@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChibiHeart</title>
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="main-header">
+        <div class="logo">
+            <h1>Chibi<span>Heart</span> 💕</h1>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+
+        <!-- VIEW DO PLAYER DE VÍDEO (Cinema Mode) -->
+        <section id="player" class="app-view">
+            <div class="cinema-wrapper">
+                <!-- Botão Voltar (Usa o histórico do navegador para saber se volta para Home ou para Info) -->
+                <a href="javascript:history.back()" class="btn-voltar-player">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </a>
+
+                <!-- A tag do Video.js isolada -->
+                <video id="chibi-player" class="video-js vjs-default-skin vjs-big-play-centered" playsinline></video>
+            </div>
+        </section>
+
+        <!-- VIEW DA HOME -->
+        <section id="inicio" class="app-view active">
+
+            <!-- HERO BANNER / BANNER DE DESTAQUE -->
+            <div class="hero-banner">
+                <a href="#info" class="hero-banner-link">
+                    <img src="https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcyVuTDqPCC.jpg" alt="Destaque" class="hero-banner-img">
+                    <div class="hero-banner-overlay"></div>
+                    
+                    <div class="hero-banner-content">
+                        <span class="hero-badge-tag">EM DESTAQUE</span>
+                        <h2 class="hero-banner-title">K-ON!!</h2>
+                        <p class="hero-banner-desc">Assista à nova temporada da banda Ho-kago Tea Time!</p>
+                    </div>
+                </a>
+            </div>
+ 
+        
+            <!-- Fileira Horizontal (Continuar Assistindo) - MANTIDO ESTÁTICO -->
+            <h2 class="titulo-categoria">Continuar Assistindo</h2>
+
+            <div class="cards-row">
+
+                <!-- Card 1 (K-ON!! T2 E13) - Link direto codificado para o Player -->
+                <a href="#player?video=https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4" class="card landscape">
+                    <div class="card-media">
+                        <img src="https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcyVuTDqPCC.jpg" alt="K-ON!!">
+                    </div>
+                    <h3 class="card-title">K-ON!!</h3>
+                    <p class="card-subtitle">T2 E13</p>
+                </a>
+
+                <!-- Card 2 Estático -->
+                <div class="card landscape">
+                    <div class="card-media">
+                        <img src="https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcyVuTDqPCC.jpg" alt="Demon Slayer">
+                    </div>
+                    <h3 class="card-title">K-ON!!</h3>
+                    <p class="card-subtitle">Episódio 02</p>
+                </div>
+
+            </div>
+
+            <!-- Grade Vertical (Animes Recomendados) - DINÂMICA -->
+            <h2 class="titulo-categoria">Assista no Chibi Heart</h2>
+            <div id="grade-recomendados" class="cards-grid"></div>
+
+            <!-- Molde para os cards de animes recomendados -->
+            <template id="modelo-card-anime">
+                <a href="" class="card poster">
+                    <div class="card-media">
+                        <img src="" alt="">
+                    </div>
+                    <h3 class="card-title"></h3>
+                </a>
+            </template>
+
+        </section>
+
+        <!-- VIEW DE DETALHES - TOTALMENTE LIMPA -->
+        <section id="info" class="app-view">
+
+            <!-- Capa/Banner Superior -->
+            <div class="info-hero">
+                <a href="#inicio" class="btn-voltar">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </a>
+                <div class="hero-overlay"></div>
+                <!-- ID para o Banner -->
+                <img id="info-banner" src="" alt="Banner do Anime" class="banner-img">
+            </div>
+
+            <!-- Conteúdo Principal dos Detalhes -->
+            <div class="info-content">
+
+                <!-- Bloco de Entrada (Poster + Título e Ano lado a lado) -->
+                <div class="info-header-block">
+                    <div class="info-poster">
+                        <!-- ID para a imagem do Poster -->
+                        <img id="info-poster-img" src="" alt="Poster do Anime">
+                    </div>
+                    <div class="info-title-meta">
+                        <!-- ID para o Título -->
+                        <h2 id="info-titulo">Carregando...</h2>
+                        <div class="info-meta">
+                            <!-- IDs para o Ano e Classificação -->
+                            <span id="info-ano" class="info-year">----</span>
+                            <span class="info-badge">HD</span>
+                            <span id="info-classificacao" class="info-badge font-bold">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gêneros / Tags (Preenchido pelo JS) -->
+                <div id="info-generos" class="info-genres"></div>
+
+                <!-- Sinopse -->
+                <div class="info-synopsis-container">
+                    <h3>Sinopse</h3>
+                    <!-- ID para a Sinopse -->
+                    <p id="info-sinopse">Carregando sinopse...</p>
+                </div>
+
+            </div>
+
+            <!-- Seção de Episódios -->
+            <div class="info-episodes-container">
+                <h2 class="titulo-categoria">Episódios</h2>
+                <!-- ID para a lista onde os episódios entram -->
+                <div id="lista-episodios" class="episodes-list"></div>
+
+                <!-- Molde para a criação dinâmica de episódios -->
+                <template id="modelo-card-ep">
+                    <div class="card-ep">
+                        <div class="ep-media">
+                            <img src="" alt="">
+                            <span class="ep-duration"></span>
+                        </div>
+                        <div class="ep-info">
+                            <h3 class="card-title-ep"></h3>
+                            <p class="card-subtitle-ep"></p>
+                        </div>
+                    </div>
+                </template>
+
+
+            </div>
+
+        </section>
+
+        <!-- Outras Seções -->
+        <section id="lista" class="app-view">
+            <h2>Minha Lista</h2>
+            <p>Seus itens salvos aparecem aqui...</p>
+        </section>
+
+        <section id="pesquisa" class="app-view">
+            <h2>Pesquisar</h2>
+            <p>Busque por conteúdos aqui...</p>
+        </section>
+
+        <section id="perfil" class="app-view">
+            <h2>Meu Perfil</h2>
+            <p>Configurações do usuário...</p>
+        </section>
+
+    </main>
+
+    <!-- Tab Bar -->
+    <nav class="tab-bar">
+        <a href="#inicio" class="tab-item active">
+            <span class="material-symbols-outlined">home</span>
+        </a>
+        <a href="#lista" class="tab-item">
+            <span class="material-symbols-outlined">list</span>
+        </a>
+        <a href="#pesquisa" class="tab-item">
+            <span class="material-symbols-outlined">search</span>
+        </a>
+        <a href="#perfil" class="tab-item">
+            <span class="material-symbols-outlined">person</span>
+        </a>
+    </nav>
+
+    <!-- Biblioteca Engine do Video.js v8 (Obrigatório vir antes dos scripts lógicos) -->
+    <script src="https://vjs.zencdn.net/8.16.1/video.js"></script>
+
+    <!-- Scripts de Inicialização e Motores Lógicos -->
+    <script src="js/main.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/animes_recomendados.js"></script>
+    <script src="js/info.js"></script>
+</body>
+</html>

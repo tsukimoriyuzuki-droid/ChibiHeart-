@@ -1,0 +1,723 @@
+/* ==========================================================================
+   1. CONFIGURAÇÕES GERAIS (TEMA ESCURO)
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #0d0e12;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    /* Evita o efeito de "pulo" na rolagem lateral ao alternar as abas */
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. CABEÇALHO (LOGO CHIBIHEART)
+   ========================================================================== */
+.main-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza o logo na tela */
+    background-color: rgba(13, 14, 18, 0.8); /* Efeito sutil de vidro no topo */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    z-index: 1000;
+}
+
+.logo h1 {
+    font-size: 1.35rem;
+    font-weight: 400; /* "Chibi" mais fino e elegante */
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Destaque para o "Heart" */
+.logo h1 span {
+    font-weight: 800; /* "Heart" bem grosso */
+    background: linear-gradient(135deg, #ff76b7, #ff4081);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 8px rgba(255, 118, 183, 0.3)); /* Brilho neon */
+}
+
+/* ==========================================================================
+   3. CONTEÚDO E VIEWS (ESTRUTURA SPA)
+   ========================================================================== */
+.main-content {
+    padding: 16px 20px;
+    padding-bottom: 90px; /* Margem para a Tab Bar */
+    min-height: calc(100vh - 118px);
+    max-width: 1200px;   /* Evita esticar demais em telas muito grandes */
+    margin: 0 auto;      /* Centraliza a estrutura na tela */
+}
+
+/* Estilo padrão das abas (Escondidas) */
+.app-view {
+    display: none;
+    opacity: 0;
+    transform: translateY(12px); /* Começa um pouco abaixo para o efeito de subida */
+}
+
+/* Quando a aba se torna ativa */
+.app-view.active {
+    display: block;
+    animation: surgiraTela 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Animação de transição suave (Fade-in + Slide-up) */
+@keyframes surgiraTela {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Títulos internos das páginas */
+.app-view h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+}
+
+.app-view p {
+    color: #94a3b8; /* Cor de texto secundária mais suave para leitura */
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   4. TAB BAR (EFEITO VIDRO FLUIDO - ESTILO TRAKT)
+   ========================================================================== */
+.tab-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 58px; /* Altura compacta ideal para formato "apenas ícones" */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+
+    /* Cantos superiores arredondados idêntico ao Trakt */
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+
+    /* O Segredo do Vidro Escuro */
+    background-color: rgba(18, 19, 26, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); /* Suporte para iOS/Safari */
+
+    /* Borda cirúrgica simulando o reflexo da luz no vidro */
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+    /* Sombra projetada para dar profundidade em relação ao fundo */
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Itens da Tab (Botões dos Ícones) */
+.tab-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #64748b; /* Cinza fosco moderno para itens inativos */
+    width: 48px;
+    height: 48px;
+    border-radius: 50%; /* Área de toque redonda */
+    transition: all 0.2s ease;
+}
+
+/* Ícones do Google Fonts */
+.tab-item .material-symbols-outlined {
+    font-size: 28px;
+    transition: transform 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* Estado Ativo e Efeito de Hover */
+.tab-item:hover,
+.tab-item.active {
+    color: #ff76b7; /* Rosa neon suave do ChibiHeart */
+    text-shadow: 0 0 12px rgba(255, 118, 183, 0.5); /* Efeito iluminado no ícone */
+}
+
+/* Feedback de clique (o ícone encolhe levemente ao pressionar com o dedo) */
+.tab-item:active .material-symbols-outlined {
+    transform: scale(0.88);
+}
+
+/* ==========================================================================
+   HERO BANNER (BANNER DE DESTAQUE NA HOME)
+   ========================================================================== */
+.hero-banner {
+    position: relative;
+    width: calc(100% + 40px); /* Compensa os 20px de padding de cada lado do .main-content */
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: -16px;        /* Gruda no topo abaixo do cabeçalho */
+    margin-bottom: 24px;
+    aspect-ratio: 16 / 9;     /* Proporção widescreen para celular e PC */
+    max-height: 380px;        /* Evita ficar gigante em monitores grandes */
+    overflow: hidden;
+    background-color: #161820;
+}
+
+
+
+.hero-banner-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #ffffff;
+    position: relative;
+}
+
+/* Imagem do Banner */
+.hero-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Sombra degradê para destacar o texto */
+.hero-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        #0d0e12 5%,
+        rgba(13, 14, 18, 0.6) 50%,
+        rgba(0, 0, 0, 0.2) 100%
+    );
+}
+
+/* Informações sobrepostas na imagem */
+.hero-banner-content {
+    position: absolute;
+    bottom: 16px;
+    left: 20px;
+    right: 20px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+/* Badge "EM DESTAQUE" */
+.hero-badge-tag {
+    background: linear-gradient(135deg, #ff76b7, #ff4081);
+    color: #ffffff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 10px rgba(255, 118, 183, 0.4);
+}
+
+/* Título do Anime no Banner */
+.hero-banner-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.1;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Descrição curta */
+.hero-banner-desc {
+    font-size: 0.8rem;
+    color: #cbd5e1;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limita a no máximo 2 linhas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Container dos Botões */
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+/* Estilo Base dos Botões do Banner */
+.btn-hero {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 20px;       /* Formato pílula elegante */
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    cursor: pointer;
+}
+
+/* Efeito de clique */
+.btn-hero:active {
+    transform: scale(0.95);
+}
+
+/* Botão "Assistir" (Principal em Rosa Neon) */
+.btn-hero-play {
+    background: linear-gradient(135deg, #ff76b7, #ff4081);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(255, 118, 183, 0.4);
+}
+
+.btn-hero-play .material-symbols-outlined {
+    font-size: 20px;
+    /* Deixa o ícone de play preenchido */
+    font-variation-settings: 'FILL' 1; 
+}
+
+/* Botão "Informações" (Secundário em Vidro Fumê) */
+.btn-hero-info {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-hero-info .material-symbols-outlined {
+    font-size: 20px;
+}
+
+
+
+/* ==========================================================================
+   5. ESTILO DOS CARDS E FILEIRAS (AJUSTADO PARA ROLAGGEM HORIZONTAL EM #INICIO)
+   ========================================================================== */
+
+/* Títulos das Fileiras (Continuar Assistindo, Recomendados, etc.) */
+.titulo-categoria {
+    font-size: 1.05rem;      /* Tamanho proporcional aos cards */
+    font-weight: 700;
+    color: #ffffff;
+    margin: 24px 0 12px 0;
+    letter-spacing: -0.2px;
+    
+    /* Detalhe estético: barrinha rosa neon na esquerda */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Cria a barrinha rosa neon ao lado do texto */
+.titulo-categoria::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 16px;
+    background: linear-gradient(135deg, #ff76b7, #ff4081);
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(255, 118, 183, 0.5);
+}
+
+
+/* Força rolagem horizontal em TODAS as fileiras e grades dentro da aba #inicio */
+
+/* Força a fileira a ir até as bordas da tela (efeito infinito) */
+#inicio .cards-row,
+#inicio .cards-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 12px;
+    
+    /* TRUQUE PARA IR ATÉ A BORDA DA TELA: */
+    margin-left: -20px;   /* Estica a fileira para fora até a borda esquerda */
+    margin-right: -20px;  /* Estica a fileira para fora até a borda direita */
+    padding-left: 20px;   /* Devolve o alinhamento correto para o 1º card */
+    padding-right: 20px;  /* Deixa um espaço no final do último card */
+    padding-bottom: 8px;
+    
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+/* Esconde a barra de rolagem no Chrome, Safari e Edge em #inicio */
+#inicio .cards-row::-webkit-scrollbar,
+#inicio .cards-grid::-webkit-scrollbar {
+    display: none;
+}
+
+/* Padrão para .cards-row fora de #inicio (se houver) */
+.cards-row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+}
+.cards-row::-webkit-scrollbar {
+    display: none;
+}
+
+/* Padrão de Grade Vertical (para outras abas como Pesquisa/Lista, se usarem .cards-grid) */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+}
+
+/* Configuração Geral do Card */
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0; /* Impede que o card encolha na rolagem */
+}
+
+/* Tamanhos Fixos para os Cards na Rolagem Horizontal */
+.card.landscape {
+    width: 180px; /* Tamanho do card horizontal (Continuar Assistindo) */
+}
+
+.card.poster {
+    width: 115px; /* Tamanho do card vertical na fileira horizontal */
+}
+
+/* Moldura da Imagem */
+.card-media {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #1a1c23;
+}
+.card.landscape .card-media {
+    aspect-ratio: 16 / 9;
+}
+.card.poster .card-media {
+    aspect-ratio: 2 / 3;
+}
+
+/* Imagem ajustada */
+.card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Textos do Card */
+.card-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-subtitle {
+    font-size: 0.75rem;
+    color: #888;
+}
+
+/* Corrige o link dos cards para não quebrar a estrutura e a foto */
+a.card {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   6. LAYOUT DA TELA DE INFORMAÇÕES (#info ESTÁTICO)
+   ========================================================================== */
+#info {
+    margin: -24px -24px 0 -24px;
+}
+
+/* Container do Banner */
+.info-hero {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #161820;
+}
+.info-hero .banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Sombra degradê escuro sobre o banner */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, #0d0e12 8%, rgba(13, 14, 18, 0.3) 60%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+/* Botão Voltar redondo flutuante */
+.btn-voltar {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: rgba(13, 14, 18, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Bloco Geral abaixo da Imagem */
+.info-content {
+    padding: 0 24px 24px 24px;
+    transform: translateY(-30px);
+}
+
+/* Alinhamento do Poster com o Título */
+.info-header-block {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+/* Caixa do Poster */
+.info-poster {
+    width: 95px;
+    aspect-ratio: 2 / 3;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    flex-shrink: 0;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+.info-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Título e Metadados */
+.info-title-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.info-title-meta h2 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 0;
+    color: #ffffff;
+    letter-spacing: -0.3px;
+}
+
+/* Ano e Tags de Formato */
+.info-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+.info-badge {
+    background-color: #1e202b;
+    color: #ff76b7;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    border: 1px solid rgba(255, 118, 183, 0.15);
+}
+.font-bold {
+    font-weight: 800;
+}
+
+/* Gêneros (Tags de Categoria) */
+.info-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+.genre-tag {
+    font-size: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.04);
+    color: #cbd5e1;
+    padding: 4px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Caixa de Sinopse */
+.info-synopsis-container h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #ffffff;
+}
+.info-synopsis-container p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #94a3b8;
+}
+
+/* ==========================================================================
+   7. SEÇÃO DE EPISÓDIOS (TEXTO AO LADO DA IMAGEM)
+   ========================================================================== */
+.info-episodes-container {
+    margin-top: 28px;
+}
+
+.info-episodes-container .titulo-categoria {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 16px;
+}
+
+.episodes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.card-ep {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background-color: rgba(255, 255, 255, 0.02);
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.ep-media {
+    position: relative;
+    width: 120px;
+    aspect-ratio: 16 / 9;
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background-color: #1a1c24;
+}
+
+.ep-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ep-duration {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    font-size: 0.6rem;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.ep-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
+}
+
+.card-title-ep {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.card-subtitle-ep {
+    font-size: 0.75rem;
+    color: #ff76b7;
+    margin: 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   8. NATIVO DO COMPONENTE PLAYER ISOLADO (#player)
+   ========================================================================== */
+#player {
+    margin: -30px -24px -90px -24px;
+    background-color: #000000;
+    min-height: 100vh;
+}
+
+#player.active {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.cinema-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #000000;
+}
+
+.btn-voltar-player {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#chibi-player {
+    width: 100% !important;
+    height: 100% !important;
+}

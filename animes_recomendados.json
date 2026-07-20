@@ -1,0 +1,22 @@
+[
+    {
+        "id": "onimai",
+        "titulo": "ONIMAI: I'm Now Your Sister!",
+        "capa": "https://image.tmdb.org/t/p/original/tpvVSr6ThPQFISYc9xRVR7MKjDF.jpg"
+    },
+    {
+        "id": "k-on",
+        "titulo": "K-ON!!",
+        "capa": "https://image.tmdb.org/t/p/original/pa5hMcg74yCcqa6NQe4h3z0pyNZ.jpg"
+    },
+    {
+        "id": "kokoro connect",
+        "titulo": "Kokoro Connect",
+        "capa": "https://image.tmdb.org/t/p/original/7DeHGDMDKOfWP3aFuxDWSlt0DDf.jpg"
+    },
+    {
+        "id": "oshi no ko",
+        "titulo": "Oshi No Ko",
+        "capa": "https://image.tmdb.org/t/p/original/mErHxLBgXK3FrfigrA19QFS1nbz.jpg"
+    }
+]
