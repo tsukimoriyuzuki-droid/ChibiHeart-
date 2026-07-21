@@ -1,0 +1,18 @@
+[
+  {
+    "id": "k-on",
+    "title": "K-ON!!",
+    "banner": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcyVuTDqPCC.jpg",
+    "synopsis": "Yui e o resto da banda atravessam mais um ano: música, amizades e muito chá.",
+    "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4",
+    "highlight": true
+  },
+  {
+    "id": "onimai",
+    "title": "ONIMAI: I'm Now Your Sister!",
+    "banner": "https://image.tmdb.org/t/p/original/15r7AEj3rxEAjGbdPv7zafeX7Ub.jpg",
+    "synopsis": "Mahiro acorda diferente — comédia slice-of-life.",
+    "video": "",
+    "highlight": false
+  }
+]
