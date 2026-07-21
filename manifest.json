@@ -3,33 +3,33 @@
   "name": "ChibiHeart - Streaming de Animes",
   "icons": [
     {
-      "src": "imagem/icon_transparent_192.png",
+      "src": "img/icon_transparent_192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any"
     },
     {
-      "src": "imagem/icon_transparent_512.png",
+      "src": "img/icon_transparent_512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any"
     },
     {
-      "src": "imagem/icon_solid_192.png",
+      "src": "img/icon_solid_192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "maskable"
     },
     {
-      "src": "imagem/icon_solid_512.png",
+      "src": "img/icon_solid_512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"
     }
   ],
   "start_url": "./index.html",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "background_color": "#0d0e12",
+  "theme_color": "#0d0e12",
   "display": "standalone",
   "orientation": "portrait"
 }

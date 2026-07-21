@@ -120,11 +120,28 @@
                     <p id="info-sinopse">Carregando sinopse...</p>
                 </div>
 
+                <!-- Botão de Assistir Direto (Exclusivo para Filmes) -->
+                <div id="acao-filme" class="acao-filme-container" style="display: none; margin-top: 20px;">
+                    <a id="btn-play-filme" href="#player" class="btn-hero btn-hero-play" style="width: 100%; justify-content: center; padding: 14px; display: inline-flex; align-items: center; gap: 8px;">
+                        <span class="material-symbols-outlined">play_arrow</span>
+                        Assistir Filme
+                    </a>
+                </div>
+
             </div>
 
-            <!-- Seção de Episódios -->
-            <div class="info-episodes-container">
-                <h2 class="titulo-categoria">Episódios</h2>
+            <!-- Seção de Episódios e Temporadas -->
+            <div id="container-episodios" class="info-episodes-container">
+                
+                <!-- Cabeçalho dos Episódios com Seletor de Temporadas -->
+                <div class="episodes-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <h2 class="titulo-categoria" style="margin: 0;">Episódios</h2>
+                    
+                    <!-- Menu de Seleção de Temporadas (Gerado Dinamicamente pelo JS) -->
+                    <select id="select-temporadas" class="select-temporadas" style="background: #1a1c24; color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.15); padding: 8px 12px; border-radius: 8px; font-family: inherit; font-size: 14px; outline: none; cursor: pointer;">
+                    </select>
+                </div>
+
                 <div id="lista-episodios" class="episodes-list"></div>
 
                 <template id="modelo-card-ep">

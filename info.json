@@ -1,5 +1,6 @@
 {
     "onimai": {
+        "tipo": "serie",
         "titulo": "ONIMAI: I'm Now Your Sister!",
         "ano": "2023",
         "classificacao": "16+",
@@ -7,24 +8,30 @@
         "sinopse": "Mahiro Oyama era apenas um jovem isolado fã de jogos eróticos... até que ele acordou um dia como uma mulher! Acontece que sua irmã mais nova, Mihari, uma cientista maluca, experimentou um de seus novos remédios nele. Agora, Mahiro precisa aprender a viver como uma estudante do ensino fundamental enquanto tenta se adaptar à sua nova rotina!",
         "banner": "https://image.tmdb.org/t/p/original/15r7AEj3rxEAjGbdPv7zafeX7Ub.jpg",
         "poster": "https://image.tmdb.org/t/p/original/tpvVSr6ThPQFISYc9xRVR7MKjDF.jpg",
-        "episodios": [
+        "temporadas": [
             {
-                "numero": "Episódio 01",
-                "titulo": "ONIMAI - O Início de Mahiro",
-                "thumb": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcOq7Kcl4R.jpg",
-                "duracao": "24 min",
-                "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
-            },
-            {
-                "numero": "Episódio 02",
-                "titulo": "ONIMAI - O Primeiro Passeio",
-                "thumb": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcOq7Kcl4R.jpg",
-                "duracao": "24 min",
-                "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
+                "nome": "1ª Temporada",
+                "episodios": [
+                    {
+                        "numero": "Episódio 01",
+                        "titulo": "ONIMAI - O Início de Mahiro",
+                        "thumb": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcOq7Kcl4R.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
+                    },
+                    {
+                        "numero": "Episódio 02",
+                        "titulo": "ONIMAI - O Primeiro Passeio",
+                        "thumb": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcOq7Kcl4R.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
+                    }
+                ]
             }
         ]
     },
     "k-on": {
+        "tipo": "serie",
         "titulo": "K-ON!!",
         "ano": "2010",
         "classificacao": "Livre",
@@ -32,14 +39,42 @@
         "sinopse": "Yui Hirasawa e suas amigas entram no último ano do ensino médio no clube de música leve. Juntas, elas continuam ensaiando, bebendo chá, comendo doces e fortalecendo seus laços de amizade.",
         "banner": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcyVuTDqPCC.jpg",
         "poster": "https://image.tmdb.org/t/p/original/pa5hMcg74yCcqa6NQe4h3z0pyNZ.jpg",
-        "episodios": [
+        "temporadas": [
             {
-                "numero": "Episódio 01",
-                "titulo": "Tempo de Música!",
-                "thumb": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcyVuTDqPCC.jpg",
-                "duracao": "23 min",
-                "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
+                "nome": "1ª Temporada",
+                "episodios": [
+                    {
+                        "numero": "Episódio 01",
+                        "titulo": "Tempo de Música!",
+                        "thumb": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcyVuTDqPCC.jpg",
+                        "duracao": "23 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
+                    }
+                ]
+            },
+            {
+                "nome": "2ª Temporada",
+                "episodios": [
+                    {
+                        "numero": "Episódio 01",
+                        "titulo": "De Novo um Calouro!",
+                        "thumb": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcyVuTDqPCC.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
+                    }
+                ]
             }
         ]
+    },
+    "k-on-movie": {
+        "tipo": "filme",
+        "titulo": "K-ON! O Filme",
+        "ano": "2011",
+        "classificacao": "Livre",
+        "generos": ["Música", "Comédia", "Viagem"],
+        "sinopse": "As integrantes do clube de música leve fazem uma viagem de graduação para Londres antes de terminarem o ensino médio!",
+        "banner": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcyVuTDqPCC.jpg",
+        "poster": "https://image.tmdb.org/t/p/original/pa5hMcg74yCcqa6NQe4h3z0pyNZ.jpg",
+        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
     }
 }

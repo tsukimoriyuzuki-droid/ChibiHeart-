@@ -155,29 +155,31 @@ body {
     text-shadow: 0 0 12px rgba(255, 118, 183, 0.5); /* Efeito iluminado no ícone */
 }
 
-/* Feedback de clique (o ícone encolhe levemente ao pressionar com o dedo) */
+/* Feedback de clique */
 .tab-item:active .material-symbols-outlined {
     transform: scale(0.88);
 }
 
 /* ==========================================================================
-   HERO BANNER (BANNER DE DESTAQUE NA HOME)
+   5. HERO BANNER (EXPANDIDO & UNIFICADO)
    ========================================================================== */
 .hero-banner {
     position: relative;
-    width: calc(100% + 40px); /* Compensa os 20px de padding de cada lado do .main-content */
+    width: calc(100% + 40px); /* Compensa os 20px de padding do main-content */
     margin-left: -20px;
     margin-right: -20px;
-    margin-top: -16px;        /* Gruda no topo abaixo do cabeçalho */
+    margin-top: -16px;
     margin-bottom: 24px;
-    aspect-ratio: 16 / 9;     /* Proporção widescreen para celular e PC */
-    max-height: 380px;        /* Evita ficar gigante em monitores grandes */
+    
+    /* ALTURA AMPLIADA: Mínimo 340px, Ideal 55% da tela, Máximo 600px */
+    height: clamp(340px, 55vh, 600px);
+    
     overflow: hidden;
-    background-color: #161820;
+    background-color: #111;
+    border-radius: 10px;
 }
 
-
-
+.hero-banner-slide,
 .hero-banner-link {
     display: block;
     width: 100%;
@@ -193,9 +195,10 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
+    filter: brightness(0.65);
 }
 
-/* Sombra degradê para destacar o texto */
+/* Overlay Degradê */
 .hero-banner-overlay {
     position: absolute;
     inset: 0;
@@ -203,100 +206,116 @@ body {
         to top,
         #0d0e12 5%,
         rgba(13, 14, 18, 0.6) 50%,
-        rgba(0, 0, 0, 0.2) 100%
+        rgba(0, 0, 0, 0.1) 100%
     );
+    pointer-events: none;
 }
 
-/* Informações sobrepostas na imagem */
+/* Conteúdo sobreposto */
 .hero-banner-content {
     position: absolute;
-    bottom: 16px;
-    left: 20px;
-    right: 20px;
+    left: 28px;
+    bottom: 24px;
+    right: 28px;
     z-index: 2;
+    color: #fff;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
+    gap: 10px;
 }
 
-/* Badge "EM DESTAQUE" */
+/* Badge Tag */
 .hero-badge-tag {
     background: linear-gradient(135deg, #ff76b7, #ff4081);
     color: #ffffff;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     font-weight: 800;
-    padding: 3px 8px;
-    border-radius: 4px;
+    padding: 4px 10px;
+    border-radius: 6px;
     letter-spacing: 0.5px;
     box-shadow: 0 0 10px rgba(255, 118, 183, 0.4);
 }
 
-/* Título do Anime no Banner */
+/* Título */
 .hero-banner-title {
-    font-size: 1.5rem;
+    font-size: clamp(1.4rem, 4.5vw, 2.6rem);
     font-weight: 800;
     margin: 0;
     line-height: 1.1;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
 }
 
-/* Descrição curta */
+/* Descrição */
 .hero-banner-desc {
-    font-size: 0.8rem;
-    color: #cbd5e1;
+    max-width: 68ch;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.92);
     margin: 0;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limita a no máximo 2 linhas */
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: all 160ms ease;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
 }
 
-/* Container dos Botões */
+.hero-banner-desc.expanded {
+    -webkit-line-clamp: unset;
+    max-height: 40vh;
+}
+
+/* Botões da Hero */
 .hero-actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     margin-top: 6px;
+    flex-wrap: nowrap;
 }
 
-/* Estilo Base dos Botões do Banner */
 .btn-hero {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: 20px;       /* Formato pílula elegante */
-    font-size: 0.85rem;
-    font-weight: 600;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 700;
     text-decoration: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    transition: transform 120ms ease, opacity 120ms ease;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* Efeito de clique */
 .btn-hero:active {
-    transform: scale(0.95);
+    transform: translateY(1px) scale(0.98);
+    opacity: 0.95;
 }
 
-/* Botão "Assistir" (Principal em Rosa Neon) */
+.btn-hero:hover {
+    transform: translateY(-2px);
+}
+
 .btn-hero-play {
     background: linear-gradient(135deg, #ff76b7, #ff4081);
     color: #ffffff;
-    box-shadow: 0 4px 12px rgba(255, 118, 183, 0.4);
+    box-shadow: 0 4px 14px rgba(255, 118, 183, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn-hero-play .material-symbols-outlined {
     font-size: 20px;
-    /* Deixa o ícone de play preenchido */
-    font-variation-settings: 'FILL' 1; 
+    font-variation-settings: 'FILL' 1;
 }
 
-/* Botão "Informações" (Secundário em Vidro Fumê) */
 .btn-hero-info {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.12);
     color: #ffffff;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -307,27 +326,45 @@ body {
     font-size: 20px;
 }
 
-
+/* Ajustes Responsivos do Banner para Celular */
+@media (max-width: 420px) {
+    .hero-banner {
+        height: 280px;
+        margin-bottom: 18px;
+    }
+    .hero-banner-content {
+        left: 16px;
+        bottom: 16px;
+        right: 16px;
+        gap: 6px;
+    }
+    .hero-banner-title {
+        font-size: 1.25rem;
+    }
+    .hero-banner-desc {
+        font-size: 0.85rem;
+        -webkit-line-clamp: 2;
+    }
+    .btn-hero {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+    }
+}
 
 /* ==========================================================================
-   5. ESTILO DOS CARDS E FILEIRAS (AJUSTADO PARA ROLAGGEM HORIZONTAL EM #INICIO)
+   6. CARDS E FILEIRAS (ROLAGEM HORIZONTAL)
    ========================================================================== */
-
-/* Títulos das Fileiras (Continuar Assistindo, Recomendados, etc.) */
 .titulo-categoria {
-    font-size: 1.05rem;      /* Tamanho proporcional aos cards */
+    font-size: 1.05rem;
     font-weight: 700;
     color: #ffffff;
     margin: 24px 0 12px 0;
     letter-spacing: -0.2px;
-    
-    /* Detalhe estético: barrinha rosa neon na esquerda */
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-/* Cria a barrinha rosa neon ao lado do texto */
 .titulo-categoria::before {
     content: '';
     display: inline-block;
@@ -338,10 +375,6 @@ body {
     box-shadow: 0 0 8px rgba(255, 118, 183, 0.5);
 }
 
-
-/* Força rolagem horizontal em TODAS as fileiras e grades dentro da aba #inicio */
-
-/* Força a fileira a ir até as bordas da tela (efeito infinito) */
 #inicio .cards-row,
 #inicio .cards-grid {
     display: flex;
@@ -349,25 +382,20 @@ body {
     overflow-x: auto;
     overflow-y: hidden;
     gap: 12px;
-    
-    /* TRUQUE PARA IR ATÉ A BORDA DA TELA: */
-    margin-left: -20px;   /* Estica a fileira para fora até a borda esquerda */
-    margin-right: -20px;  /* Estica a fileira para fora até a borda direita */
-    padding-left: 20px;   /* Devolve o alinhamento correto para o 1º card */
-    padding-right: 20px;  /* Deixa um espaço no final do último card */
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-bottom: 8px;
-    
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
 }
 
-/* Esconde a barra de rolagem no Chrome, Safari e Edge em #inicio */
 #inicio .cards-row::-webkit-scrollbar,
 #inicio .cards-grid::-webkit-scrollbar {
     display: none;
 }
 
-/* Padrão para .cards-row fora de #inicio (se houver) */
 .cards-row {
     display: flex;
     gap: 12px;
@@ -379,31 +407,27 @@ body {
     display: none;
 }
 
-/* Padrão de Grade Vertical (para outras abas como Pesquisa/Lista, se usarem .cards-grid) */
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 12px;
 }
 
-/* Configuração Geral do Card */
 .card {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    flex-shrink: 0; /* Impede que o card encolha na rolagem */
+    flex-shrink: 0;
 }
 
-/* Tamanhos Fixos para os Cards na Rolagem Horizontal */
 .card.landscape {
-    width: 180px; /* Tamanho do card horizontal (Continuar Assistindo) */
+    width: 180px;
 }
 
 .card.poster {
-    width: 115px; /* Tamanho do card vertical na fileira horizontal */
+    width: 115px;
 }
 
-/* Moldura da Imagem */
 .card-media {
     width: 100%;
     overflow: hidden;
@@ -417,7 +441,6 @@ body {
     aspect-ratio: 2 / 3;
 }
 
-/* Imagem ajustada */
 .card-media img {
     width: 100%;
     height: 100%;
@@ -425,7 +448,6 @@ body {
     display: block;
 }
 
-/* Textos do Card */
 .card-title {
     font-size: 0.85rem;
     font-weight: 600;
@@ -439,7 +461,6 @@ body {
     color: #888;
 }
 
-/* Corrige o link dos cards para não quebrar a estrutura e a foto */
 a.card {
     text-decoration: none;
     color: inherit;
@@ -448,13 +469,12 @@ a.card {
 }
 
 /* ==========================================================================
-   6. LAYOUT DA TELA DE INFORMAÇÕES (#info ESTÁTICO)
+   7. LAYOUT DA TELA DE INFORMAÇÕES (#info)
    ========================================================================== */
 #info {
     margin: -24px -24px 0 -24px;
 }
 
-/* Container do Banner */
 .info-hero {
     position: relative;
     width: 100%;
@@ -468,7 +488,6 @@ a.card {
     display: block;
 }
 
-/* Sombra degradê escuro sobre o banner */
 .hero-overlay {
     position: absolute;
     top: 0;
@@ -478,7 +497,6 @@ a.card {
     background: linear-gradient(to top, #0d0e12 8%, rgba(13, 14, 18, 0.3) 60%, rgba(0, 0, 0, 0.6) 100%);
 }
 
-/* Botão Voltar redondo flutuante */
 .btn-voltar {
     position: absolute;
     top: 16px;
@@ -498,13 +516,11 @@ a.card {
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Bloco Geral abaixo da Imagem */
 .info-content {
     padding: 0 24px 24px 24px;
     transform: translateY(-30px);
 }
 
-/* Alinhamento do Poster com o Título */
 .info-header-block {
     display: flex;
     gap: 16px;
@@ -512,7 +528,6 @@ a.card {
     margin-bottom: 20px;
 }
 
-/* Caixa do Poster */
 .info-poster {
     width: 95px;
     aspect-ratio: 2 / 3;
@@ -529,7 +544,6 @@ a.card {
     display: block;
 }
 
-/* Título e Metadados */
 .info-title-meta {
     display: flex;
     flex-direction: column;
@@ -544,7 +558,6 @@ a.card {
     letter-spacing: -0.3px;
 }
 
-/* Ano e Tags de Formato */
 .info-meta {
     display: flex;
     align-items: center;
@@ -565,7 +578,6 @@ a.card {
     font-weight: 800;
 }
 
-/* Gêneros (Tags de Categoria) */
 .info-genres {
     display: flex;
     flex-wrap: wrap;
@@ -581,7 +593,6 @@ a.card {
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Caixa de Sinopse */
 .info-synopsis-container h3 {
     font-size: 0.95rem;
     font-weight: 600;
@@ -595,7 +606,7 @@ a.card {
 }
 
 /* ==========================================================================
-   7. SEÇÃO DE EPISÓDIOS (TEXTO AO LADO DA IMAGEM)
+   8. SEÇÃO DE EPISÓDIOS
    ========================================================================== */
 .info-episodes-container {
     margin-top: 28px;
@@ -676,10 +687,8 @@ a.card {
     letter-spacing: 0.5px;
 }
 
-}
-
 /* ==========================================================================
-   8. ESTILOS DO PLAYER (VIDEO.JS)
+   9. ESTILOS DO PLAYER (VIDEO.JS)
    ========================================================================== */
 .player-container {
     position: relative;
@@ -692,7 +701,6 @@ a.card {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
-/* Botão Voltar sobreposto no Player */
 .btn-voltar-player {
     position: absolute;
     top: 12px;
@@ -717,7 +725,6 @@ a.card {
     transform: scale(0.9);
 }
 
-/* Ajuste das cores primárias do Video.js para a paleta ChibiHeart */
 .vjs-theme-chibi .vjs-play-progress,
 .vjs-theme-chibi .vjs-volume-level {
     background-color: #ff76b7 !important;
@@ -728,148 +735,51 @@ a.card {
     aspect-ratio: 16 / 9;
 }
 
-/*--------------
 
+/* ===================================
+   SELETOR DE TEMPORADAS E BOTÃO FILME
+   =================================== */
 
-/* ===== Hero actions / big buttons ===== */
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 12px;
-  align-items: center;
-  flex-wrap: nowrap;
+/* Ajuste do cabeçalho da seção de episódios */
+.episodes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
 }
 
-/* Base do botão */
-.btn-hero {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-decoration: none;
-  color: #fff;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-  transition: transform 120ms ease, opacity 120ms ease;
-  -webkit-tap-highlight-color: transparent;
+/* Menu Select de Temporadas */
+.select-temporadas {
+    background-color: #1a1c24;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-/* Botão principal (assistir) em destaque */
-.btn-hero-play {
-  background: linear-gradient(90deg, #ff6b6b, #ff2e7a);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.06);
+.select-temporadas:hover,
+.select-temporadas:focus {
+    border-color: #ff2a74; /* Rosa neon do ChibiHeart */
+    background-color: #222530;
 }
 
-/* Botão secundário (detalhes) estilo vidro */
-.btn-hero-info {
-  background: rgba(255,255,255,0.06);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(6px);
+/* Estilo das opções internas do Select */
+.select-temporadas option {
+    background-color: #121318;
+    color: #ffffff;
+    padding: 10px;
 }
 
-/* Feedbacks */
-.btn-hero:active { transform: translateY(1px) scale(0.995); opacity: 0.98; }
-.btn-hero:hover { transform: translateY(-2px); }
-
-/* Garante leitura do texto no hero para telas pequenas */
-@media (max-width: 420px) {
-  .hero-banner-title { font-size: 1.25rem; }
-  .hero-banner-desc { font-size: 0.8rem; }
-  .btn-hero { padding: 10px 12px; font-size: 0.9rem; }
-}
-
-/* BANNER /*
-
-
-/* ===== Hero banner dynamic adjustments ===== */
-.hero-banner {
-  position: relative;
-  width: calc(100% + 40px); /* respeita padding do main-content como antes */
-  margin-left: -20px;
-  margin-right: -20px;
-  margin-top: -16px;
-  margin-bottom: 20px;
-  height: clamp(220px, 36vw, 420px); /* responsivo: maior em telas largas */
-  overflow: hidden;
-  background: #111;
-  border-radius: 8px;
-}
-
-.hero-banner-slide {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-}
-
-.hero-banner-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: brightness(0.55);
-}
-
-.hero-banner-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.7) 10%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.0) 100%);
-  pointer-events: none;
-}
-
-.hero-banner-content {
-  position: absolute;
-  left: 20px;
-  bottom: 18px;
-  right: 20px;
-  z-index: 2;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.hero-banner-title {
-  font-size: clamp(1.15rem, 3.6vw, 2rem);
-  font-weight: 800;
-  margin: 0;
-  line-height: 1.05;
-  text-shadow: 0 6px 18px rgba(0,0,0,0.6);
-}
-
-.hero-banner-desc {
-  max-width: 68ch;
-  font-size: 0.95rem;
-  color: rgba(255,255,255,0.92);
-  margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* show 3 lines */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
-  transition: all 160ms ease;
-}
-
-/* quando expandido mostra mais */
-.hero-banner-desc.expanded {
-  -webkit-line-clamp: unset;
-  max-height: 40vh;
-}
-
-/* hero actions (botões) já existem no style.css; reforçar espaçamentos */
-.hero-actions { margin-top: 8px; display:flex; gap:10px; align-items:center; }
-
-/* garante bom contraste do badge */
-.hero-badge-tag { background: linear-gradient(135deg, #ff76b7, #ff4081); padding: 4px 8px; border-radius: 6px; font-weight:800; font-size:0.7rem; }
-
-/* mobile tweaks */
-@media (max-width: 420px) {
-  .hero-banner { height: 220px; margin-bottom: 14px; }
-  .hero-banner-desc { font-size: 0.85rem; -webkit-line-clamp: 2; }
-  .hero-banner-title { font-size: 1.1rem; }
+/* Container de ação direta para filmes */
+.acao-filme-container {
+    margin-top: 20px;
+    width: 100%;
 }
