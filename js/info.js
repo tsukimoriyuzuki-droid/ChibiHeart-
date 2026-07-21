@@ -1,24 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
     
     async function gerenciarTelaInfo() {
-        // Pega o hash e divide para identificar se há parâmetros (ex: #info?anime=onimai)
+        // 1. Pega a rota e os parâmetros da URL (ex: #info?anime=onimai)
         const rawHash = window.location.hash || "#inicio";
         const [hashAtual, queryString] = rawHash.split("?");
 
-        // Só executa se o usuário estiver na tela de info
+        // Só roda a função se o usuário estiver na View de Informações
         if (hashAtual !== "#info") return;
 
+        // Referências do DOM
         const containerEps = document.getElementById("lista-episodios");
         const modeloEp = document.getElementById("modelo-card-ep");
         const containerGeneros = document.getElementById("info-generos");
+        const selectTemporadas = document.getElementById("select-temporadas");
+        const blocoFilme = document.getElementById("acao-filme");
+        const blocoEpisodios = document.getElementById("container-episodios");
 
         if (!containerEps || !modeloEp) return;
 
-        // Pega o ID do anime contido na URL
+        // Pega o ID do anime/filme contido na URL (?anime=id ou ?id=id)
         const params = new URLSearchParams(queryString);
-        const animeId = params.get("anime");
+        const itemId = params.get("anime") || params.get("id");
 
-        if (!animeId) {
+        if (!itemId) {
             window.location.hash = "#inicio"; // Se não tiver ID válido, volta pra Home
             return;
         }
@@ -27,75 +31,136 @@ document.addEventListener("DOMContentLoaded", () => {
             // Busca o arquivo info.json do servidor
             const resposta = await fetch("info.json");
             const bancoDados = await resposta.json();
-            const anime = bancoDados[animeId];
+            const item = bancoDados[itemId];
 
-            if (!anime) {
-                console.error("Anime não encontrado no info.json");
+            if (!item) {
+                console.error("Item não encontrado no info.json:", itemId);
                 return;
             }
 
-            // 1. Preenche os dados principais da tela
-            document.getElementById("info-banner").src = anime.banner;
-            document.getElementById("info-poster-img").src = anime.poster;
-            document.getElementById("info-titulo").textContent = anime.titulo;
-            document.getElementById("info-ano").textContent = anime.ano;
-            document.getElementById("info-classificacao").textContent = anime.classificacao;
-            document.getElementById("info-sinopse").textContent = anime.sinopse;
+            // 2. Preenche os dados visuais básicos (Comuns para Filme e Série)
+            document.getElementById("info-banner").src = item.banner || "";
+            document.getElementById("info-poster-img").src = item.poster || "";
+            document.getElementById("info-titulo").textContent = item.titulo || "Sem título";
+            document.getElementById("info-ano").textContent = item.ano || "----";
+            document.getElementById("info-classificacao").textContent = item.classificacao || "--";
+            document.getElementById("info-sinopse").textContent = item.sinopse || "Sem sinopse disponível.";
 
-            // 2. Preenche os Gêneros/Tags de forma limpa
+            // Preenche as tags de Gêneros
             containerGeneros.innerHTML = "";
-            anime.generos.forEach(genero => {
-                const tag = document.createElement("span");
-                tag.className = "genre-tag";
-                tag.textContent = genero;
-                containerGeneros.appendChild(tag);
-            });
+            if (Array.isArray(item.generos)) {
+                item.generos.forEach(genero => {
+                    const tag = document.createElement("span");
+                    tag.className = "genre-tag";
+                    tag.textContent = genero;
+                    containerGeneros.appendChild(tag);
+                });
+            }
 
-            // 3. Preenche a Lista de Episódios usando o Template (sem destruir o DOM)
-            containerEps.innerHTML = ""; // Limpa os episódios do anime anterior
-            anime.episodios.forEach((ep, epIndex) => {
-                const clone = modeloEp.content.cloneNode(true);
+            // 3. CONDICIONAL: É FILME OU SÉRIE/ANIME?
 
-                const imgEl = clone.querySelector("img");
-                const durationEl = clone.querySelector(".ep-duration");
-                const titleEl = clone.querySelector(".card-title-ep");
-                const subtitleEl = clone.querySelector(".card-subtitle-ep");
-                const cardWrapper = clone.querySelector(".card-ep");
+            if (item.tipo === "filme" || item.video) {
+                // --- É UM FILME ---
+                if (blocoEpisodios) blocoEpisodios.style.display = "none";
+                if (blocoFilme) blocoFilme.style.display = "block";
 
-                // Preenchimento
-                if (imgEl) {
-                    imgEl.src = ep.thumb || "";
-                    imgEl.alt = ep.titulo || `Episódio ${ep.numero || epIndex+1}`;
-                }
-                if (durationEl) durationEl.textContent = ep.duracao || "";
-                if (titleEl) titleEl.textContent = ep.titulo || `Episódio ${epIndex+1}`;
-                if (subtitleEl) subtitleEl.textContent = ep.numero || "";
-
-                // Adiciona click handler para abrir o player com a URL do JSON
-                if (cardWrapper) {
-                    cardWrapper.style.cursor = "pointer";
-                    cardWrapper.addEventListener("click", () => {
-                        const videoUrl = ep.video || ep.url || "";
-                        if (!videoUrl) {
-                            console.warn("Episódio sem vídeo definido:", ep);
-                            return;
+                const btnPlay = document.getElementById("btn-play-filme");
+                if (btnPlay) {
+                    btnPlay.onclick = (e) => {
+                        e.preventDefault();
+                        const videoUrl = item.video || "";
+                        if (videoUrl) {
+                            window.location.hash = `#player?video=${encodeURIComponent(videoUrl)}`;
+                        } else {
+                            alert("Vídeo indisponível para este filme.");
                         }
-                        // Navega por hash para manter SPA routing (player.js escuta hashchange)
-                        window.location.hash = `#player?video=${encodeURIComponent(videoUrl)}`;
-                    });
+                    };
                 }
 
-                containerEps.appendChild(clone);
-            });
+            } else {
+                // --- É UMA SÉRIE / ANIME ---
+                if (blocoFilme) blocoFilme.style.display = "none";
+                if (blocoEpisodios) blocoEpisodios.style.display = "block";
+
+                // Se o JSON contiver a lista de TEMPORADAS:
+                if (Array.isArray(item.temporadas) && item.temporadas.length > 0) {
+                    if (selectTemporadas) {
+                        selectTemporadas.style.display = "block";
+                        selectTemporadas.innerHTML = "";
+
+                        // Popula o <select> com as temporadas
+                        item.temporadas.forEach((temp, index) => {
+                            const option = document.createElement("option");
+                            option.value = index;
+                            option.textContent = temp.nome || `${index + 1}ª Temporada`;
+                            selectTemporadas.appendChild(option);
+                        });
+
+                        // Evento ao trocar de temporada no menu
+                        selectTemporadas.onchange = (e) => {
+                            const idx = e.target.value;
+                            renderizarListaEpisodios(item.temporadas[idx].episodios, containerEps, modeloEp);
+                        };
+                    }
+
+                    // Renderiza a 1ª temporada por padrão
+                    renderizarListaEpisodios(item.temporadas[0].episodios, containerEps, modeloEp);
+
+                } else if (Array.isArray(item.episodios)) {
+                    // Compatibilidade: Se for um anime sem temporadas (lista simples de episódios)
+                    if (selectTemporadas) selectTemporadas.style.display = "none";
+                    renderizarListaEpisodios(item.episodios, containerEps, modeloEp);
+                }
+            }
 
         } catch (erro) {
-            console.error("Erro ao processar dados da tela de informações:", erro);
+            console.error("Erro ao carregar os dados de info.json:", erro);
         }
     }
 
-    // Executa quando muda o hash da URL (navegação SPA)
+    // Função interna para clonar e injetar os episódios na tela
+    function renderizarListaEpisodios(listaEpisodios, container, modelo) {
+        container.innerHTML = ""; // Limpa episódios anteriores
+
+        if (!Array.isArray(listaEpisodios) || listaEpisodios.length === 0) {
+            container.innerHTML = "<p style='color: #888; padding: 10px;'>Nenhum episódio disponível nesta temporada.</p>";
+            return;
+        }
+
+        listaEpisodios.forEach((ep, epIndex) => {
+            const clone = modelo.content.cloneNode(true);
+
+            const imgEl = clone.querySelector("img");
+            const durationEl = clone.querySelector(".ep-duration");
+            const titleEl = clone.querySelector(".card-title-ep");
+            const subtitleEl = clone.querySelector(".card-subtitle-ep");
+            const cardWrapper = clone.querySelector(".card-ep");
+
+            if (imgEl) {
+                imgEl.src = ep.thumb || "";
+                imgEl.alt = ep.titulo || `Episódio ${epIndex + 1}`;
+            }
+            if (durationEl) durationEl.textContent = ep.duracao || "";
+            if (titleEl) titleEl.textContent = ep.titulo || `Episódio ${epIndex + 1}`;
+            if (subtitleEl) subtitleEl.textContent = ep.numero || `EP ${epIndex + 1}`;
+
+            if (cardWrapper) {
+                cardWrapper.style.cursor = "pointer";
+                cardWrapper.addEventListener("click", () => {
+                    const videoUrl = ep.video || ep.url || "";
+                    if (videoUrl) {
+                        window.location.hash = `#player?video=${encodeURIComponent(videoUrl)}`;
+                    } else {
+                        console.warn("Episódio sem URL de vídeo vinculada.");
+                    }
+                });
+            }
+
+            container.appendChild(clone);
+        });
+    }
+
+    // Executa ao mudar de rota ou recarregar
     window.addEventListener("hashchange", gerenciarTelaInfo);
-    
-    // Executa também se a página já recarregar direto no link de info
     gerenciarTelaInfo();
 });
