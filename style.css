@@ -676,36 +676,32 @@ a.card {
     letter-spacing: 0.5px;
 }
 
+}
+
 /* ==========================================================================
-   8. NATIVO DO COMPONENTE PLAYER ISOLADO (#player)
+   8. ESTILOS DO PLAYER (VIDEO.JS)
    ========================================================================== */
-#player {
-    margin: -30px -24px -90px -24px;
-    background-color: #000000;
-    min-height: 100vh;
-}
-
-#player.active {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-}
-
-.cinema-wrapper {
+.player-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    max-width: 1000px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
     background-color: #000000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
+/* Botão Voltar sobreposto no Player */
 .btn-voltar-player {
     position: absolute;
-    top: 16px;
-    left: 16px;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     color: #ffffff;
@@ -713,11 +709,167 @@ a.card {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    z-index: 10;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease;
 }
 
-#chibi-player {
-    width: 100% !important;
-    height: 100% !important;
+.btn-voltar-player:active {
+    transform: scale(0.9);
+}
+
+/* Ajuste das cores primárias do Video.js para a paleta ChibiHeart */
+.vjs-theme-chibi .vjs-play-progress,
+.vjs-theme-chibi .vjs-volume-level {
+    background-color: #ff76b7 !important;
+}
+
+.video-js {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+/*--------------
+
+
+/* ===== Hero actions / big buttons ===== */
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+/* Base do botão */
+.btn-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  transition: transform 120ms ease, opacity 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Botão principal (assistir) em destaque */
+.btn-hero-play {
+  background: linear-gradient(90deg, #ff6b6b, #ff2e7a);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Botão secundário (detalhes) estilo vidro */
+.btn-hero-info {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(6px);
+}
+
+/* Feedbacks */
+.btn-hero:active { transform: translateY(1px) scale(0.995); opacity: 0.98; }
+.btn-hero:hover { transform: translateY(-2px); }
+
+/* Garante leitura do texto no hero para telas pequenas */
+@media (max-width: 420px) {
+  .hero-banner-title { font-size: 1.25rem; }
+  .hero-banner-desc { font-size: 0.8rem; }
+  .btn-hero { padding: 10px 12px; font-size: 0.9rem; }
+}
+
+/* BANNER /*
+
+
+/* ===== Hero banner dynamic adjustments ===== */
+.hero-banner {
+  position: relative;
+  width: calc(100% + 40px); /* respeita padding do main-content como antes */
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-top: -16px;
+  margin-bottom: 20px;
+  height: clamp(220px, 36vw, 420px); /* responsivo: maior em telas largas */
+  overflow: hidden;
+  background: #111;
+  border-radius: 8px;
+}
+
+.hero-banner-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.hero-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.55);
+}
+
+.hero-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 10%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.0) 100%);
+  pointer-events: none;
+}
+
+.hero-banner-content {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  right: 20px;
+  z-index: 2;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hero-banner-title {
+  font-size: clamp(1.15rem, 3.6vw, 2rem);
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.05;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+.hero-banner-desc {
+  max-width: 68ch;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.92);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* show 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+
+/* quando expandido mostra mais */
+.hero-banner-desc.expanded {
+  -webkit-line-clamp: unset;
+  max-height: 40vh;
+}
+
+/* hero actions (botões) já existem no style.css; reforçar espaçamentos */
+.hero-actions { margin-top: 8px; display:flex; gap:10px; align-items:center; }
+
+/* garante bom contraste do badge */
+.hero-badge-tag { background: linear-gradient(135deg, #ff76b7, #ff4081); padding: 4px 8px; border-radius: 6px; font-weight:800; font-size:0.7rem; }
+
+/* mobile tweaks */
+@media (max-width: 420px) {
+  .hero-banner { height: 220px; margin-bottom: 14px; }
+  .hero-banner-desc { font-size: 0.85rem; -webkit-line-clamp: 2; }
+  .hero-banner-title { font-size: 1.1rem; }
 }

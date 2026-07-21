@@ -20,34 +20,50 @@
     <!-- Conteúdo Principal -->
     <main class="main-content">
 
-        <!-- VIEW DO PLAYER DE VÍDEO (Cinema Mode) -->
-        <section id="player" class="app-view">
-            <div class="cinema-wrapper">
-                <!-- Botão Voltar (Usa o histórico do navegador para saber se volta para Home ou para Info) -->
-                <a href="javascript:history.back()" class="btn-voltar-player">
-                    <span class="material-symbols-outlined">arrow_back</span>
-                </a>
+<!-- VIEW DO PLAYER DE VÍDEO -->
+<section id="player" class="app-view">
+    <div class="player-container">
+        <!-- Botão Voltar Sobreposto (Redireciona para o Início) -->
+        <a href="#inicio" class="btn-voltar-player">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </a>
 
-                <!-- A tag do Video.js isolada -->
-                <video id="chibi-player" class="video-js vjs-default-skin vjs-big-play-centered" playsinline></video>
-            </div>
-        </section>
+        <!-- Elemento do Video.js -->
+        <video 
+            id="main-player" 
+            class="video-js vjs-big-play-centered vjs-theme-chibi" 
+            controls 
+            preload="auto" 
+            playsinline>
+        </video>
+    </div>
+</section>
+
 
         <!-- VIEW DA HOME -->
         <section id="inicio" class="app-view active">
 
             <!-- HERO BANNER / BANNER DE DESTAQUE -->
-            <div class="hero-banner">
-                <a href="#info" class="hero-banner-link">
-                    <img src="https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcyVuTDqPCC.jpg" alt="Destaque" class="hero-banner-img">
-                    <div class="hero-banner-overlay"></div>
-                    
-                    <div class="hero-banner-content">
-                        <span class="hero-badge-tag">EM DESTAQUE</span>
-                        <h2 class="hero-banner-title">K-ON!!</h2>
-                        <p class="hero-banner-desc">Assista à nova temporada da banda Ho-kago Tea Time!</p>
-                    </div>
-                </a>
+          <!-- HERO BANNER / BANNER DE DESTAQUE (dinâmico via js/hero_banner.js) -->
+<div id="hero-banner" class="hero-banner"></div>
+
+<template id="modelo-hero-banner">
+  <div class="hero-banner-slide">
+    <img class="hero-banner-img" src="" alt="">
+    <div class="hero-banner-overlay"></div>
+
+    <div class="hero-banner-content">
+      <span class="hero-badge-tag">EM DESTAQUE</span>
+      <h2 class="hero-banner-title"></h2>
+      <p class="hero-banner-desc"></p>
+
+      <div class="hero-actions">
+        <a class="btn-hero btn-hero-play" role="button" aria-label="Assistir"></a>
+        <a class="btn-hero btn-hero-info" role="button" aria-label="Detalhes"></a>
+      </div>
+    </div>
+  </div>
+</template>
             </div>
  
         
@@ -201,9 +217,11 @@
     <script src="https://vjs.zencdn.net/8.16.1/video.js"></script>
 
     <!-- Scripts de Inicialização e Motores Lógicos -->
-    <script src="js/main.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/animes_recomendados.js"></script>
-    <script src="js/info.js"></script>
+
+	<script src="js/main.js"></script>
+	<script src="js/hero_banner.js"></script>
+	<script src="js/player.js"></script>
+	<script src="js/animes_recomendados.js"></script>
+	<script src="js/info.js"></script>
 </body>
 </html>
