@@ -1,103 +1,88 @@
-let player;
-
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
+    const playerElement = document.getElementById('main-player');
+    
     // Inicializa o Video.js
-    player = videojs('chibi-player', {
+    const player = videojs('main-player', {
         controls: true,
-        fluid: true,
+        autoplay: false,
         preload: 'auto',
-        playbackRates: [0.5, 1, 1.25, 1.5, 2]
+        responsive: true,
+        fluid: true
     });
 
-    // Escuta a mudança de rota/hash para saber quando o player foi aberto
-    window.addEventListener("hashchange", verificarRotaPlayer);
-    
-    // Verifica também se a página já carregou direto na URL do player
-    verificarRotaPlayer();
-});
+    // Função para entrar em Fullscreen e Travar a Tela na Horizontal
+    async function entrarEmModoPlayer() {
+        try {
+            // 1. Tenta colocar o contêiner do vídeo em Tela Cheia no navegador
+            const container = document.querySelector('.player-container');
+            if (container.requestFullscreen) {
+                await container.requestFullscreen();
+            } else if (container.webkitRequestFullscreen) { /* Safari / iOS */
+                await container.webkitRequestFullscreen();
+            }
 
-async function verificarRotaPlayer() {
-    const rawHash = window.location.hash || "#inicio";
-    const [hashAtual, queryString] = rawHash.split("?");
-
-    // Se a rota não for o player, pausa o vídeo (caso estivesse tocando) e sai
-    if (hashAtual !== "#player") {
-        if (player && !player.paused()) {
-            player.pause();
+            // 2. Força a rotação da tela do celular para Horizontal (Landscape)
+            if (screen.orientation && screen.orientation.lock) {
+                await screen.orientation.lock('landscape').catch(() => {
+                    // Alguns navegadores exigem interação ativa, ignora se bloqueado
+                });
+            }
+        } catch (err) {
+            console.log('Modo Fullscreen automático não suportado ou bloqueado pelo navegador:', err);
         }
-        return;
     }
 
-    // Se entrou na rota #player, pega os parâmetros da URL
-    const params = new URLSearchParams(queryString);
-    const urlVideo = params.get("video");
-    const urlLegenda = params.get("legenda");
+    // Função para Sair do Fullscreen
+    function sairDoModoPlayer() {
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        }
 
-    if (!urlVideo) {
-        console.warn("⚠️ [Player] Nenhum link de vídeo foi enviado na URL.");
-        window.location.hash = "#inicio";
-        return;
+        // Destrava a orientação de tela do celular
+        if (screen.orientation && screen.orientation.unlock) {
+            screen.orientation.unlock();
+        }
     }
 
-    console.log("🎬 [Player] Inicializando reprodução automatizada para:", urlVideo);
-    
-    // Dispara a função de carga, play e tela cheia
-    dispararCinema(urlVideo, urlLegenda);
-}
+    // Monitora as mudanças de Hash na URL (#player?video=...)
+    function tratarTrocaDeRota() {
+        const hash = window.location.hash;
 
-function dispararCinema(urlVideo, urlLegenda) {
-    if (!player) return;
+        if (hash.startsWith('#player')) {
+            const urlParams = new URLSearchParams(hash.split('?')[1]);
+            const videoUrl = urlParams.get('video');
 
-    // 1. Detecta o tipo do formato
-    let tipoVideo = 'video/mp4';
-    if (urlVideo.endsWith('.webm')) tipoVideo = 'video/webm';
-    if (urlVideo.endsWith('.mkv')) tipoVideo = 'video/x-matroska';
-
-    // 2. Alimenta o player com a nova fonte
-    player.src({ type: tipoVideo, src: urlVideo });
-
-    // 3. Limpa as legendas antigas
-    const faixasAntigas = player.remoteTextTracks();
-    let i = faixasAntigas.length;
-    while (i--) {
-        player.removeRemoteTextTrack(faixasAntigas[i]);
+            if (videoUrl) {
+                player.src({ type: 'video/mp4', src: videoUrl });
+                player.ready(() => {
+                    player.play().then(() => {
+                        entrarEmModoPlayer();
+                    }).catch(() => {
+                        // Trata políticas de Autoplay com áudio
+                        entrarEmModoPlayer();
+                    });
+                });
+            }
+        } else {
+            // Se o usuário saiu do #player (ex: apertou o voltar do celular)
+            player.pause();
+            sairDoModoPlayer();
+        }
     }
 
-    // 4. Adiciona a nova legenda se houver
-    if (urlLegenda) {
-        player.addRemoteTextTrack({
-            kind: 'captions',
-            src: urlLegenda,
-            srclang: 'pt-BR',
-            label: 'Português',
-            default: true
-        }, true);
-    }
-
-    // 5. O truque de mestre: Aguarda o player estar pronto com o novo vídeo
-    player.ready(() => {
-        // Tenta dar o Play
-        player.play().then(() => {
-            console.log("▶️ [Player] Autoplay iniciado com sucesso.");
-            
-            // Joga em tela cheia imediatamente após o play iniciar
-            setTimeout(() => {
-                try {
-                    player.requestFullscreen();
-                    console.log("📺 [Player] Tela cheia ativada.");
-                } catch (erroFs) {
-                    console.error("❌ [Player] Erro ao forçar tela cheia:", erroFs);
-                }
-            }, 300); // Um delay cirúrgico de 300ms para o celular processar a mídia antes do baque do Fullscreen
-
-        }).catch(erroPlay => {
-            // Se o navegador do celular ainda assim bloquear o som/play automático
-            console.warn("⚠️ [Player] Bloqueio de segurança do navegador detetado. Tentando modo de segurança (Muted)...");
-            
-            player.muted(true); // Força o mudo para burlar o bloqueio
-            player.play().then(() => {
-                player.requestFullscreen();
-            });
-        });
+    // Detecta quando o usuário sai do Fullscreen manualmente (ex: gestos do Android)
+    document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement && window.location.hash.startsWith('#player')) {
+            // Se ele fechou o Fullscreen, redireciona a app para o #inicio
+            window.location.hash = '#inicio';
+        }
     });
-}
+
+    // Escuta a troca de páginas/rotas da SPA
+    window.addEventListener('hashchange', tratarTrocaDeRota);
+    tratarTrocaDeRota();
+});

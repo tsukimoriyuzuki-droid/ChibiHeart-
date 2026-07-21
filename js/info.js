@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            // Busca o arquivo info.json do servidor Nginx
+            // Busca o arquivo info.json do servidor
             const resposta = await fetch("info.json");
             const bancoDados = await resposta.json();
             const anime = bancoDados[animeId];
@@ -53,14 +53,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // 3. Preenche a Lista de Episódios usando o Template (sem destruir o DOM)
             containerEps.innerHTML = ""; // Limpa os episódios do anime anterior
-            anime.episodios.forEach(ep => {
+            anime.episodios.forEach((ep, epIndex) => {
                 const clone = modeloEp.content.cloneNode(true);
 
-                clone.querySelector("img").src = ep.thumb;
-                clone.querySelector("img").alt = ep.titulo;
-                clone.querySelector(".ep-duration").textContent = ep.duracao;
-                clone.querySelector(".card-title-ep").textContent = ep.titulo;
-                clone.querySelector(".card-subtitle-ep").textContent = ep.numero;
+                const imgEl = clone.querySelector("img");
+                const durationEl = clone.querySelector(".ep-duration");
+                const titleEl = clone.querySelector(".card-title-ep");
+                const subtitleEl = clone.querySelector(".card-subtitle-ep");
+                const cardWrapper = clone.querySelector(".card-ep");
+
+                // Preenchimento
+                if (imgEl) {
+                    imgEl.src = ep.thumb || "";
+                    imgEl.alt = ep.titulo || `Episódio ${ep.numero || epIndex+1}`;
+                }
+                if (durationEl) durationEl.textContent = ep.duracao || "";
+                if (titleEl) titleEl.textContent = ep.titulo || `Episódio ${epIndex+1}`;
+                if (subtitleEl) subtitleEl.textContent = ep.numero || "";
+
+                // Adiciona click handler para abrir o player com a URL do JSON
+                if (cardWrapper) {
+                    cardWrapper.style.cursor = "pointer";
+                    cardWrapper.addEventListener("click", () => {
+                        const videoUrl = ep.video || ep.url || "";
+                        if (!videoUrl) {
+                            console.warn("Episódio sem vídeo definido:", ep);
+                            return;
+                        }
+                        // Navega por hash para manter SPA routing (player.js escuta hashchange)
+                        window.location.hash = `#player?video=${encodeURIComponent(videoUrl)}`;
+                    });
+                }
 
                 containerEps.appendChild(clone);
             });
