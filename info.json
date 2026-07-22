@@ -1,35 +1,28 @@
 {
-    "onimai": {
-        "tipo": "serie",
-        "titulo": "ONIMAI: I'm Now Your Sister!",
-        "ano": "2023",
-        "classificacao": "16+",
-        "generos": ["Comédia", "Slice of Life", "Troca de Gênero"],
-        "sinopse": "Mahiro Oyama era apenas um jovem isolado fã de jogos eróticos... até que ele acordou um dia como uma mulher! Acontece que sua irmã mais nova, Mihari, uma cientista maluca, experimentou um de seus novos remédios nele. Agora, Mahiro precisa aprender a viver como uma estudante do ensino fundamental enquanto tenta se adaptar à sua nova rotina!",
-        "banner": "https://image.tmdb.org/t/p/original/15r7AEj3rxEAjGbdPv7zafeX7Ub.jpg",
-        "poster": "https://image.tmdb.org/t/p/original/tpvVSr6ThPQFISYc9xRVR7MKjDF.jpg",
-        "temporadas": [
-            {
-                "nome": "1ª Temporada",
-                "episodios": [
-                    {
-                        "numero": "Episódio 01",
-                        "titulo": "ONIMAI - O Início de Mahiro",
-                        "thumb": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcOq7Kcl4R.jpg",
-                        "duracao": "24 min",
-                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
-                    },
-                    {
-                        "numero": "Episódio 02",
-                        "titulo": "ONIMAI - O Primeiro Passeio",
-                        "thumb": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcOq7Kcl4R.jpg",
-                        "duracao": "24 min",
-                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
-                    }
-                ]
-            }
-        ]
-    },
+	"chuunibyou": {
+		"tipo": "serie",
+		"titulo": "Chuunibyou Demo Koi Ga Shitai!",
+		"ano": "2012",
+		"classificacao": "14 Anos",
+		"generos": ["Animação", "Comédia"],
+		"sinopse": "Yuta Togashi tem um problema. Ele costumava ser um “chunibyo”, um dos milhares de estudantes japoneses tão desesperados para se destacar que literalmente se convenceram de que possuem conhecimentos secretos e poderes ocultos. Mas agora que está começando o ensino médio, ele está determinado a deixar de lado seus delírios e encarar a vida de frente. O problema é que Rikka Takanashi, sua vizinha de cima, também está um pouco delirando. E ela sabe tudo sobre suas indiscrições passadas.",
+		"banner": "https://media.themoviedb.org/t/p/w1000_and_h563_face/vxZ3DV05A7vuarYjneANzwVvdf0.jpg",
+		"poster": "https://image.tmdb.org/t/p/original/zWrADu3PuMqEJtY1gj8J1faQv3e.jpg",
+		"temporadas" : [
+			{
+				"nome": "2ª Temporada",
+				"episodios": [
+					{
+						"numero": "Episódio 01",
+						"titulo": "O Renascimento Do… O Olho Mau",
+						"thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/FY31bu8xhDSwjt1Ui7pVb2t1I4.jpg",
+						"duracao": "24 min",
+						"video": "https://ia800406.us.archive.org/3/items/ChubyouLeg/Segunda-1.mp4"
+					}
+				]
+			}
+		]
+	},
     "k-on": {
         "tipo": "serie",
         "titulo": "K-ON!!",
@@ -46,9 +39,16 @@
                     {
                         "numero": "Episódio 01",
                         "titulo": "Tempo de Música!",
-                        "thumb": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcyVuTDqPCC.jpg",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/kC4aJQF5MdnOepF40k2HrvzhJca.jpg",
                         "duracao": "23 min",
-                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-1.mp4"
+                    },
+                    {
+                        "numero": "Episódio 02",
+                        "titulo": "Instrumentos!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/gDVVSZ8VekACMpfdRfZihP5oKBX.jpg",
+                        "duracao": "23 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-2.mp4"
                     }
                 ]
             },
@@ -57,10 +57,185 @@
                 "episodios": [
                     {
                         "numero": "Episódio 01",
-                        "titulo": "De Novo um Calouro!",
-                        "thumb": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcyVuTDqPCC.jpg",
+                        "titulo": "Veteranas!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/sZJamTpk4Gub8ePBLCKAAF1lAEg.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-1.mp4"
+                    },
+                    {
+                        "numero": "Episódio 02",
+                        "titulo": "Limpeza!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/xnaLR4q0ie09DfbqasVrYxsok9e.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-2.mp4"
+                    },
+                    {
+                        "numero": "Episódio 03",
+                        "titulo": "Baterista!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/iS7BhqVp7LzylOs9nBhqcqDO2yp.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-3.mp4"
+                    },
+                    {
+                        "numero": "Episódio 04",
+                        "titulo": "Viagem Escolar!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/d3uUaU2KfPN742N2dnMffahfO3e.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-4.mp4"
+                    },
+                    {
+                        "numero": "Episódio 05",
+                        "titulo": "Ficando Para Trás!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/8BMQwJ7SKhuVPjohyxWPk4KHvzB.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-5.mp4"
+                    },
+                    {
+                        "numero": "Episódio 06",
+                        "titulo": "Estação Chuvosa!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/r2EXk9I8up4ktxOv253TNNO4ASM.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-6.mp4"
+                    },
+                    {
+                        "numero": "Episódio 07",
+                        "titulo": "Festa do Chá!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/pROa3YUegKdbnwHhXGG5B9IlNc5.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-7.mp4"
+                    },
+                    {
+                        "numero": "Episódio 08",
+                        "titulo": "O Futuro!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/yzbQHgi1ydFoPap447M9EXoSymY.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-8.mp4"
+                    },
+                    {
+                        "numero": "Episódio 09",
+                        "titulo": "Exames Finais!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/uSAIW2HqXw33WPN0LVGAjQUAV9P.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-9.mp4"
+                    },
+                    {
+                        "numero": "Episódio 10",
+                        "titulo": "Sensei!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/dDl0USilDNNJfWb7gBPRQreAkOB.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-10.mp4"
+                    },
+                    {
+                        "numero": "Episódio 11",
+                        "titulo": "Calor!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/uqb6nFHlybK051OZMqC4qJ9j4X2.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-11.mp4"
+                    },
+                    {
+                        "numero": "Episódio 12",
+                        "titulo": "Festival de Verão!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/vvnQJgXUwyfPjiviS0iLQ8JmFk4.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-12.mp4"
+                    },
+                    {
+                        "numero": "Episódio 13",
+                        "titulo": "Passeio do Fim do Verão!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/dP2XkXFd9682ilNDMfFVWkZgImp.jpg",
                         "duracao": "24 min",
                         "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
+                    },
+                    {
+                        "numero": "Episódio 14",
+                        "titulo": "Dias de Verão!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/qf6EDOvpPTDp43Huai700ckPUfz.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-14.mp4"
+                    },
+                    {
+                        "numero": "Episódio 15",
+                        "titulo": "Maratona!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/guD1OMHurzF852CiVd9vuFUr9VJ.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-15.mp4"
+                    },
+                    {
+                        "numero": "Episódio 16",
+                        "titulo": "Senpai!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/9ygxfVfE3tYNMpiq0hfz1US5kt8.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-16.mp4"
+                    },
+                    {
+                        "numero": "Episódio 17",
+                        "titulo": "Sem Sala de Música!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/pTmbffrFA3Ov1wjkZI7meOXYYte.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-17.mp4"
+                    },
+                    {
+                        "numero": "Episódio 18",
+                        "titulo": "Papel Principal!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/xW6J1pjfIZ8XHFb8h3SDIxzyzKw.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-18.mp4"
+                    },
+                    {
+                        "numero": "Episódio 19",
+                        "titulo": "Romeu e Julieta!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/eqX3b80TQ3wcxd55UlIp2mpHGUx.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-19.mp4"
+                    },
+                    {
+                        "numero": "Episódio 20",
+                        "titulo": "Mais Uma Vez, O Festival Escolar!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/owSNTzI4Oans5x4r0QUAjXvPcjr.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-20.mp4"
+                    },
+                    {
+                        "numero": "Episódio 21",
+                        "titulo": "Fotos de Formatura!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/oYXjwrXAGXoE1wnE4m3LvSZuJvO.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-21.mp4"
+                    },
+                    {
+                        "numero": "Episódio 22",
+                        "titulo": "Exames!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/yDMasAMqn48gtiTiO8CtR0ju9Yi.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-22.mp4"
+                    },
+                    {
+                        "numero": "Episódio 23",
+                        "titulo": "Depois da escola!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/g14CMfNMoxa9YR8RMA1b9P2CC4o.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-23.mp4"
+                    },
+                    {
+                        "numero": "Episódio 24",
+                        "titulo": "Formatura!",
+                        "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/gtXQ6yeUwq8o5nY1nstAWQAVhjP.jpg",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-24.mp4"
+                    },
+                    {
+                        "numero": "Episódio 25",
+                        "titulo": "Discussão de plano!",
+                        "thumb": "",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-25.mp4"
+                    },
+                    {
+                        "numero": "Episódio 26",
+                        "titulo": "Visita!",
+                        "thumb": "",
+                        "duracao": "24 min",
+                        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-26.mp4"
                     }
                 ]
             }
