@@ -241,15 +241,59 @@
             }
         ]
     },
-    "k-on-movie": {
-        "tipo": "filme",
-        "titulo": "K-ON! O Filme",
+    "oshi no ko": {
+        "tipo": "serie",
+        "titulo": "Oshi No Ko",
         "ano": "2011",
-        "classificacao": "Livre",
-        "generos": ["Música", "Comédia", "Viagem"],
-        "sinopse": "As integrantes do clube de música leve fazem uma viagem de graduação para Londres antes de terminarem o ensino médio!",
-        "banner": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcyVuTDqPCC.jpg",
-        "poster": "https://image.tmdb.org/t/p/original/pa5hMcg74yCcqa6NQe4h3z0pyNZ.jpg",
-        "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
+        "classificacao": "+14",
+        "generos": ["Drama", "Mistério", "Sobrenatural"],
+        "sinopse": "Um médico de cidade pequena entra no impiedoso mundo do entretenimento ao atender uma jovem famosa que esconde um segredo.",
+        "banner": "https://media.themoviedb.org/t/p/w1000_and_h563_face/hb9woOsZ3wz9o6P2DPCIUGoX01a.jpg",
+        "poster": "https://image.tmdb.org/t/p/original/sVc9arJOuIvOKOEFkQkWImvb0CZ.jpg",
+        "temporadas": [
+        	{
+        		"nome": "1ª Temporada Dub",
+        		"episodios": [
+        			{
+        				"numero": "Episódio 01",
+        				"titulo": "Mãe e filhos",
+        				"thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/rvy4W28wYkct3IFxU0RGF2uHppG.jpg",
+        				"duracao": "90 min",
+        				"video": "https://ia800705.us.archive.org/15/items/OshiS01S02S03/Primeira-Dub-1.mp4"
+        			},
+        			{
+        				"numero": "Episódio 02",
+        				"titulo": "A terceira opção",
+        				"thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/klFBxM7QHRtYvuqBcHGSoJaY5ES.jpg",
+        				"duracao": "24 min",
+        				"video": "https://ia800705.us.archive.org/15/items/OshiS01S02S03/Primeira-Dub-2.mp4"
+        			}
+        		]
+        	},
+        	{
+        		"nome": "2ª Temporada Leg",
+        		"episodios": [
+        			{
+        				"numero": "Episódio 12",
+        				"titulo": "Tokyo Blade",
+        				"thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/z05lf0LjvKIFw4sX3TFvN97hAvF.jpg",
+        				"duracao": "24 min",
+        				"video": "https://ia800705.us.archive.org/15/items/OshiS01S02S03/12.mp4"
+        			}
+        		]
+        	},
+        	{
+        		"nome": "3ª Temporada Leg",
+        		"episodios": [
+        			{
+        				"numero": "Episódio 25",
+        				"titulo": "Obsessão",
+        				"thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/1XPtlsRHFY4H7CdYZItnSZa7Knc.jpg",
+        				"duracao": "24 min",
+        				"video": "https://ia800705.us.archive.org/15/items/OshiS01S02S03/25.mp4"
+        			}
+        		]
+        	}
+        ]
     }
 }
