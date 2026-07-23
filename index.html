@@ -8,33 +8,24 @@
     <!-- PWA: Manifest e Cor do Tema -->
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#ffffff">
-    
 
-    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+    <!-- CSS Externo e Fontes -->
+    <link rel="stylesheet" href="https://vjs.zencdn.net/8.16.1/video-js.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
 </head>
 <body>
 
-    <!-- Cabeçalho -->
-  <!--  <header class="main-header">
-        <div class="logo">
-            <h1>Chibi<span>Heart</span> 💕</h1>
-        </div>
-    </header>
-	-->
-    <!-- Conteúdo Principal -->
+    <!-- Conteúdo Principal (SPA) -->
     <main class="main-content">
 
         <!-- VIEW DO PLAYER DE VÍDEO -->
         <section id="player" class="app-view">
             <div class="player-container">
-                <!-- Botão Voltar Sobreposto (Redireciona para o Início) -->
-                <a href="#inicio" class="btn-voltar-player">
+                <a href="#inicio" class="btn-voltar-player" aria-label="Voltar para o início">
                     <span class="material-symbols-outlined">arrow_back</span>
                 </a>
 
-                <!-- Elemento do Video.js -->
                 <video
                     id="main-player"
                     class="video-js vjs-big-play-centered vjs-theme-chibi"
@@ -47,15 +38,7 @@
 
         <!-- VIEW DA HOME -->
         <section id="inicio" class="app-view active">
-
-
-      <!--  	<header class="main-header">
-        		<div class="logo">
-        			<h1>Chibi<span>Heart</span> 💕</h1>
-        		</div>
-        	</header>
-	-->
-            <!-- HERO BANNER / BANNER DE DESTAQUE (dinâmico via js/hero_banner.js) -->
+            <!-- Hero Banner Dinâmico -->
             <div id="hero-banner" class="hero-banner"></div>
 
             <template id="modelo-hero-banner">
@@ -76,11 +59,10 @@
                 </div>
             </template>
 
-            <!-- Grade Vertical (Animes Recomendados) - DINÂMICA -->
+            <!-- Grade de Animes Recomendados -->
             <h2 class="titulo-categoria">Assista no Chibi Heart</h2>
             <div id="grade-recomendados" class="cards-grid"></div>
 
-            <!-- Molde para os cards de animes recomendados -->
             <template id="modelo-card-anime">
                 <a href="" class="card poster">
                     <div class="card-media">
@@ -89,28 +71,19 @@
                     <h3 class="card-title"></h3>
                 </a>
             </template>
-
         </section>
 
         <!-- VIEW DE DETALHES -->
-
-        <!-- VIEW DE DETALHES -->
         <section id="info" class="app-view">
-        
-            <!-- Capa/Banner Superior -->
             <div class="info-hero">
-                <!-- Botão Voltar idêntico ao da Disney -->
-                <a href="#inicio" class="btn-voltar">
+                <a href="#inicio" class="btn-voltar" aria-label="Voltar">
                     <span class="material-symbols-outlined">arrow_back</span>
                 </a>
                 <div class="hero-overlay"></div>
                 <img id="info-banner" src="" alt="Banner da Série/Filme" class="banner-img">
             </div>
-        
-            <!-- Conteúdo Principal dos Detalhes -->
+
             <div class="info-content">
-        
-                <!-- Bloco de Título e Metadados (Sem o pôster vertical) -->
                 <div class="info-header-block">
                     <h2 id="info-titulo">Carregando...</h2>
                     
@@ -118,63 +91,37 @@
                         <span id="info-ano" class="info-year">----</span>
                         <span class="info-separator">•</span>
                         <span id="info-temporadas" class="info-seasons">-- Temporadas</span>
-                        <!-- Se for filme, seu JS pode injetar a classificação/HD aqui se desejar -->
                     </div>
                 </div>
-        
-                <!-- Gêneros / Categorias -->
+
                 <div id="info-generos" class="info-genres"></div>
-        
-                <!-- Botão Principal de Assistir (Estilo Disney: Branco, Largo e Centralizado) -->
+
                 <div class="acao-principal-container">
                     <a id="btn-play-filme" href="#player" class="btn-disney-play">
                         <span class="material-symbols-outlined">play_arrow</span>
                         ASSISTIR
                     </a>
                 </div>
-        
-                <!-- Botões de Ação Secundários (Minha Lista Comentado) -->
-                <!-- 
-                <div class="acoes-secundarias">
-                    <button id="btn-minha-lista" class="btn-acao-secundaria">
-                        <span class="material-symbols-outlined">add</span>
-                        <span>MINHA LISTA</span>
-                    </button>
-                </div>
-                -->
-        
-                <!-- Sinopse / Descrição -->
+
                 <div class="info-synopsis-container">
                     <p id="info-sinopse">Carregando sinopse...</p>
                 </div>
-        
             </div>
 
-
-
-
-            <!-- Seção de Episódios e Temporadas -->
+            <!-- Seção de Episódios -->
             <div id="container-episodios" class="info-episodes-container">
-                
-                <!-- Cabeçalho dos Episódios com Seletor de Temporadas -->
-                <div class="episodes-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                    <h2 class="titulo-categoria" style="margin: 0;">Episódios</h2>
+                <div class="episodes-header">
+                    <h2 class="titulo-categoria">Episódios</h2>
                     
-                    <!-- Menu de Seleção de Temporadas (Gerado Dinamicamente pelo JS) -->
-                    <!-- Container do seletor customizado -->
                     <div class="custom-select-container">
-                      <!-- Botão que o usuário clica para abrir as opções -->
-                      <div id="btn-selecionar-temporada" class="btn-select-atual" onclick="togglePopupTemporadas()">
+                    <div type="button" id="btn-selecionar-temporada" class="btn-select-atual" onclick="togglePopupTemporadas()">
                         Carregando... ▾
-                      </div>
-                    
-                      <!-- O Pop-up flutuante que começa escondido -->
-                      <div id="popup-temporadas" class="popup-opcoes">
-                        <!-- As opções de temporadas serão injetadas aqui pelo JS -->
-                      </div>
                     </div>
-                    
 
+                    
+                    
+                        <div id="popup-temporadas" class="popup-opcoes"></div>
+                    </div>
                 </div>
 
                 <div id="lista-episodios" class="episodes-list"></div>
@@ -192,10 +139,9 @@
                     </div>
                 </template>
             </div>
-
         </section>
 
-        <!-- Outras Seções -->
+        <!-- OUTRAS SEÇÕES DA APLICAÇÃO -->
         <section id="lista" class="app-view">
             <h2>Minha Lista</h2>
             <p>Seus itens salvos aparecem aqui...</p>
@@ -210,29 +156,26 @@
             <h2>Meu Perfil</h2>
             <p>Configurações do usuário...</p>
         </section>
-
     </main>
 
-    <!-- Tab Bar -->
+    <!-- TAB BAR DE NAVEGAÇÃO -->
     <nav class="tab-bar">
-        <a href="#inicio" class="tab-item active">
+        <a href="#inicio" class="tab-item active" aria-label="Início">
             <span class="material-symbols-outlined">home</span>
         </a>
-        <a href="#lista" class="tab-item">
+        <a href="#lista" class="tab-item" aria-label="Minha Lista">
             <span class="material-symbols-outlined">list</span>
         </a>
-        <a href="#pesquisa" class="tab-item">
+        <a href="#pesquisa" class="tab-item" aria-label="Pesquisa">
             <span class="material-symbols-outlined">search</span>
         </a>
-        <a href="#perfil" class="tab-item">
+        <a href="#perfil" class="tab-item" aria-label="Perfil">
             <span class="material-symbols-outlined">person</span>
         </a>
     </nav>
 
-    <!-- Biblioteca Video.js -->
-    <script src="https://vjs.zencdn.net/8.16.1/video.js"></script>
-
     <!-- Scripts da Aplicação -->
+    <script src="https://vjs.zencdn.net/8.16.1/video.js"></script>
     <script src="js/main.js"></script>
     <script src="js/hero_banner.js"></script>
     <script src="js/player.js"></script>
@@ -249,6 +192,5 @@
         });
       }
     </script>
-
 </body>
 </html>

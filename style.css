@@ -23,7 +23,17 @@ body {
     overflow-x: hidden;
 }
 
-/* botao pop up select*/
+.episodes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.episodes-header .titulo-categoria {
+    margin: 0;
+}
+
 
 /* Container principal relativo para posicionar o pop-up */
 .custom-select-container {
