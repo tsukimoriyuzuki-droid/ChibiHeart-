@@ -1,42 +1,51 @@
+// js/main.js
+import { carregarHeroBanner } from './modules/heroBanner.js';
+import { carregarAnimesRecomendados } from './modules/destaque_principal_card.js';
+import { gerenciarTelaInfo } from './modules/infoView.js';
+import { fecharOverlayEp } from './modules/overlayEpisodio.js';
+
 document.addEventListener("DOMContentLoaded", () => {
-    const tabItems = document.querySelectorAll(".tab-item");
-    const appViews = document.querySelectorAll(".app-view");
+  // --- ROTEADOR DE ABAS / VIEWS ---
+  const tabItems = document.querySelectorAll(".tab-item");
+  const appViews = document.querySelectorAll(".app-view");
 
-    // Função que lê a URL e renderiza a tela correta
-    function navegarPeloHash() {
-        // 1. Pega o hash bruto (ex: #info?anime=onimai)
-        let rawHash = window.location.hash || "#inicio";
-        
-        // 2. Limpa os parâmetros, pegando só o ID da tela (ex: #info)
-        let hashAtual = rawHash.split("?")[0];
+  function navegarPeloHash() {
+    let rawHash = window.location.hash || "#inicio";
+    let hashAtual = rawHash.split("?")[0];
 
-        // Verifica se a tela realmente existe no HTML para evitar erros
-        const telaAlvo = document.querySelector(hashAtual);
-
-        if (!telaAlvo) {
-            hashAtual = "#inicio"; // Se o hash for inválido, força ir para o início
-        }
-
-        // 3. Esconde todas as telas e mostra apenas a do hash limpo
-        appViews.forEach(view => view.classList.remove("active"));
-        document.querySelector(hashAtual).classList.add("active");
-
-        // 4. Atualiza os ícones da Tab Bar (limpa se for #info)
-        tabItems.forEach(tab => {
-            tab.classList.remove("active");
-            // Só acende o ícone se o hash atual bater exatamente com o menu
-            if (tab.getAttribute("href") === hashAtual) {
-                tab.classList.add("active");
-            }
-        });
-
-        // 5. Joga o scroll para o topo suavemente
-        window.scrollTo({ top: 0, behavior: "smooth" });
+    const telaAlvo = document.querySelector(hashAtual);
+    if (!telaAlvo) {
+      hashAtual = "#inicio";
     }
 
-    // Escuta a mudança de hash na URL
-    window.addEventListener("hashchange", navegarPeloHash);
+    // Alterna a exibição das seções
+    appViews.forEach(view => view.classList.remove("active"));
+    document.querySelector(hashAtual)?.classList.add("active");
 
-    // Executa no carregamento inicial da página
+    // Alterna o estado ativo da bottom nav / tabs
+    tabItems.forEach(tab => {
+      tab.classList.remove("active");
+      if (tab.getAttribute("href") === hashAtual) {
+        tab.classList.add("active");
+      }
+    });
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // --- INICIALIZAÇÃO DOS MÓDULOS ---
+  // 1. Carrega os componentes da Home (#inicio)
+  carregarHeroBanner();
+  carregarAnimesRecomendados();
+
+  // 2. Controla a troca de telas e eventos de rota
+  window.addEventListener("hashchange", () => {
     navegarPeloHash();
+    fecharOverlayEp();
+    gerenciarTelaInfo();
+  });
+
+  // Execuções iniciais de rota
+  navegarPeloHash();
+  gerenciarTelaInfo();
 });

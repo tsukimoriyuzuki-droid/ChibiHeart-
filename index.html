@@ -19,23 +19,6 @@
     <!-- Conteúdo Principal (SPA) -->
     <main class="main-content">
 
-        <!-- VIEW DO PLAYER DE VÍDEO -->
-        <section id="player" class="app-view">
-            <div class="player-container">
-                <a href="#inicio" class="btn-voltar-player" aria-label="Voltar para o início">
-                    <span class="material-symbols-outlined">arrow_back</span>
-                </a>
-
-                <video
-                    id="main-player"
-                    class="video-js vjs-big-play-centered vjs-theme-chibi"
-                    controls
-                    preload="auto"
-                    playsinline>
-                </video>
-            </div>
-        </section>
-
         <!-- VIEW DA HOME -->
         <section id="inicio" class="app-view active">
             <!-- Hero Banner Dinâmico -->
@@ -174,13 +157,8 @@
         </a>
     </nav>
 
-    <!-- Scripts da Aplicação -->
-    <script src="https://vjs.zencdn.net/8.16.1/video.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/hero_banner.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/animes_recomendados.js"></script>
-    <script src="js/info.js"></script>
+    <!-- No final do body de index.html -->
+    <script type="module" src="js/main.js"></script>
 
     <!-- Registro do Service Worker -->
     <script>
