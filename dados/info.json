@@ -1,0 +1,365 @@
+{
+  "chuunibyou": {
+    "tipo": "serie",
+    "titulo": "Chuunibyou Demo Koi Ga Shitai!",
+    "ano": "2012",
+    "classificacao": "14 Anos",
+    "generos": ["Animação", "Comédia"],
+    "sinopse": "Yuta Togashi costumava ser um “chunibyo” — alguém que se convencia possuir poderes especiais. Agora tentando deixar essa fase para trás, sua vida vira de cabeça para baixo quando conhece Rikka, que ainda vive nesse mundo de delírios.",
+    "banner": "https://media.themoviedb.org/t/p/w1000_and_h563_face/vxZ3DV05A7vuarYjneANzwVvdf0.jpg",
+    "poster": "https://image.tmdb.org/t/p/original/zWrADu3PuMqEJtY1gj8J1faQv3e.jpg",
+    "temporadas": [
+      {
+        "nome": "2ª Temporada",
+        "episodios": [
+          {
+            "id": "chuunibyou_s02e01",
+            "index": 1,
+            "titulo": "01. O Renascimento Do… O Olho Mau",
+            "descricao": "Yuta e os amigos encaram novas confusões quando memórias e delírios antigos retornam de forma inesperada.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/FY31bu8xhDSwjt1Ui7pVb2t1I4.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800406.us.archive.org/3/items/ChubyouLeg/Segunda-1.mp4"
+          }
+        ]
+      }
+    ]
+  },
+  "k-on": {
+    "tipo": "serie",
+    "titulo": "K-ON!!",
+    "ano": "2010",
+    "classificacao": "Livre",
+    "generos": ["Música", "Comédia", "Slice of Life"],
+    "sinopse": "Yui Hirasawa e suas amigas continuam no clube de música leve: ensaios, chá, doces e muito humor enquanto crescem juntas.",
+    "banner": "https://image.tmdb.org/t/p/original/pYa81GUfKspR81chpcyVuTDqPCC.jpg",
+    "poster": "https://image.tmdb.org/t/p/original/pa5hMcg74yCcqa6NQe4h3z0pyNZ.jpg",
+    "temporadas": [
+      {
+        "nome": "1ª Temporada",
+        "episodios": [
+          {
+            "id": "k-on_s01e01",
+            "index": 1,
+            "titulo": "01. Tempo de Música!",
+            "descricao": "Yui começa a descobrir a música e se junta ao clube, iniciando novas amizades.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/kC4aJQF5MdnOepF40k2HrvzhJca.jpg",
+            "duracao": "23 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-1.mp4"
+          },
+          {
+            "id": "k-on_s01e02",
+            "index": 2,
+            "titulo": "02. Instrumentos!",
+            "descricao": "As integrantes lidam com instrumentos e iniciam os primeiros ensaios.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/gDVVSZ8VekACMpfdRfZihP5oKBX.jpg",
+            "duracao": "23 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-2.mp4"
+          }
+        ]
+      },
+      {
+        "nome": "2ª Temporada",
+        "episodios": [
+          {
+            "id": "k-on_s02e01",
+            "index": 1,
+            "titulo": "01. Veteranas!",
+            "descricao": "Yui, Mio, Ritsu e Tsumugi estão na mesma classe e enfrentam os desafios de uma nova fase escolar.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/sZJamTpk4Gub8ePBLCKAAF1lAEg.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-1.mp4"
+          },
+          {
+            "id": "k-on_s02e02",
+            "index": 2,
+            "titulo": "02. Limpeza!",
+            "descricao": "O clube precisa limpar o local e encontra um violão antigo que traz novidades.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/xnaLR4q0ie09DfbqasVrYxsok9e.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-2.mp4"
+          },
+          {
+            "id": "k-on_s02e03",
+            "index": 3,
+            "titulo": "03. Baterista!",
+            "descricao": "O clube procura uma baterista e surgem situações engraçadas.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/iS7BhqVp7LzylOs9nBhqcqDO2yp.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-3.mp4"
+          },
+          {
+            "id": "k-on_s02e04",
+            "index": 4,
+            "titulo": "04. Viagem Escolar!",
+            "descricao": "As garotas fazem uma viagem escolar recheada de confusões.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/d3uUaU2KfPN742N2dnMffahfO3e.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-4.mp4"
+          },
+          {
+            "id": "k-on_s02e05",
+            "index": 5,
+            "titulo": "05. Ficando Para Trás!",
+            "descricao": "Uma situação faz com que alguém fique para trás, e o grupo precisa lidar com isso.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/8BMQwJ7SKhuVPjohyxWPk4KHvzB.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-5.mp4"
+          },
+          {
+            "id": "k-on_s02e06",
+            "index": 6,
+            "titulo": "06. Estação Chuvosa!",
+            "descricao": "Dias de chuva e pequenos conflitos pessoais entre as meninas.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/r2EXk9I8up4ktxOv253TNNO4ASM.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-6.mp4"
+          },
+          {
+            "id": "k-on_s02e07",
+            "index": 7,
+            "titulo": "07. Festa do Chá!",
+            "descricao": "O clube se reúne para uma tradicional festa do chá.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/pROa3YUegKdbnwHhXGG5B9IlNc5.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-7.mp4"
+          },
+          {
+            "id": "k-on_s02e08",
+            "index": 8,
+            "titulo": "08. O Futuro!",
+            "descricao": "Reflexões sobre o futuro e decisões importantes para as integrantes.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/yzbQHgi1ydFoPap447M9EXoSymY.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-8.mp4"
+          },
+          {
+            "id": "k-on_s02e09",
+            "index": 9,
+            "titulo": "09. Exames Finais!",
+            "descricao": "Período de provas; o clube tenta conciliar estudos e música.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/uSAIW2HqXw33WPN0LVGAjQUAV9P.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-9.mp4"
+          },
+          {
+            "id": "k-on_s02e10",
+            "index": 10,
+            "titulo": "10. Sensei!",
+            "descricao": "Um novo professor causa agito na escola e no clube.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/dDl0USilDNNJfWb7gBPRQreAkOB.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-10.mp4"
+          },
+          {
+            "id": "k-on_s02e11",
+            "index": 11,
+            "titulo": "11. Calor!",
+            "descricao": "O verão traz eventos especiais e emoções à flor da pele.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/uqb6nFHlybK051OZMqC4qJ9j4X2.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-11.mp4"
+          },
+          {
+            "id": "k-on_s02e12",
+            "index": 12,
+            "titulo": "12. Festival de Verão!",
+            "descricao": "Preparativos e participação no festival escolar.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/vvnQJgXUwyfPjiviS0iLQ8JmFk4.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-12.mp4"
+          },
+          {
+            "id": "k-on_s02e13",
+            "index": 13,
+            "titulo": "13. Passeio do Fim do Verão!",
+            "descricao": "Um passeio que marca momentos de despedida.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/dP2XkXFd9682ilNDMfFVWkZgImp.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
+          },
+          {
+            "id": "k-on_s02e14",
+            "index": 14,
+            "titulo": "14. Dias de Verão!",
+            "descricao": "Momentos descontraídos durante as férias de verão.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/qf6EDOvpPTDp43Huai700ckPUfz.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-14.mp4"
+          },
+          {
+            "id": "k-on_s02e15",
+            "index": 15,
+            "titulo": "15. Maratona!",
+            "descricao": "As meninas encaram uma maratona musical e se divertem muito.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/guD1OMHurzF852CiVd9vuFUr9VJ.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-15.mp4"
+          },
+          {
+            "id": "k-on_s02e16",
+            "index": 16,
+            "titulo": "16. Senpai!",
+            "descricao": "Relações com os senpais e eventos de fim de ciclo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/9ygxfVfE3tYNMpiq0hfz1US5kt8.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-16.mp4"
+          },
+          {
+            "id": "k-on_s02e17",
+            "index": 17,
+            "titulo": "17. Sem Sala de Música!",
+            "descricao": "O clube perde a sala de música e precisa se reinventar.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/pTmbffrFA3Ov1wjkZI7meOXYYte.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-17.mp4"
+          },
+          {
+            "id": "k-on_s02e18",
+            "index": 18,
+            "titulo": "18. Papel Principal!",
+            "descricao": "Alguém assume um papel principal que muda a dinâmica do grupo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/xW6J1pjfIZ8XHFb8h3SDIxzyzKw.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-18.mp4"
+          },
+          {
+            "id": "k-on_s02e19",
+            "index": 19,
+            "titulo": "19. Romeu e Julieta!",
+            "descricao": "Uma peça escolar provoca situações românticas e cômicas.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/eqX3b80TQ3wcxd55UlIp2mpHGUx.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-19.mp4"
+          },
+          {
+            "id": "k-on_s02e20",
+            "index": 20,
+            "titulo": "20. Mais Uma Vez, O Festival Escolar!",
+            "descricao": "Preparativos com emoção e música para o festival.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/owSNTzI4Oans5x4r0QUAjXvPcjr.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-20.mp4"
+          },
+          {
+            "id": "k-on_s02e21",
+            "index": 21,
+            "titulo": "21. Fotos de Formatura!",
+            "descricao": "Fotos e memórias de formatura trazem nostalgia ao grupo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/oYXjwrXAGXoE1wnE4m3LvSZuJvO.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-21.mp4"
+          },
+          {
+            "id": "k-on_s02e22",
+            "index": 22,
+            "titulo": "22. Exames!",
+            "descricao": "Período de provas e tensão escolar.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/yDMasAMqn48gtiTiO8CtR0ju9Yi.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-22.mp4"
+          },
+          {
+            "id": "k-on_s02e23",
+            "index": 23,
+            "titulo": "23. Depois da escola!",
+            "descricao": "Momentos após as aulas que fortalecem a amizade do grupo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/g14CMfNMoxa9YR8RMA1b9P2CC4o.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-23.mp4"
+          },
+          {
+            "id": "k-on_s02e24",
+            "index": 24,
+            "titulo": "24. Formatura!",
+            "descricao": "A formatura marca o fim de um ciclo e celebrações.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/gtXQ6yeUwq8o5nY1nstAWQAVhjP.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-24.mp4"
+          },
+          {
+            "id": "k-on_s02e25",
+            "index": 25,
+            "titulo": "25. Discussão de plano!",
+            "descricao": "O grupo discute planos para o futuro após eventos importantes.",
+            "thumb": "",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-25.mp4"
+          },
+          {
+            "id": "k-on_s02e26",
+            "index": 26,
+            "titulo": "26. Visita!",
+            "descricao": "Uma visita inesperada traz novas histórias.",
+            "thumb": "",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-26.mp4"
+          }
+        ]
+      }
+    ]
+  },
+  "oshi no ko": {
+    "tipo": "serie",
+    "titulo": "Oshi No Ko",
+    "ano": "2011",
+    "classificacao": "+14",
+    "generos": ["Drama", "Mistério", "Sobrenatural"],
+    "sinopse": "Um médico de cidade pequena entra no mundo do entretenimento ao atender uma jovem famosa, e acaba envolvido em segredos que mudam sua vida.",
+    "banner": "https://media.themoviedb.org/t/p/w1000_and_h563_face/hb9woOsZ3wz9o6P2DPCIUGoX01a.jpg",
+    "poster": "https://image.tmdb.org/t/p/original/sVc9arJOuIvOKOEFkQkWImvb0CZ.jpg",
+    "temporadas": [
+      {
+        "nome": "1ª Temporada Dub",
+        "episodios": [
+          {
+            "id": "oshi no ko_s01e01",
+            "index": 1,
+            "titulo": "01. Mãe e filhos",
+            "descricao": "O primeiro episódio apresenta a dinâmica entre mãe e filhos e o começo do conflito central.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/rvy4W28wYkct3IFxU0RGF2uHppG.jpg",
+            "duracao": "90 min",
+            "video": "https://ia800705.us.archive.org/15/items/OshiS01S02S03/Primeira-Dub-1.mp4"
+          },
+          {
+            "id": "oshi no ko_s01e02",
+            "index": 2,
+            "titulo": "02. A terceira opção",
+            "descricao": "Decisões difíceis aparecem e a história ganha camadas inesperadas.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/klFBxM7QHRtYvuqBcHGSoJaY5ES.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800705.us.archive.org/15/items/OshiS01S02S03/Primeira-Dub-2.mp4"
+          }
+        ]
+      },
+      {
+        "nome": "2ª Temporada Leg",
+        "episodios": [
+          {
+            "id": "oshi no ko_s02e12",
+            "index": 1,
+            "titulo": "01. Tokyo Blade",
+            "descricao": "Um episódio tenso com ação em Tóquio.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/z05lf0LjvKIFw4sX3TFvN97hAvF.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800705.us.archive.org/15/items/OshiS01S02S03/12.mp4"
+          }
+        ]
+      },
+      {
+        "nome": "3ª Temporada Leg",
+        "episodios": [
+          {
+            "id": "oshi no ko_s03e25",
+            "index": 1,
+            "titulo": "01. Obsessão",
+            "descricao": "Temas de obsessão e fama são explorados neste episódio.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/1XPtlsRHFY4H7CdYZItnSZa7Knc.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800705.us.archive.org/15/items/OshiS01S02S03/25.mp4"
+          }
+        ]
+      }
+    ]
+  }
+}
