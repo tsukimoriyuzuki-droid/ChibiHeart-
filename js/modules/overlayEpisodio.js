@@ -21,6 +21,7 @@ function createOverlayIfNeeded() {
     backdrop.style.inset = '0';
     backdrop.style.background = 'rgba(0,0,0,0.45)';
     backdrop.style.backdropFilter = 'blur(6px)';
+    backdrop.style.webkitBackdropFilter = 'blur(6px)';
     overlay.appendChild(backdrop);
 
     // panel
@@ -32,7 +33,7 @@ function createOverlayIfNeeded() {
     panel.style.transform = 'translate(-50%, -50%)';
     panel.style.width = 'min(720px, 96%)';
     panel.style.maxHeight = '85vh';
-    panel.style.overflow = 'auto';
+    panel.style.overflowY = 'auto';
     panel.style.background = '#0f1114';
     panel.style.borderRadius = '12px';
     panel.style.padding = '18px';
@@ -43,6 +44,7 @@ function createOverlayIfNeeded() {
     const closeBtn = document.createElement('button');
     closeBtn.id = 'overlay-close';
     closeBtn.innerText = '✕';
+    closeBtn.setAttribute('aria-label', 'Fechar');
     closeBtn.style.position = 'absolute';
     closeBtn.style.right = '12px';
     closeBtn.style.top = '12px';
@@ -59,6 +61,7 @@ function createOverlayIfNeeded() {
     thumb.style.height = 'auto';
     thumb.style.borderRadius = '8px';
     thumb.style.marginBottom = '12px';
+    thumb.style.objectFit = 'cover';
     panel.appendChild(thumb);
 
     const title = document.createElement('h3');
@@ -110,11 +113,15 @@ function createOverlayIfNeeded() {
     overlay.appendChild(panel);
     document.body.appendChild(overlay);
 
-    // Events
+    // Eventos
     backdrop.addEventListener('click', fecharOverlayEp);
     closeBtn.addEventListener('click', fecharOverlayEp);
+    
+    // Fecha no ESC apenas se o modal estiver ativo
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') fecharOverlayEp();
+        if (e.key === 'Escape' && overlay.style.display !== 'none') {
+            fecharOverlayEp();
+        }
     });
 
     toggleBtn.addEventListener('click', () => {
@@ -125,7 +132,7 @@ function createOverlayIfNeeded() {
             toggleBtn.innerText = 'Ver mais';
             toggleBtn.dataset.expanded = 'false';
         } else {
-            descEl.style.maxHeight = '';
+            descEl.style.maxHeight = 'none';
             toggleBtn.innerText = 'Ver menos';
             toggleBtn.dataset.expanded = 'true';
         }
@@ -135,7 +142,7 @@ function createOverlayIfNeeded() {
 export function abrirOverlayEp(epId) {
     const meta = episodesMap[epId];
     if (!meta) {
-        console.warn('Episódio não encontrado:', epId);
+        console.warn('[Overlay] Episódio não encontrado:', epId);
         return;
     }
     createOverlayIfNeeded();
@@ -149,12 +156,13 @@ export function abrirOverlayEp(epId) {
 
     const ep = meta.ep;
 
+    // Popula dados do episódio
     thumb.src = ep.thumb || '';
-    thumb.alt = ep.titulo || '';
+    thumb.alt = ep.titulo || 'Thumb do Episódio';
     title.textContent = ep.titulo || '';
     desc.textContent = ep.descricao || '';
 
-    // Reset collapse state
+    // Reseta estado de expansão da descrição
     desc.style.maxHeight = '4.8em';
     desc.style.overflow = 'hidden';
     toggleBtn.style.display = 'none';
@@ -170,7 +178,7 @@ export function abrirOverlayEp(epId) {
         pendingRaf = null;
     });
 
-    // Play button behavior
+    // Comportamento do botão de Play
     playBtn.onclick = (e) => {
         e.preventDefault();
         if (ep.video) {
@@ -181,7 +189,7 @@ export function abrirOverlayEp(epId) {
         }
     };
 
-    // Show overlay
+    // Exibe overlay e bloqueia scroll do fundo
     overlay.style.display = 'block';
     overlay.setAttribute('aria-hidden', 'false');
     document.body.classList.add('overlay-open');
@@ -197,8 +205,18 @@ export function fecharOverlayEp() {
         pendingRaf = null;
     }
 
+    // Oculta modal
     overlay.style.display = 'none';
     overlay.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('overlay-open');
     document.body.style.overflow = '';
+
+    // Limpa estado para não exibir dados antigos na próxima abertura
+    const thumb = document.getElementById('overlay-thumb');
+    const title = document.getElementById('overlay-ep-title');
+    const desc = document.getElementById('overlay-ep-desc');
+
+    if (thumb) thumb.src = '';
+    if (title) title.textContent = '';
+    if (desc) desc.textContent = '';
 }

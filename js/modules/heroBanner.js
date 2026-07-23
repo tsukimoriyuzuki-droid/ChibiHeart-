@@ -24,7 +24,7 @@ export async function carregarHeroBanner() {
     let videoUrl = hero.video && hero.video.trim() ? hero.video : '';
     if (!videoUrl) {
       try {
-        const infoRes = await fetch('info.json');
+        const infoRes = await fetch('./dados/info.json');
         if (infoRes.ok) {
           const info = await infoRes.json();
           if (info[hero.id] && Array.isArray(info[hero.id].episodios) && info[hero.id].episodios.length) {
@@ -77,10 +77,10 @@ export async function carregarHeroBanner() {
       });
     }
 
-    // Se quiser que clicar no slide leve para detalhes (mantive comportamento opcional)
+    // Se quiser que clicar no slide leve para detalhes
     if (slide) {
       slide.addEventListener('click', (ev) => {
-        // ignora se o clique for nos botões (para não duplicar)
+        // ignora se o clique for nos botões
         const target = ev.target;
         if (target.closest('.btn-hero')) return;
         window.location.hash = `#info?anime=${encodeURIComponent(hero.id)}`;
@@ -89,7 +89,7 @@ export async function carregarHeroBanner() {
 
     container.appendChild(clone);
 
-    // Expand / collapse da sinopse ao tocar (tela pequena)
+    // Expand / collapse da sinopse ao tocar
     const descEl = container.querySelector('.hero-banner-desc');
     if (descEl) {
       descEl.addEventListener('click', (e) => {

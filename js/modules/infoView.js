@@ -45,7 +45,7 @@ export async function gerenciarTelaInfo() {
     const modeloEp = document.getElementById("modelo-card-ep");
     const containerGeneros = document.getElementById("info-generos");
     const customSelectContainer = document.querySelector(".custom-select-container");
-    const blocoFilme = document.getElementById("acao-filme");
+    const blocoFilme = document.querySelector(".acao-principal-container");
     const blocoEpisodios = document.getElementById("container-episodios");
 
     if (!containerEps || !modeloEp) return;
@@ -63,38 +63,39 @@ export async function gerenciarTelaInfo() {
 
     const params = new URLSearchParams(queryString);
     const itemId = params.get("anime") || params.get("id");
+    const tempParam = parseInt(params.get("temp"), 10);
 
+    // Se não informou ID de anime na URL, envia para a tela de erro
     if (!itemId) {
-        window.location.hash = "#inicio";
+        window.location.hash = "#erro";
         return;
     }
 
     currentAnimeId = itemId;
 
     try {
-        const resposta = await fetch("dados/info.json");
+        const resposta = await fetch("./dados/info.json");
         if (!resposta.ok) throw new Error('Erro ao carregar info.json: ' + resposta.status);
         const bancoDados = await resposta.json();
         let item = bancoDados[itemId];
 
+        // Se o anime/filme não existir no JSON, envia para a tela de erro
         if (!item) {
             console.error("Item não encontrado no info.json:", itemId);
+            window.location.hash = "#erro";
             return;
         }
 
-        // Preenche dados básicos
+        // Preenche dados básicos (IDs confirmados no HTML)
         const infoBanner = document.getElementById("info-banner");
-        const infoPoster = document.getElementById("info-poster-img");
         const infoTitulo = document.getElementById("info-titulo");
         const infoAno = document.getElementById("info-ano");
-        const infoClass = document.getElementById("info-classificacao");
+        const infoTemporadas = document.getElementById("info-temporadas");
         const infoSinopse = document.getElementById("info-sinopse");
 
         if (infoBanner) infoBanner.src = item.banner || "";
-        if (infoPoster) infoPoster.src = item.poster || "";
         if (infoTitulo) infoTitulo.textContent = item.titulo || "Sem título";
         if (infoAno) infoAno.textContent = item.ano || "----";
-        if (infoClass) infoClass.textContent = item.classificacao || "--";
         if (infoSinopse) infoSinopse.textContent = item.sinopse || "Sem sinopse disponível.";
 
         // Preenche os gêneros
@@ -110,10 +111,11 @@ export async function gerenciarTelaInfo() {
             }
         }
 
-        // Filme vs série
+        // Filme vs Série
         if (item.tipo === "filme" || item.video) {
             if (blocoEpisodios) blocoEpisodios.style.display = "none";
             if (blocoFilme) blocoFilme.style.display = "block";
+            if (infoTemporadas) infoTemporadas.style.display = "none";
 
             const btnPlay = document.getElementById("btn-play-filme");
             if (btnPlay) {
@@ -129,25 +131,57 @@ export async function gerenciarTelaInfo() {
             }
 
         } else {
-            if (blocoFilme) blocoFilme.style.display = "none";
+            // SÉRIE / ANIME: Mantém o botão ASSISTIR do topo visível
+            if (blocoFilme) blocoFilme.style.display = "block";
             if (blocoEpisodios) blocoEpisodios.style.display = "block";
+            if (infoTemporadas) infoTemporadas.style.display = "inline";
+
+            // Ação do botão do topo para Séries (Toca o 1º Episódio da temporada atual)
+            const btnPlay = document.getElementById("btn-play-filme");
+            if (btnPlay) {
+                btnPlay.onclick = (e) => {
+                    e.preventDefault();
+                    const tempAtiva = temporadasAtuais[temporadaSelecionadaIndex];
+                    const primeiroEp = tempAtiva?.episodios?.[0];
+
+                    if (primeiroEp && primeiroEp.video) {
+                        window.location.hash = `#player?video=${encodeURIComponent(primeiroEp.video)}`;
+                    } else {
+                        alert("Nenhum episódio disponível para reprodução.");
+                    }
+                };
+            }
 
             if (Array.isArray(item.temporadas) && item.temporadas.length > 0) {
                 if (customSelectContainer) customSelectContainer.style.display = "inline-block";
                 temporadasAtuais = item.temporadas;
+                if (infoTemporadas) {
+                    const totalTemp = item.temporadas.length;
+                    infoTemporadas.textContent = `${totalTemp} ${totalTemp === 1 ? 'Temporada' : 'Temporadas'}`;
+                }
             } else if (Array.isArray(item.episodios)) {
                 if (customSelectContainer) customSelectContainer.style.display = "none";
                 temporadasAtuais = [{ nome: "Temporada Única", episodios: item.episodios }];
+                if (infoTemporadas) infoTemporadas.textContent = "1 Temporada";
             } else {
                 temporadasAtuais = [];
+                if (infoTemporadas) infoTemporadas.textContent = "-- Temporadas";
             }
 
-            temporadaSelecionadaIndex = 0;
+            // Define a temporada salva na URL se for válida; caso contrário, padrão é a 0
+            if (!isNaN(tempParam) && tempParam >= 1 && tempParam <= temporadasAtuais.length) {
+                temporadaSelecionadaIndex = tempParam - 1;
+            } else {
+                temporadaSelecionadaIndex = 0;
+            }
+
             indexEpisodes(itemId);
 
             renderizarPopUpTemporadas(containerEps, modeloEp);
-            if (temporadasAtuais[0] && temporadasAtuais[0].episodios) {
-                renderizarListaEpisodios(temporadasAtuais[0].episodios, containerEps, modeloEp);
+            
+            const tempAtiva = temporadasAtuais[temporadaSelecionadaIndex];
+            if (tempAtiva && tempAtiva.episodios) {
+                renderizarListaEpisodios(tempAtiva.episodios, containerEps, modeloEp);
             } else {
                 containerEps.innerHTML = "<p style='color: #888; padding: 10px;'>Nenhum episódio disponível nesta temporada.</p>";
             }
@@ -155,6 +189,7 @@ export async function gerenciarTelaInfo() {
 
     } catch (erro) {
         console.error("Erro ao carregar os dados de info.json:", erro);
+        window.location.hash = "#erro";
     }
 }
 
@@ -189,6 +224,15 @@ function renderizarPopUpTemporadas(containerEps, modeloEp) {
 
 function mudarTemporada(index, containerEps, modeloEp) {
     temporadaSelecionadaIndex = index;
+
+    const novaTempNum = index + 1;
+    const urlAtual = new URL(window.location.href);
+    const [hashBase, hashQuery] = urlAtual.hash.split("?");
+    const params = new URLSearchParams(hashQuery || "");
+    params.set("temp", novaTempNum);
+    
+    history.replaceState(null, "", `${hashBase}?${params.toString()}`);
+
     renderizarPopUpTemporadas(containerEps, modeloEp);
 
     const popup = document.getElementById("popup-temporadas");
@@ -213,7 +257,7 @@ window.addEventListener("click", (event) => {
     }
 });
 
-// --- RENDERIZAR EPISÓDIOS (Otimizado) ---
+// --- RENDERIZAR EPISÓDIOS ---
 
 function renderizarListaEpisodios(listaEpisodios, container, modelo) {
     container.innerHTML = "";
@@ -261,12 +305,3 @@ function renderizarListaEpisodios(listaEpisodios, container, modelo) {
 
     container.appendChild(frag);
 }
-
-// --- ROTEAMENTO ---
-
-window.addEventListener("hashchange", () => {
-    fecharOverlayEp();
-    gerenciarTelaInfo();
-});
-
-gerenciarTelaInfo();
