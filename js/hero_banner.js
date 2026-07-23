@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-    const res = await fetch('hero_banner.json');
+    const res = await fetch('./dados/hero_banner.json');
     if (!res.ok) throw new Error('Erro ao carregar hero_banner.json: ' + res.status);
     const items = await res.json();
     if (!Array.isArray(items) || items.length === 0) {
