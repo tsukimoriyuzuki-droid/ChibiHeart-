@@ -93,50 +93,65 @@
         </section>
 
         <!-- VIEW DE DETALHES -->
-        <section id="info" class="app-view">
 
+        <!-- VIEW DE DETALHES -->
+        <section id="info" class="app-view">
+        
             <!-- Capa/Banner Superior -->
             <div class="info-hero">
+                <!-- Botão Voltar idêntico ao da Disney -->
                 <a href="#inicio" class="btn-voltar">
                     <span class="material-symbols-outlined">arrow_back</span>
                 </a>
                 <div class="hero-overlay"></div>
-                <img id="info-banner" src="" alt="Banner do Anime" class="banner-img">
+                <img id="info-banner" src="" alt="Banner da Série/Filme" class="banner-img">
             </div>
-
+        
             <!-- Conteúdo Principal dos Detalhes -->
             <div class="info-content">
-
+        
+                <!-- Bloco de Título e Metadados (Sem o pôster vertical) -->
                 <div class="info-header-block">
-                    <div class="info-poster">
-                        <img id="info-poster-img" src="" alt="Poster do Anime">
-                    </div>
-                    <div class="info-title-meta">
-                        <h2 id="info-titulo">Carregando...</h2>
-                        <div class="info-meta">
-                            <span id="info-ano" class="info-year">----</span>
-                            <span class="info-badge">HD</span>
-                            <span id="info-classificacao" class="info-badge font-bold">--</span>
-                        </div>
+                    <h2 id="info-titulo">Carregando...</h2>
+                    
+                    <div class="info-meta">
+                        <span id="info-ano" class="info-year">----</span>
+                        <span class="info-separator">•</span>
+                        <span id="info-temporadas" class="info-seasons">-- Temporadas</span>
+                        <!-- Se for filme, seu JS pode injetar a classificação/HD aqui se desejar -->
                     </div>
                 </div>
-
+        
+                <!-- Gêneros / Categorias -->
                 <div id="info-generos" class="info-genres"></div>
-
-                <div class="info-synopsis-container">
-                    <h3>Sinopse</h3>
-                    <p id="info-sinopse">Carregando sinopse...</p>
-                </div>
-
-                <!-- Botão de Assistir Direto (Exclusivo para Filmes) -->
-                <div id="acao-filme" class="acao-filme-container" style="display: none; margin-top: 20px;">
-                    <a id="btn-play-filme" href="#player" class="btn-hero btn-hero-play" style="width: 100%; justify-content: center; padding: 14px; display: inline-flex; align-items: center; gap: 8px;">
+        
+                <!-- Botão Principal de Assistir (Estilo Disney: Branco, Largo e Centralizado) -->
+                <div class="acao-principal-container">
+                    <a id="btn-play-filme" href="#player" class="btn-disney-play">
                         <span class="material-symbols-outlined">play_arrow</span>
-                        Assistir Filme
+                        ASSISTIR
                     </a>
                 </div>
-
+        
+                <!-- Botões de Ação Secundários (Minha Lista Comentado) -->
+                <!-- 
+                <div class="acoes-secundarias">
+                    <button id="btn-minha-lista" class="btn-acao-secundaria">
+                        <span class="material-symbols-outlined">add</span>
+                        <span>MINHA LISTA</span>
+                    </button>
+                </div>
+                -->
+        
+                <!-- Sinopse / Descrição -->
+                <div class="info-synopsis-container">
+                    <p id="info-sinopse">Carregando sinopse...</p>
+                </div>
+        
             </div>
+
+
+
 
             <!-- Seção de Episódios e Temporadas -->
             <div id="container-episodios" class="info-episodes-container">
@@ -172,7 +187,7 @@
                         </div>
                         <div class="ep-info">
                             <h3 class="card-title-ep"></h3>
-                            <p class="card-subtitle-ep"></p>
+                            <p class="card-descricao-ep"></p>
                         </div>
                     </div>
                 </template>
