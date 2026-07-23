@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             console.log("📡 [Recomendados] Fazendo fetch em 'animes_recomendados.json'...");
-            const resposta = await fetch("animes_recomendados.json");
+            const resposta = await fetch("./dados/animes_recomendados.json");
             
             if (!resposta.ok) {
                 throw new Error(`Erro HTTP ao buscar JSON! Status: ${resposta.status}`);
