@@ -2,12 +2,13 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ChibiHeart</title>
 
     <!-- PWA: Manifest e Cor do Tema -->
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#ffffff">
+    
 
     <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
@@ -145,8 +146,20 @@
                     <h2 class="titulo-categoria" style="margin: 0;">Episódios</h2>
                     
                     <!-- Menu de Seleção de Temporadas (Gerado Dinamicamente pelo JS) -->
-                    <select id="select-temporadas" class="select-temporadas" style="background: #1a1c24; color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.15); padding: 8px 12px; border-radius: 8px; font-family: inherit; font-size: 14px; outline: none; cursor: pointer;">
-                    </select>
+                    <!-- Container do seletor customizado -->
+                    <div class="custom-select-container">
+                      <!-- Botão que o usuário clica para abrir as opções -->
+                      <div id="btn-selecionar-temporada" class="btn-select-atual" onclick="togglePopupTemporadas()">
+                        Carregando... ▾
+                      </div>
+                    
+                      <!-- O Pop-up flutuante que começa escondido -->
+                      <div id="popup-temporadas" class="popup-opcoes">
+                        <!-- As opções de temporadas serão injetadas aqui pelo JS -->
+                      </div>
+                    </div>
+                    
+
                 </div>
 
                 <div id="lista-episodios" class="episodes-list"></div>

@@ -5,7 +5,15 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-tap-highlight-color: transparent;
 }
+
+.container {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
 
 body {
     background-color: #0d0e12;
@@ -14,6 +22,73 @@ body {
     /* Evita o efeito de "pulo" na rolagem lateral ao alternar as abas */
     overflow-x: hidden;
 }
+
+/* botao pop up select*/
+
+/* Container principal relativo para posicionar o pop-up */
+.custom-select-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* O botão principal que substitui o visual do select */
+.btn-select-atual {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid #333333;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* O Pop-up flutuante de opções */
+.popup-opcoes {
+  display: none; /* Começa escondido */
+  position: absolute;
+  top: 105%; /* Senta logo abaixo do botão */
+  left: 0;
+  width: 100%;
+  min-width: 160px;
+  background-color: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  overflow: hidden;
+}
+
+/* Classe utilitária para mostrar o pop-up */
+.popup-opcoes.mostrar {
+  display: block;
+}
+
+/* Cada item/temporada dentro do pop-up */
+.opcao-temporada {
+  color: #aaaaaa;
+  padding: 12px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Efeito visual ao passar o dedo/clicar na opção */
+.opcao-temporada:active {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+/* Estilo para a temporada que está atualmente selecionada */
+.opcao-temporada.selecionada {
+  color: #00ffcc; /* Cor de destaque (pode mudar para a cor do seu app) */
+  background-color: #262626;
+  font-weight: bold;
+}
+
 
 
 /* testees hero
