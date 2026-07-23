@@ -1,34 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
     
+    // Variável para armazenar as temporadas do anime atual na memória
+    let temporadasAtuais = [];
+    let temporadaSelecionadaIndex = 0;
+
     async function gerenciarTelaInfo() {
-        // 1. Pega a rota e os parâmetros da URL (ex: #info?anime=onimai)
         const rawHash = window.location.hash || "#inicio";
         const [hashAtual, queryString] = rawHash.split("?");
 
-        // Só roda a função se o usuário estiver na View de Informações
         if (hashAtual !== "#info") return;
 
-        // Referências do DOM
         const containerEps = document.getElementById("lista-episodios");
         const modeloEp = document.getElementById("modelo-card-ep");
         const containerGeneros = document.getElementById("info-generos");
-        const selectTemporadas = document.getElementById("select-temporadas");
+        const customSelectContainer = document.querySelector(".custom-select-container");
         const blocoFilme = document.getElementById("acao-filme");
         const blocoEpisodios = document.getElementById("container-episodios");
 
         if (!containerEps || !modeloEp) return;
 
-        // Pega o ID do anime/filme contido na URL (?anime=id ou ?id=id)
         const params = new URLSearchParams(queryString);
         const itemId = params.get("anime") || params.get("id");
 
         if (!itemId) {
-            window.location.hash = "#inicio"; // Se não tiver ID válido, volta pra Home
+            window.location.hash = "#inicio";
             return;
         }
 
         try {
-            // Busca o arquivo info.json do servidor
             const resposta = await fetch("info.json");
             const bancoDados = await resposta.json();
             const item = bancoDados[itemId];
@@ -38,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // 2. Preenche os dados visuais básicos (Comuns para Filme e Série)
+            // Preenche dados básicos
             document.getElementById("info-banner").src = item.banner || "";
             document.getElementById("info-poster-img").src = item.poster || "";
             document.getElementById("info-titulo").textContent = item.titulo || "Sem título";
@@ -46,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("info-classificacao").textContent = item.classificacao || "--";
             document.getElementById("info-sinopse").textContent = item.sinopse || "Sem sinopse disponível.";
 
-            // Preenche as tags de Gêneros
+            // Preenche os gêneros
             containerGeneros.innerHTML = "";
             if (Array.isArray(item.generos)) {
                 item.generos.forEach(genero => {
@@ -57,10 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
 
-            // 3. CONDICIONAL: É FILME OU SÉRIE/ANIME?
-
+            // Condicional Filme vs Série/Anime
             if (item.tipo === "filme" || item.video) {
-                // --- É UM FILME ---
                 if (blocoEpisodios) blocoEpisodios.style.display = "none";
                 if (blocoFilme) blocoFilme.style.display = "block";
 
@@ -78,37 +75,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
             } else {
-                // --- É UMA SÉRIE / ANIME ---
                 if (blocoFilme) blocoFilme.style.display = "none";
                 if (blocoEpisodios) blocoEpisodios.style.display = "block";
 
-                // Se o JSON contiver a lista de TEMPORADAS:
+                // Se o JSON tiver a lista de TEMPORADAS:
                 if (Array.isArray(item.temporadas) && item.temporadas.length > 0) {
-                    if (selectTemporadas) {
-                        selectTemporadas.style.display = "block";
-                        selectTemporadas.innerHTML = "";
+                    if (customSelectContainer) customSelectContainer.style.display = "inline-block";
+                    
+                    temporadasAtuais = item.temporadas;
+                    temporadaSelecionadaIndex = 0; // Inicia na 1ª temporada por padrão
 
-                        // Popula o <select> com as temporadas
-                        item.temporadas.forEach((temp, index) => {
-                            const option = document.createElement("option");
-                            option.value = index;
-                            option.textContent = temp.nome || `${index + 1}ª Temporada`;
-                            selectTemporadas.appendChild(option);
-                        });
-
-                        // Evento ao trocar de temporada no menu
-                        selectTemporadas.onchange = (e) => {
-                            const idx = e.target.value;
-                            renderizarListaEpisodios(item.temporadas[idx].episodios, containerEps, modeloEp);
-                        };
-                    }
-
-                    // Renderiza a 1ª temporada por padrão
-                    renderizarListaEpisodios(item.temporadas[0].episodios, containerEps, modeloEp);
+                    // Renderiza o pop-up com as temporadas e carrega os episódios da 1ª
+                    renderizarPopUpTemporadas(containerEps, modeloEp);
+                    renderizarListaEpisodios(temporadasAtuais[0].episodios, containerEps, modeloEp);
 
                 } else if (Array.isArray(item.episodios)) {
-                    // Compatibilidade: Se for um anime sem temporadas (lista simples de episódios)
-                    if (selectTemporadas) selectTemporadas.style.display = "none";
+                    // Esconde o seletor caso não haja múltiplas temporadas
+                    if (customSelectContainer) customSelectContainer.style.display = "none";
                     renderizarListaEpisodios(item.episodios, containerEps, modeloEp);
                 }
             }
@@ -118,9 +101,71 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Função interna para clonar e injetar os episódios na tela
+    // --- FUNÇÕES DO SELETOR CUSTOMIZADO ---
+
+    function renderizarPopUpTemporadas(containerEps, modeloEp) {
+        const popup = document.getElementById("popup-temporadas");
+        const btnAtual = document.getElementById("btn-selecionar-temporada");
+
+        if (!popup || !btnAtual) return;
+
+        popup.innerHTML = "";
+
+        temporadasAtuais.forEach((temp, index) => {
+            const item = document.createElement("div");
+            item.className = "opcao-temporada";
+            const nomeTemporada = temp.nome || `${index + 1}ª Temporada`;
+            item.innerText = nomeTemporada;
+
+            if (index === temporadaSelecionadaIndex) {
+                item.classList.add("selecionada");
+                btnAtual.innerText = nomeTemporada + " ▾";
+            }
+
+            item.onclick = function () {
+                mudarTemporada(index, containerEps, modeloEp);
+            };
+
+            popup.appendChild(item);
+        });
+    }
+
+    function mudarTemporada(index, containerEps, modeloEp) {
+        temporadaSelecionadaIndex = index;
+
+        // 1. Atualiza o layout do pop-up e do botão
+        renderizarPopUpTemporadas(containerEps, modeloEp);
+
+        // 2. Fecha o pop-up
+        const popup = document.getElementById("popup-temporadas");
+        if (popup) popup.classList.remove("mostrar");
+
+        // 3. Atualiza os episódios para a temporada escolhida
+        if (temporadasAtuais[index] && temporadasAtuais[index].episodios) {
+            renderizarListaEpisodios(temporadasAtuais[index].episodios, containerEps, modeloEp);
+        }
+    }
+
+    // Alternar visibilidade do pop-up
+    window.togglePopupTemporadas = function () {
+        const popup = document.getElementById("popup-temporadas");
+        if (popup) popup.classList.toggle("mostrar");
+    };
+
+    // Fechar ao clicar fora
+    window.addEventListener("click", (event) => {
+        if (!event.target.matches('#btn-selecionar-temporada')) {
+            const popup = document.getElementById("popup-temporadas");
+            if (popup && popup.classList.contains('mostrar')) {
+                popup.classList.remove('mostrar');
+            }
+        }
+    });
+
+    // --- FUNÇÃO PARA RENDERIZAR OS EPISÓDIOS ---
+
     function renderizarListaEpisodios(listaEpisodios, container, modelo) {
-        container.innerHTML = ""; // Limpa episódios anteriores
+        container.innerHTML = "";
 
         if (!Array.isArray(listaEpisodios) || listaEpisodios.length === 0) {
             container.innerHTML = "<p style='color: #888; padding: 10px;'>Nenhum episódio disponível nesta temporada.</p>";
