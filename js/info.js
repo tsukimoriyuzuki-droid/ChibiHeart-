@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentAnimeId = itemId;
 
         try {
-            const resposta = await fetch("https://tsukimoriyuzuki-droid.github.io/ChibiHeart-/dados/info.json");
+            const resposta = await fetch("dados/info.json");
             if (!resposta.ok) throw new Error('Erro ao carregar info.json: ' + resposta.status);
             const bancoDados = await resposta.json();
             let item = bancoDados[itemId];
