@@ -1,0 +1,1070 @@
+{
+  "chuunibyou_ren": {
+    "tipo": "serie",
+    "titulo": "Chuunibyou Demo Koi ga Shitai! Ren",
+    "ano": "2014",
+    "classificacao": "14 Anos",
+    "generos": ["Animação", "Comédia"],
+    "sinopse": "Yuta e Rikka podem até estar juntos finalmente, mas as coisas ainda não se acalmaram! A chegada de Satone Shichimiya — uma amiga de infância de Yuta extremamente excêntrica — está prestes a levar o relacionamento do casal de um nível de delírio para a loucura total. Além de ser uma *chunibyo* convicta, Satone agora afirma ser a única alma gêmea de Yuta. Se Yuta e Rikka quiserem transformar seu relacionamento em realidade, terão primeiro que romper as fantasias de Satone!",
+    "banner": "https://image.tmdb.org/t/p/original/xrFWt1CIYjvO9cK5JQ1SFaAZgGf.jpg",
+    "poster": "https://image.tmdb.org/t/p/original/anw0BBKyYQsLtTltDO4xMmpiCW6.jpg",
+    "temporadas": [
+      {
+        "nome": "2ª Temporada",
+        "episodios": [
+          {
+            "id": "chuunibyou_s02e01",
+            "index": 1,
+            "titulo": "01. O Renascimento Do… O Olho Mau",
+            "descricao": "Yuta e os amigos encaram novas confusões quando memórias e delírios antigos retornam de forma inesperada.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/FY31bu8xhDSwjt1Ui7pVb2t1I4.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800406.us.archive.org/3/items/ChubyouLeg/Segunda-1.mp4"
+          },
+          {
+            "id": "chuunibyou_s02e02",
+            "index": 2,
+            "titulo": "02. Golfinho Anel Atacante Do (o Golfinho… Os Amantes Contrato)",
+            "descricao": "Nibutani fica obcecada pela situação do romance questionável entre Yuta e Rikka, e pressiona Yuta a assumir o controle da namorada e guiá-la pelo caminho correto dos relacionamentos amorosos.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/xazTw2IJCXlgTLsFaSXnHLk4Cbh.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800406.us.archive.org/3/items/ChubyouLeg/Segunda-2.mp4"
+          },
+          {
+            "id": "chuunibyou_s02e03",
+            "index": 3,
+            "titulo": "03. Garota Mágica Demoníaca Em Perseguição",
+            "descricao": "Rikka fica muito empolgada com a presença de uma usuária de magia com quem ela supostamente trava uma batalha invisível, mas logo fica claro que essa pessoa é real. Trata-se de uma garota que Yuta conheceu na época do ensino fundamental e que foi a primeira a contaminá-lo com o *chunibyo*. Rikka sente-se ao mesmo tempo fascinada e aterrorizada pela ameaça que a nova garota representa para o contrato amoroso entre ela e Yuta, oscilando entre o desejo de ser sua amiga e o de livrar-se dela para sempre.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/4QN12DB3zde5EpIH0d2gQDiOxxk.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800406.us.archive.org/3/items/ChubyouLeg/Segunda-3.mp4"
+          },
+          {
+            "id": "chuunibyou_s02e04",
+            "index": 4,
+            "titulo": "04. Uma Inocente… Fabricante De Rainha",
+            "descricao": "Nibutani tenta se candidatar à presidência do Grêmio Estudantil, mas uma garotinha loira e irritante frustra todas as suas tentativas de levar uma vida normal. O que ela pode fazer para mantê-la sob controle? O impensável...",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/63wkOEUMlpO6qWuFZ8dMvRTACzu.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800406.us.archive.org/3/items/ChubyouLeg/Segunda-4.mp4"
+          },
+          {
+            "id": "chuunibyou_s02e05",
+            "index": 5,
+            "titulo": "05. A Encadernação… Cruz (Etudo Rígido)",
+            "descricao": "Em risco de perder a sala do clube, a Sociedade Mágica do Cochilo de Verão decide realizar a única atividade que o conselho estudantil aceitará: cochilo competitivo!",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/AcuJjcb6beMGx1quscCYsQOdUZx.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800406.us.archive.org/3/items/ChubyouLeg/Segunda-5.mp4"
+          },
+          {
+            "id": "chuunibyou_s02e06",
+            "index": 6,
+            "titulo": "06. A Viagem De Hesitação… Tsukoshinoshima",
+            "descricao": "Chegou a hora da viagem da turma e, embora Rikka e Dekomori precisem se separar, é um bom momento para ela ficar a sós com Yuta... se os colegas de classe deixarem!",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/XWi2NGWNRYv6D9o4YFAtRUFM8b.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800406.us.archive.org/3/items/ChubyouLeg/Segunda-6.mp4"
+          },
+          {
+            "id": "chuunibyou_s02e07",
+            "index": 7,
+            "titulo": "07. Triângulo… Vulcânico",
+            "descricao": "Togashi espera passar o dia inteiro a sós com Rikka, mas Shichimiya, de alguma forma, acaba encontrando o casal e os arrasta para sua missão secreta.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/pBHM1NAi9eFYUgxhSrfSiERcXyh.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800406.us.archive.org/3/items/ChubyouLeg/Segunda-7.mp4"
+          },
+          {
+            "id": "chuunibyou_s02e08",
+            "index": 8,
+            "titulo": "08. Uma Falsa… Mori Summer",
+            "descricao": "Uma nova 'Fake Mori Summer' surge, determinada a fazer de Dekomori sua própria protegida. No entanto, suas intenções sinistras são descobertas, e apenas a verdadeira 'Fake Mori Summer' pode fazê-la abrir mão de Sanae!",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/daezKwgqNgewxtSL9UBiwA2fEVn.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800406.us.archive.org/3/items/ChubyouLeg/Segunda-8.mp4"
+          },
+          {
+            "id": "chuunibyou_s02e09",
+            "index": 9,
+            "titulo": "09. A Confusa… Primeiro Frustração Amor (Caos Coração)",
+            "descricao": "Enquanto ajuda a tia de Kumin a administrar uma loja na praia, Rikka percebe que seus poderes estão desaparecendo... e talvez ela queira que isso aconteça.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/onKy5h9oH3gmbPjA49JDvWd5Kni.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800406.us.archive.org/3/items/ChubyouLeg/Segunda-9.mp4"
+          },
+          {
+            "id": "chuunibyou_s02e10",
+            "index": 10,
+            "titulo": "10. Chuva De Manopla",
+            "descricao": "Shichimiya continua a lidar com seus sentimentos recém-descobertos, e apenas uma coisa pode salvá-la de si mesma: um confronto!",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/9uqxsfJqeeHsF7teNiRr8InCB5X.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800406.us.archive.org/3/items/ChubyouLeg/Segunda-10.mp4"
+          },
+          {
+            "id": "chuunibyou_s02e11",
+            "index": 11,
+            "titulo": "11. O Ragnarok… Da Lua Azul!",
+            "descricao": "Rikka está determinada a encontrar os itens necessários para reviver o Dragão da Chama Sombria e, no processo, coloca-se em perigo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/jq7uX2R6RhIhGLYevTnU6a6TgoE.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800406.us.archive.org/3/items/ChubyouLeg/Segunda-11.mp4"
+          },
+          {
+            "id": "chuunibyou_s02e12",
+            "index": 12,
+            "titulo": "12. Um Contrato Ainda Mais Poderoso… Crepúsculo",
+            "descricao": "Rikka está agindo de forma estranha perto de Yuta, e ela precisa de toda a sua coragem para confessar seus verdadeiros sentimentos a ele.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/fOmX2jxqCRXO0yz9gPnQGOylosx.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800406.us.archive.org/3/items/ChubyouLeg/Segunda-12.mp4"
+          }
+        ]
+      }
+    ]
+  },
+  "k-on!": {
+    "tipo": "serie",
+    "titulo": "K-ON!",
+    "ano": "2009",
+    "classificacao": "Livre",
+    "generos": ["Música", "Comédia", "Slice of Life"],
+    "sinopse": "Para salvar o clube de música leve do colégio da extinção, quatro garotas se unem para formar uma banda. O único problema é que Yui Hirasawa, a guitarrista principal, nunca tocou um instrumento na vida. Entre ensaios, muito chá e bolo, elas aprendem a tocar juntas e fortalecem sua amizade.",
+    "banner": "https://image.tmdb.org/t/p/original/vzeFXCYtSt5YAsigaPAU2EoGGaw.jpg",
+    "poster": "https://image.tmdb.org/t/p/original/pa5hMcg74yCcqa6NQe4h3z0pyNZ.jpg",
+    "temporadas": [
+      {
+        "nome": "1ª Temporada",
+        "episodios": [
+          {
+            "id": "k-on_s01e01",
+            "index": 1,
+            "titulo": "01. Tempo de Música!",
+            "descricao": "Recém-chegada ao ensino médio, Yui tem dificuldade em se enturmar e decide entrar para o clube de música leve. Mas, antes, ela precisa comprar uma guitarra e aprender a tocá-la.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/kC4aJQF5MdnOepF40k2HrvzhJca.jpg",
+            "duracao": "23 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-1.mp4"
+          },
+          {
+            "id": "k-on_s01e02",
+            "index": 2,
+            "titulo": "02. Instrumentos!",
+            "descricao": "Yui quer uma guitarra que é cara demais. Todas as integrantes da banda arranjam empregos de meio período para juntar dinheiro para a guitarra. Pode ser que a Yui realmente consiga comprá-la graças a uma reviravolta do destino.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/gDVVSZ8VekACMpfdRfZihP5oKBX.jpg",
+            "duracao": "23 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-2.mp4"
+          },
+          {
+            "id": "k-on_s01e03",
+            "index": 3,
+            "titulo": "03. Maratona de Estudos!",
+            "descricao": "Chegou a hora das provas parciais, mas Yui está tão ocupada praticando guitarra que acaba sendo reprovada. Ela precisa passar na prova de recuperação, ou a banda terá que acabar.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/wI1UUNcyKxA29raIdIsPlAkDoY1.jpg",
+            "duracao": "23 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-3.mp4"
+          },
+          {
+            "id": "k-on_s01e04",
+            "index": 4,
+            "titulo": "04. Campo de Treinamento!",
+            "descricao": "Mio se inspira ao encontrar uma gravação da apresentação do grupo anterior e reúne a banda para ensaiar durante o verão, visando um próximo festival escolar.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/tPmIeIChm8ZryyK1CBLDp1tUq4P.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-4.mp4"
+          },
+          {
+            "id": "k-on_s01e05",
+            "index": 5,
+            "titulo": "05. Consultor!",
+            "descricao": "Faltam três dias para o festival de música, e as garotas ainda não são oficialmente reconhecidas como um clube. Ritsu chantageia uma ex-integrante do clube para que ela seja a orientadora do grupo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/hLTtcJ9JKBnYNTMb6BLYsKh38SO.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-5.mp4"
+          },
+          {
+            "id": "k-on_s01e06",
+            "index": 6,
+            "titulo": "06. School Festival!",
+            "descricao": "A banda toca no festival da escola. Mio tropeça e acaba expondo a roupa íntima para a plateia. Ela termina ganhando um fã-clube, mas fica marcada pelo constrangimento.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/6lDPIA3MzJJysvGK4KBojdptQAn.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-6.mp4"
+          },
+          {
+            "id": "k-on_s01e07",
+            "index": 7,
+            "titulo": "07. Natal!",
+            "descricao": "É época de Natal e Ritsu decide dar uma festa de Natal na casa da Yui.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/d0WTXmGiMPaW2ZwFDSERXO073Bs.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-7.mp4"
+          },
+          {
+            "id": "k-on_s01e08",
+            "index": 8,
+            "titulo": "08. Recepção aos Calouros!",
+            "descricao": "O segundo ano letivo começa! O Clube de Música Leve tenta se reunir a todo custo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/swzH7K2L10n56JuV8LkymdKUjRM.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-8.mp4"
+          },
+          {
+            "id": "k-on_s01e09",
+            "index": 9,
+            "titulo": "09. Novo membro do clube!",
+            "descricao": "Azusa Nakano entra para o Clube de Música Leve, mas percebe que o clube, com seu clima descontraído, talvez não seja para ela — e sua permanência no grupo fica em jogo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/i1AFUuXalcr2DcPRPqgWZonnpV1.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-9.mp4"
+          },
+          {
+            "id": "k-on_s01e10",
+            "index": 10,
+            "titulo": "10. Mais um campo de treinamento!",
+            "descricao": "As garotas partem para mais um acampamento de treinamento com a nova integrante. Apesar de Azusa ficar reclamando, é ela quem mais toca.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/oSjvCimmaSoehY71a4B2vxI52zN.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-10.mp4"
+          },
+          {
+            "id": "k-on_s01e11",
+            "index": 11,
+            "titulo": "11. Crise!",
+            "descricao": "O festival escolar anual está chegando e o Clube de Música Leve vai se apresentar novamente... no entanto, Mio e Ritsu acabam discutindo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/lk7k3Q6XCvqJCEh2loB2lX6WiFU.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-11.mp4"
+          },
+          {
+            "id": "k-on_s01e12",
+            "index": 12,
+            "titulo": "12. Música Leve!",
+            "descricao": "Yui pega uma febre. Será que ela vai se recuperar a tempo para o festival?",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/3FIO2pdtuK6nPxpwlY51AtwuhT5.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-12.mp4"
+          },
+          {
+            "id": "k-on_s01e13",
+            "index": 13,
+            "titulo": "13. Winter Days!",
+            "descricao": "Yui quer aproveitar uma sopa quente com as outras garotas, mas todas estão ocupadas! Será que Yui será forçada a passar as férias de inverno geladas sozinha?",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/eC1QEnSi9l7OgXzoLks76EgIKSo.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-13.mp4"
+          },
+          {
+            "id": "k-on_s01e14",
+            "index": 14,
+            "titulo": "14. Live House!",
+            "descricao": "Maki, uma amiga de Ritsu Tainaka, convida o clube para uma apresentação em uma casa de shows na véspera de Ano-Novo. Acompanhando o clube, Catherine reencontra sua velha amiga Janice.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/sjLIKJQJdgGtzIE4GVhZlISA6ac.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Primeira-14.mp4"
+          }
+        ]
+      }
+    ]
+  },
+  "k-on!!": {
+    "tipo": "serie",
+    "titulo": "K-ON!! T02",
+    "ano": "2010",
+    "classificacao": "Livre",
+    "generos": ["Música", "Comédia", "Slice of Life"],
+    "sinopse": "É o último ano do ensino médio para Yui, Ritsu, Mio e Mugi, as membros fundadoras do Clube de Música Leve. Junto com a integrante mais nova, Azusa, elas passam os dias na sala de música aproveitando o chá e os doces enquanto ensaiam. Entre os ensaios da banda, os preparativos para a apresentação de boas-vindas aos novos alunos e a busca por novos membros, elas ainda encontram tempo para o 'After School Tea Time' (o chá depois da aula). É um momento deliciosamente divertido em K-On!",
+    "banner": "https://image.tmdb.org/t/p/original/yEEOUrGCaFfVMs88HK2HsahYpV.jpg",
+    "poster": "https://image.tmdb.org/t/p/original/rK0m1pPvSJBefYj35VsceMWjKe0.jpg",
+    "temporadas": [
+      {
+        "nome": "2ª Temporada",
+        "episodios": [
+          {
+            "id": "k-on_s02e01",
+            "index": 1,
+            "titulo": "01. Veteranas!",
+            "descricao": "Yui, Mio, Ritsu e Tsumugi estão na mesma classe e enfrentam os desafios de uma nova fase escolar.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/sZJamTpk4Gub8ePBLCKAAF1lAEg.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-1.mp4"
+          },
+          {
+            "id": "k-on_s02e02",
+            "index": 2,
+            "titulo": "02. Limpeza!",
+            "descricao": "O clube precisa limpar o local e encontra um violão antigo que traz novidades.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/xnaLR4q0ie09DfbqasVrYxsok9e.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-2.mp4"
+          },
+          {
+            "id": "k-on_s02e03",
+            "index": 3,
+            "titulo": "03. Baterista!",
+            "descricao": "O clube procura uma baterista e surgem situações engraçadas.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/iS7BhqVp7LzylOs9nBhqcqDO2yp.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-3.mp4"
+          },
+          {
+            "id": "k-on_s02e04",
+            "index": 4,
+            "titulo": "04. Viagem Escolar!",
+            "descricao": "As garotas fazem uma viagem escolar recheada de confusões.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/d3uUaU2KfPN742N2dnMffahfO3e.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-4.mp4"
+          },
+          {
+            "id": "k-on_s02e05",
+            "index": 5,
+            "titulo": "05. Ficando Para Trás!",
+            "descricao": "Uma situação faz com que alguém fique para trás, e o grupo precisa lidar com isso.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/8BMQwJ7SKhuVPjohyxWPk4KHvzB.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-5.mp4"
+          },
+          {
+            "id": "k-on_s02e06",
+            "index": 6,
+            "titulo": "06. Estação Chuvosa!",
+            "descricao": "Dias de chuva e pequenos conflitos pessoais entre as meninas.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/r2EXk9I8up4ktxOv253TNNO4ASM.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-6.mp4"
+          },
+          {
+            "id": "k-on_s02e07",
+            "index": 7,
+            "titulo": "07. Festa do Chá!",
+            "descricao": "O clube se reúne para uma tradicional festa do chá.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/pROa3YUegKdbnwHhXGG5B9IlNc5.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-7.mp4"
+          },
+          {
+            "id": "k-on_s02e08",
+            "index": 8,
+            "titulo": "08. O Futuro!",
+            "descricao": "Reflexões sobre o futuro e decisões importantes para as integrantes.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/yzbQHgi1ydFoPap447M9EXoSymY.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-8.mp4"
+          },
+          {
+            "id": "k-on_s02e09",
+            "index": 9,
+            "titulo": "09. Exames Finais!",
+            "descricao": "Período de provas; o clube tenta conciliar estudos e música.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/uSAIW2HqXw33WPN0LVGAjQUAV9P.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-9.mp4"
+          },
+          {
+            "id": "k-on_s02e10",
+            "index": 10,
+            "titulo": "10. Sensei!",
+            "descricao": "Um novo professor causa agito na escola e no clube.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/dDl0USilDNNJfWb7gBPRQreAkOB.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-10.mp4"
+          },
+          {
+            "id": "k-on_s02e11",
+            "index": 11,
+            "titulo": "11. Calor!",
+            "descricao": "O verão traz eventos especiais e emoções à flor da pele.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/uqb6nFHlybK051OZMqC4qJ9j4X2.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-11.mp4"
+          },
+          {
+            "id": "k-on_s02e12",
+            "index": 12,
+            "titulo": "12. Festival de Verão!",
+            "descricao": "Preparativos e participação no festival escolar.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/vvnQJgXUwyfPjiviS0iLQ8JmFk4.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-12.mp4"
+          },
+          {
+            "id": "k-on_s02e13",
+            "index": 13,
+            "titulo": "13. Passeio do Fim do Verão!",
+            "descricao": "Um passeio que marca momentos de despedida.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/dP2XkXFd9682ilNDMfFVWkZgImp.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-13.mp4"
+          },
+          {
+            "id": "k-on_s02e14",
+            "index": 14,
+            "titulo": "14. Dias de Verão!",
+            "descricao": "Momentos descontraídos durante as férias de verão.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/qf6EDOvpPTDp43Huai700ckPUfz.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-14.mp4"
+          },
+          {
+            "id": "k-on_s02e15",
+            "index": 15,
+            "titulo": "15. Maratona!",
+            "descricao": "As meninas encaram uma maratona musical e se divertem muito.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/guD1OMHurzF852CiVd9vuFUr9VJ.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-15.mp4"
+          },
+          {
+            "id": "k-on_s02e16",
+            "index": 16,
+            "titulo": "16. Senpai!",
+            "descricao": "Relações com os senpais e eventos de fim de ciclo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/9ygxfVfE3tYNMpiq0hfz1US5kt8.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-16.mp4"
+          },
+          {
+            "id": "k-on_s02e17",
+            "index": 17,
+            "titulo": "17. Sem Sala de Música!",
+            "descricao": "O clube perde a sala de música e precisa se reinventar.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/pTmbffrFA3Ov1wjkZI7meOXYYte.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-17.mp4"
+          },
+          {
+            "id": "k-on_s02e18",
+            "index": 18,
+            "titulo": "18. Papel Principal!",
+            "descricao": "Alguém assume um papel principal que muda a dinâmica do grupo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/xW6J1pjfIZ8XHFb8h3SDIxzyzKw.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-28.mp4"
+          },
+          {
+            "id": "k-on_s02e19",
+            "index": 19,
+            "titulo": "19. Romeu e Julieta!",
+            "descricao": "Uma peça escolar provoca situações românticas e cômicas.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/eqX3b80TQ3wcxd55UlIp2mpHGUx.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-19.mp4"
+          },
+          {
+            "id": "k-on_s02e20",
+            "index": 20,
+            "titulo": "20. Mais Uma Vez, O Festival Escolar!",
+            "descricao": "Preparativos com emoção e música para o festival.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/owSNTzI4Oans5x4r0QUAjXvPcjr.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-20.mp4"
+          },
+          {
+            "id": "k-on_s02e21",
+            "index": 21,
+            "titulo": "21. Fotos de Formatura!",
+            "descricao": "Fotos e memórias de formatura trazem nostalgia ao grupo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/oYXjwrXAGXoE1wnE4m3LvSZuJvO.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-21.mp4"
+          },
+          {
+            "id": "k-on_s02e22",
+            "index": 22,
+            "titulo": "22. Exames!",
+            "descricao": "Período de provas e tensão escolar.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/yDMasAMqn48gtiTiO8CtR0ju9Yi.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-22.mp4"
+          },
+          {
+            "id": "k-on_s02e23",
+            "index": 23,
+            "titulo": "23. Depois da escola!",
+            "descricao": "Momentos após as aulas que fortalecem a amizade do grupo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/g14CMfNMoxa9YR8RMA1b9P2CC4o.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-23.mp4"
+          },
+          {
+            "id": "k-on_s02e24",
+            "index": 24,
+            "titulo": "24. Formatura!",
+            "descricao": "A formatura marca o fim de um ciclo e celebrações.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/gtXQ6yeUwq8o5nY1nstAWQAVhjP.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-24.mp4"
+          },
+          {
+            "id": "k-on_s02e25",
+            "index": 25,
+            "titulo": "25. Discussão de plano!",
+            "descricao": "O grupo discute planos para o futuro após eventos importantes.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/dgg98T2aW5XM0Jm49WAM0pHy3TF.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-25.mp4"
+          },
+          {
+            "id": "k-on_s02e26",
+            "index": 26,
+            "titulo": "26. Visita!",
+            "descricao": "Uma visita inesperada traz novas histórias.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/pS8aCmFYtb4IALlvr994tBFMIvR.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-26.mp4"
+          },
+          {
+            "id": "k-on_s02e27",
+            "index": 27,
+            "titulo": "27. Plano",
+            "descricao": "As garotas planejam uma viagem ao exterior e vão ao departamento de passaportes para dar entrada nos documentos.",
+            "thumb": "https://image.tmdb.org/t/p/w640_and_h360_face/yR0Sl0uSoYXlYxUMuag4bRDMKmk.jpg",
+            "duracao": "24 min",
+            "video": "https://ia803204.us.archive.org/29/items/K-ONLeg/Segunda-27.mp4"
+          }
+        ]
+      }
+    ]
+  },
+  "oshi no ko": {
+    "tipo": "serie",
+    "titulo": "Oshi No Ko",
+    "ano": "2023",
+    "classificacao": "+14",
+    "generos": ["Drama", "Mistério", "Sobrenatural"],
+    "sinopse": "Um médico de cidade pequena entra no mundo do entretenimento ao atender uma jovem famosa, e acaba envolvido em segredos que mudam sua vida.",
+    "banner": "https://media.themoviedb.org/t/p/w1000_and_h563_face/hb9woOsZ3wz9o6P2DPCIUGoX01a.jpg",
+    "poster": "https://image.tmdb.org/t/p/original/sVc9arJOuIvOKOEFkQkWImvb0CZ.jpg",
+    "temporadas": [
+      {
+        "nome": "1ª Temporada Dub",
+        "episodios": [
+          {
+            "id": "oshi no ko_s01e01",
+            "index": 1,
+            "titulo": "01. Mãe e filhos",
+            "descricao": "O primeiro episódio apresenta a dinâmica entre mãe e filhos e o começo do conflito central.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/rvy4W28wYkct3IFxU0RGF2uHppG.jpg",
+            "duracao": "90 min",
+            "video": "https://ia800705.us.archive.org/15/items/OshiS01S02S03/Primeira-Dub-1.mp4"
+          },
+          {
+            "id": "oshi no ko_s01e02",
+            "index": 2,
+            "titulo": "02. A terceira opção",
+            "descricao": "Decisões difíceis aparecem e a história ganha camadas inesperadas.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/klFBxM7QHRtYvuqBcHGSoJaY5ES.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800705.us.archive.org/15/items/OshiS01S02S03/Primeira-Dub-2.mp4"
+          }
+        ]
+      },
+      {
+        "nome": "2ª Temporada Leg",
+        "episodios": [
+          {
+            "id": "oshi no ko_s02e12",
+            "index": 1,
+            "titulo": "01. Tokyo Blade",
+            "descricao": "Um episódio tenso com ação em Tóquio.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/z05lf0LjvKIFw4sX3TFvN97hAvF.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800705.us.archive.org/15/items/OshiS01S02S03/12.mp4"
+          }
+        ]
+      },
+      {
+        "nome": "3ª Temporada Leg",
+        "episodios": [
+          {
+            "id": "oshi no ko_s03e25",
+            "index": 1,
+            "titulo": "01. Obsessão",
+            "descricao": "Temas de obsessão e fama são explorados neste episódio.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/1XPtlsRHFY4H7CdYZItnSZa7Knc.jpg",
+            "duracao": "24 min",
+            "video": "https://ia800705.us.archive.org/15/items/OshiS01S02S03/25.mp4"
+          }
+        ]
+      }
+    ]
+  },
+  "seihantai-na-kimi-to-boku": {
+    "tipo": "serie",
+    "titulo": "Seihantai na Kimi to Boku",
+    "ano": "2024",
+    "classificacao": "12 Anos",
+    "generos": [
+      "Romance",
+      "Comédia",
+      "Escolar"
+    ],
+    "sinopse": "Miyu Suzuki é uma garota enérgica que tende a seguir a maioria, enquanto Yuyu Tani é um garoto quieto e introvertido que expressa claramente suas opiniões. Uma comédia romântica sobre duas pessoas com personalidades totalmente opostas.",
+    "banner": "https://media.themoviedb.org/t/p/w1000_and_h563_face/58Hiq9Iaf12HfMGspOfmuFZM61v.jpg",
+    "poster": "https://image.tmdb.org/t/p/original/9hRuMU33DBz4z1vaYBRqLLuFFbQ.jpg",
+    "temporadas": [
+      {
+        "nome": "1ª Temporada Dub",
+        "episodios": [
+          {
+            "id": "seihantai_s01e01",
+            "index": 1,
+            "titulo": "01.Suzuki e Tani",
+            "descricao": "Suzuki é uma menina do tipo descolada e cheia de amizades, enquanto Tani é quieto e sempre impassível...",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/zJ8F0h0bfUQiDtMYoXI3TTcqTbr.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/1.mp4"
+          },
+          {
+            "id": "seihantai_s01e02",
+            "index": 2,
+            "titulo": "02. Primeiro encontro",
+            "descricao": "Suzuki e Tani finalmente terão seu primeiro encontro, que é marcado por muitas emoções.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/j4N8U1Ko095J34hqlkGtOHeBDuD.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/2.mp4"
+          },
+          {
+            "id": "seihantai_s01e03",
+            "index": 3,
+            "titulo": "03. Hierarquia",
+            "descricao": "O fato de Suzuki e Tani estarem juntos é uma incógnita para Taira, que tenta entender a relação como um todo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/kzwArBjJYjwOIVyQKjH3Wa7xLJP.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/3.mp4"
+          },
+          {
+            "id": "seihantai_s01e04",
+            "index": 4,
+            "titulo": "04. Reunião de estudos",
+            "descricao": "Suzuki organiza um grupo de estudo para os exames de final de semestre. Ela fica feliz em ver que Tani está se aproximando de seus amigos. Então, finalmente, chega o dia do festival de verão.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/sbqLyWw494FzqXkPGTzWmECrlfs.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/4.mp4"
+          },
+          {
+            "id": "seihantai_s01e05",
+            "index": 5,
+            "titulo": "05. Pessoas que pensam, outras que não pensam",
+            "descricao": "Yamada está com uma certa dúvida sobre o amor e pede aos amigos para ajudarem a esclarecê-la.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/drvq3TWFixfmVNu4HeosHo0mNB4.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/5.mp4"
+          },
+          {
+            "id": "seihantai_s01e06",
+            "index": 6,
+            "titulo": "06. Sentimentos nebulosos",
+            "descricao": "Chega a época do Festival Cultural na escola, mas um encontro inusitado nesse evento assusta Yamada.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/nXWfE9t7r0f4oZtVCb3L1epHmHU.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/6.mp4"
+          },
+          {
+            "id": "seihantai_s01e07",
+            "index": 7,
+            "titulo": "07. Após o festival",
+            "descricao": "Nishi sofre por não conseguir entender seus próprios sentimentos, mas tem a ajuda de seus amigos.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/a3hUbc5VffUNxqCFAi9mJ4xSnf7.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/7.mp4"
+          },
+          {
+            "id": "seihantai_s01e08",
+            "index": 8,
+            "titulo": "08. O outono deste ano...",
+            "descricao": "O verão terminou e o outono já está vindo. Hora de aproveitarem o que a estação do ano tem a oferecer.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/h52qNjyK9OWTaDWCBx63eeK26fM.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/8.mp4"
+          },
+          {
+            "id": "seihantai_s01e09",
+            "index": 9,
+            "titulo": "09. Surpresa!",
+            "descricao": "O aniversário do Tani está chegando e Suzuki está ansiosa para fazer uma bela surpresa a ele!",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/5zYubjFRu4kjQt50Vezn1iG2ySb.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/9.mp4"
+          },
+          {
+            "id": "seihantai_s01e10",
+            "index": 10,
+            "titulo": "10. Excursão escolar (Parte 1)",
+            "descricao": "Chegou a hora de Suzuki, Tani e seus amigos irem a uma excursão escolar, mas há muitos planos a serem feitos.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/1Zv3mma8R5NLfWA0NOJXOjY4vG9.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/10.mp4"
+          },
+          {
+            "id": "seihantai_s01e11",
+            "index": 11,
+            "titulo": "11. Excursão escolar (Parte 2)",
+            "descricao": "Tudo vai bem durante a viagem de excursão, assim como vários relacionamentos paralelos.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/3krNHdteKbrm5vjuuyttaoh8WuS.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/11.mp4"
+          },
+          {
+            "id": "seihantai_s01e12",
+            "index": 12,
+            "titulo": "12. Pouco a pouco",
+            "descricao": "Tani e Suzuki aproveitam mais um dia para sair e demonstrar as pequenas mudanças positivas entre eles.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/3o4Xb5E8yocJi2a0KEOAr4akIUV.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/12.mp4"
+          }
+        ]
+      },
+      {
+        "nome": "2ª Temporada Leg",
+        "episodios": [
+          {
+            "id": "seihantai_s02e13",
+            "index": 1,
+            "titulo": "13. Noite de Natal",
+            "descricao": "À medida que a primeira véspera de Natal juntos se aproxima, Suzuki e Tani planejam seu encontro. Eles decidem encarar o desafio de fazer um bolo, e o coração de Suzuki dispara ao ver a seriedade com que Tani encara tudo; e então...",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/mg1m3qwjJI2DCoaNFugpaFM4neW.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/Segunda-Leg-1.mp4"
+          },
+          {
+            "id": "seihantai_s02e14",
+            "index": 2,
+            "titulo": "14. O Dilema de uma Noite de Inverno",
+            "descricao": "Em meio às férias de inverno, Yamada fica ansioso com o fato de que seu relacionamento com Nishi simplesmente não tem avançado muito. Ele usa a lição de casa como pretexto para vê-la, mas não consegue encontrar o momento certo para revelar seus sentimentos.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/lEHeSZLCPu3zZIaULslblJAwsp2.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/Segunda-Leg-2.mp4"
+          },
+          {
+            "id": "seihantai_s02e15",
+            "index": 3,
+            "titulo": "15. O ano que passou e o ano que virá",
+            "descricao": "Tani conta à família que está namorando e convida Suzuki para visitá-los no dia de Ano-Novo. Nervoso com o convite, Suzuki comete uma gafe atrás da outra diante da família de Tani. No último dia das férias de inverno, o grupo habitual de amigos aproveita para visitar um santuário. Tocados pelas palavras de Tani sobre viver sem arrependimentos, cada um deles entra no ano novo carregando esperanças e sentimentos no coração.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/e1O9AH0CtDf4SNHoA1sHplhqx9q.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/Segunda-Leg-3.mp4"
+          },
+          {
+            "id": "seihantai_s02e16",
+            "index": 4,
+            "titulo": "16. Episódio 4",
+            "descricao": "Indisponível",
+            "thumb": "https://media.themoviedb.org/t/p/w1000_and_h563_face/5p423VlhPXf7681XyZCL4khIJLl.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/Segunda-Leg-4.mp4"
+          },
+          {
+            "id": "seihantai_s02e17",
+            "index": 5,
+            "titulo": "17. Episódio 5",
+            "descricao": "Indisponível",
+            "thumb": "https://media.themoviedb.org/t/p/w1000_and_h563_face/5p423VlhPXf7681XyZCL4khIJLl.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/Segunda-Leg-5.mp4"
+          },
+          {
+            "id": "seihantai_s02e18",
+            "index": 6,
+            "titulo": "18. Episódio 6",
+            "descricao": "Indisponível",
+            "thumb": "https://media.themoviedb.org/t/p/w1000_and_h563_face/5p423VlhPXf7681XyZCL4khIJLl.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/Segunda-Leg-6.mp4"
+          },
+          {
+            "id": "seihantai_s02e19",
+            "index": 7,
+            "titulo": "19. Episódio 7",
+            "descricao": "Indisponível",
+            "thumb": "https://media.themoviedb.org/t/p/w1000_and_h563_face/5p423VlhPXf7681XyZCL4khIJLl.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/Segunda-Leg-7.mp4"
+          },
+          {
+            "id": "seihantai_s02e20",
+            "index": 8,
+            "titulo": "20. Episódio 8",
+            "descricao": "Indisponível",
+            "thumb": "https://media.themoviedb.org/t/p/w1000_and_h563_face/5p423VlhPXf7681XyZCL4khIJLl.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/Segunda-Leg-8.mp4"
+          },
+          {
+            "id": "seihantai_s02e21",
+            "index": 9,
+            "titulo": "21. Episódio 9",
+            "descricao": "Indisponível",
+            "thumb": "https://media.themoviedb.org/t/p/w1000_and_h563_face/5p423VlhPXf7681XyZCL4khIJLl.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/Segunda-Leg-9.mp4"
+          },
+          {
+            "id": "seihantai_s02e22",
+            "index": 10,
+            "titulo": "22. Episódio 10",
+            "descricao": "Indisponível",
+            "thumb": "https://media.themoviedb.org/t/p/w1000_and_h563_face/5p423VlhPXf7681XyZCL4khIJLl.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/Segunda-Leg-10.mp4"
+          },
+          {
+            "id": "seihantai_s02e23",
+            "index": 11,
+            "titulo": "23. Episódio 11",
+            "descricao": "Indisponível",
+            "thumb": "https://media.themoviedb.org/t/p/w1000_and_h563_face/5p423VlhPXf7681XyZCL4khIJLl.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/Segunda-Leg-11.mp4"
+          },
+          {
+            "id": "seihantai_s02e24",
+            "index": 12,
+            "titulo": "24. Episódio 12",
+            "descricao": "Indisponível",
+            "thumb": "https://media.themoviedb.org/t/p/w1000_and_h563_face/5p423VlhPXf7681XyZCL4khIJLl.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600905.us.archive.org/12/items/oppositesS01/Segunda-Leg-12.mp4"
+          }
+        ]
+      }
+    ]
+  },
+  "tensura_s01": {
+  "tipo": "serie",
+  "titulo": "Tensei Shitara Slime Datta Ken",
+  "ano": "2018",
+  "classificacao": "+14",
+  "generos": ["Isekai", "Fantasia", "Comédia"],
+  "sinopse": "Mikami Satoru, um funcionário de uma empresa, é esfaqueado por um assassino aleatório e renasce em um mundo alternativo. Mas, para sua surpresa, ele renasce como um slime! Lançado neste novo mundo com o nome de Rimuru, ele inicia sua jornada para criar um mundo acolhedor para todas as raças.",
+  "banner": "https://image.tmdb.org/t/p/original/bQlHgqXFpZ1xpiiBEzncSpXYIwF.jpg",
+  "poster": "https://image.tmdb.org/t/p/original/bQlHgqXFpZ1xpiiBEzncSpXYIwF.jpg",
+  "temporadas": [
+    {
+      "nome": "1ª Temporada",
+      "episodios": [
+        {
+          "id": "tensura_dub-s01e01",
+          "index": 1,
+          "titulo": "01. O Dragão do Vendaval, Veldora",
+          "descricao": "Satoru leva uma vida confortável, trabalhando em uma grande empresa que lhe permite ter liberdade financeira. Mas um incidente literalmente vai mudar sua vida.",
+          "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/kn2O2A6yxvPNjyxJ2gJmW6l8qzs.jpg",
+          "duracao": "24 min",
+          "video": "https://ia902902.us.archive.org/16/items/ShitaraS01S02S03/1.mp4"
+        },
+        {
+          "id": "tensura_dub-s01e02",
+          "index": 2,
+          "titulo": "02. O Encontro Com os Goblins",
+          "descricao": "Após conseguir a amizade de um dragão, nosso amigo slime também arranjou um nome: Rimuru. Seu próximo objetivo é conseguir sair da caverna onde esteve até agora...",
+          "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/bl7NSSaMhVQFAUdVMyyzylfZ5Be.jpg",
+          "duracao": "24 min",
+          "video": "https://ia902902.us.archive.org/16/items/ShitaraS01S02S03/2.mp4"
+        },
+        {
+          "id": "tensura_dub-s01e03",
+          "index": 3,
+          "titulo": "03. Batalha no Vilarejo dos Goblins",
+          "descricao": "Após deixar a caverna, Rimuru encontra uma aldeia de goblins sob o ataque de uma matilha de lobos. Apanhado no calor do momento, Rimuru concorda em ajudar os goblins em sua batalha. Naquela noite, os lobos chegam para tentar assumir o controle como os novos governantes da Grande Floresta de Jura!",
+          "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/uB7iLDVu1DXXk8u4IOr3O4eWAY1.jpg",
+          "duracao": "24 min",
+          "video": "https://ia902902.us.archive.org/16/items/ShitaraS01S02S03/3.mp4"
+        }
+      ]
+    },
+    {
+      "nome": "1ª Temporada Leg",
+      "episodios": [
+        {
+          "id": "tensura_leg_s01e01",
+          "index": 1,
+          "titulo": "01. O Dragão do Vendaval, Veldora",
+          "descricao": "Satoru leva uma vida confortável, trabalhando em uma grande empresa que lhe permite ter liberdade financeira. Mas um incidente literalmente vai mudar sua vida.",
+          "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/kn2O2A6yxvPNjyxJ2gJmW6l8qzs.jpg",
+          "duracao": "24 min",
+          "video": "https://ia902902.us.archive.org/16/items/ShitaraS01S02S03/Primeira-Leg-1.mp4"
+        }
+      ]
+    }
+  ]
+},
+  "tensura_s04": {
+    "tipo": "serie",
+    "titulo": "Tensei Shitara Slime Datta Ken",
+    "ano": "2026",
+    "classificacao": "+14",
+    "generos": ["Isekai", "Fantasia", "Comédia"],
+    "sinopse": "O sonho do Lorde Demônio Rimuru de criar uma aliança entre humanos e monstros está cada vez mais perto de se tornar realidade. Enquanto Tempest continua a prosperar, Granville Rozzo e sua neta, Maribel Rozzo, entram em conflito com o Lorde Demônio Rimuru devido ao plano deles de proteger a humanidade governando-a. Paralelamente, em El Dorado, o Lorde Demônio Leon trabalha em prol de seus próprios objetivos. O despertar de um novo Herói se aproxima!",
+    "banner": "https://media.themoviedb.org/t/p/w1000_and_h563_face/x8WY21awXlw2uDAyPGYIw829IlS.jpg",
+    "poster": "https://image.tmdb.org/t/p/original/94MjsZUyxubodMPJdWOVkcJ0bdU.jpg",
+    "temporadas": [
+      {
+        "nome": "4ª Temporada Dub",
+        "episodios": [
+          {
+            "id": "tensura_dub-s04e01",
+            "index": 1,
+            "titulo": "73. Novos dias",
+            "descricao": "A cidade de Rimuru está em pleno desenvolvimento, assim como seus planos internacionais. Mas faltam ajustes.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/gb4p6xHYwN3c4gYlnVzvpFtlOB8.jpg",
+            "duracao": "24 min",
+            "video": "https://ia903200.us.archive.org/19/items/ShitaraS04/1.mp4"
+          },
+          {
+            "id": "tensura_dub_s04e02",
+            "index": 2,
+            "titulo": "74. Masmorra que evolui",
+            "descricao": "Rimuru vê sua masmorra prosperar, mas guerreiros espertos mostram que ainda falta resolver certos detalhes.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/nRLCpzRP359dz7u475PlzOuT9zW.jpg",
+            "duracao": "24 min",
+            "video": "https://ia903200.us.archive.org/19/items/ShitaraS04/2.mp4"
+          },
+          {
+            "id": "tensura_dub_s04e03",
+            "index": 3,
+            "titulo": "75. É formada a Equipe Avatar",
+            "descricao": "Rimuru se preocupa em manter viável sua nova masmorra enquanto gente poderosa faz novos planos contra o slime.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/tm0pmQIOdzW5choXRITpHgYGGSC.jpg",
+            "duracao": "24 min",
+            "video": "https://ia903200.us.archive.org/19/items/ShitaraS04/3.mp4"
+          },
+          {
+            "id": "tensura_dub_s04e04",
+            "index": 4,
+            "titulo": "76. Convite",
+            "descricao": "As Nações Ocidentais começam a discutir sobre a entrada de Tempest, a nação de monstros, para o Conselho.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/wzYc59SeMxQUIrb01D3BwIAj90c.jpg",
+            "duracao": "24 min",
+            "video": "https://ia903200.us.archive.org/19/items/ShitaraS04/4.mp4"
+          },
+          {
+            "id": "tensura_dub_s04e05",
+            "index": 5,
+            "titulo": "77. O primeiro passo",
+            "descricao": "Rimuru e seu grupo chegam para a reunião com o Conselho, que definirá o futuro das Nações Ocidentais.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/ztpuWTZbiM0aXFlUSGdhk1Q17zk.jpg",
+            "duracao": "24 min",
+            "video": "https://ia903200.us.archive.org/19/items/ShitaraS04/5.mp4"
+          },
+          {
+            "id": "tensura_dub_s04e06",
+            "index": 6,
+            "titulo": "78. O Conselho do Ocidente",
+            "descricao": "Rimuru perde a calma com as exigências absurdas que o Conselho ofereceu, mas há algo mais estranho ali.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/27GSNADh5MnmkTwHC8pmi3SOW7G.jpg",
+            "duracao": "24 min",
+            "video": "https://ia903200.us.archive.org/19/items/ShitaraS04/6.mp4"
+          },
+          {
+            "id": "tensura_dub_s04e07",
+            "index": 7,
+            "titulo": "79. A identidade do mentor",
+            "descricao": "Rimuru consegue capturar alguém que dará informações importantes sobre quem ele precisará enfrentar.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/edUKB10nnw9BBK0dyoJNiAlSR56.jpg",
+            "duracao": "24 min",
+            "video": "https://ia903200.us.archive.org/19/items/ShitaraS04/7.mp4"
+          },
+          {
+            "id": "tensura_dub_s04e08",
+            "index": 8,
+            "titulo": "80. Os fundamentos da ganância",
+            "descricao": "Glenda revela tudo o que sabe sobre o Conselho e os Rozzo, e Rimuru se prepara para inspecionar ruínas antigas.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/bs2vK9WUOQKvwj8KEC3Ra3WXDQV.jpg",
+            "duracao": "24 min",
+            "video": "https://ia903200.us.archive.org/19/items/ShitaraS04/8.mp4"
+          },
+          {
+            "id": "tensura_dub_s04e09",
+            "index": 9,
+            "titulo": "81. Investigando as ruínas",
+            "descricao": "A investigação das antigas ruínas de Amrita começa.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/1hrPaiyrBjC9jpB5n43VOzZ8SFA.jpg",
+            "duracao": "24 min",
+            "video": "https://ia903200.us.archive.org/19/items/ShitaraS04/9.mp4"
+          },
+          {
+            "id": "tensura_dub_s04e10",
+            "index": 10,
+            "titulo": "82. A Senhora da Ganância",
+            "descricao": "Rimuru e Mirabel finalmente ficam frente a frente nas ruínas antigas.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/zv5JGGOQl9Rii3NrVip295TyVyE.jpg",
+            "duracao": "24 min",
+            "video": "https://ia903200.us.archive.org/19/items/ShitaraS04/10.mp4"
+          },
+          {
+             "id": "tensura_dub_s04e11",
+            "index": 11,
+            "titulo": "83. Amigo da Milim",
+            "descricao": "Rimuru ajuda Milim a enfrentar o Dragão do Caos, uma forma corrompida do filhote de dragão que um dia foi seu amigo.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/w5bBroiKoeCe69CHew0y6Q1edQ8.jpg",
+            "duracao": "24 min",
+            "video": "https://ia903200.us.archive.org/19/items/ShitaraS04/11.mp4"
+          },
+          {
+           "id": "tensura_dub_s04e12",
+            "index": 12,
+            "titulo": "84. Tempest Evolui",
+            "descricao": "Rimuru compartilha seus planos para o futuro de Tempest, incluindo um novo sistema de governo e representação no Conselho.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/xtucVEgiymwJ61iErgqom5WcYt.jpg",
+            "duracao": "24 min",
+            "video": "https://ia903200.us.archive.org/19/items/ShitaraS04/12.mp4"
+          },
+          {
+             "id": "tensura_dub_s04e13",
+            "index": 13,
+            "titulo": "85. Novos Companheiros",
+            "descricao": "Ramiris e Veldora sentem que estão sobrecarregados, então pedem a Rimuru que encontre assistentes para eles.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/uLRfCUw0ql6HKOezGv5HmsUMooo.jpg",
+            "duracao": "24 min",
+            "video": "https://ia903200.us.archive.org/19/items/ShitaraS04/13.mp4"
+          }
+        ]
+      },
+      {
+        "nome": "4ª Temporada Leg",
+        "episodios": [
+          {
+            "id": "tensura_leg_s04e01",
+            "index": 1,
+            "titulo": "73. Novos dias",
+            "descricao": "A cidade de Rimuru está em pleno desenvolvimento, assim como seus planos internacionais. Mas faltam ajustes.",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/gb4p6xHYwN3c4gYlnVzvpFtlOB8.jpg",
+            "duracao": "24 min",
+            "video": "https://ia903200.us.archive.org/19/items/ShitaraS04/Quarta-Leg-1.mp4"
+          }
+        ]
+      }
+    ]
+  },
+  "konosuba": {
+    "tipo": "serie",
+    "titulo": "KONOSUBA: As Bênçãos de Deus Neste Mundo Maravilhoso! (2016)",
+    "ano": "2016",
+    "classificacao": "+14",
+    "generos": ["Comédia", "Fantasia", "Isekai"],
+    "sinopse": "Após uma morte ridícula e patética enquanto voltava para casa depois de comprar um jogo, o estudante do ensino médio e recluso Kazuma Satou se vê diante de uma deusa linda, porém insuportável, chamada Aqua. Ela oferece ao jovem duas opções: seguir para o paraíso ou reencarnar no sonho de todo gamer — um mundo de fantasia de verdade! Ao decidir começar uma vida nova, Kazuma logo recebe a missão de derrotar um Rei Demônio que aterroriza vilarejos. Antes de partir, ele pode escolher um único item para ajudá-lo em sua jornada, e o futuro herói escolhe a própria Aqua. Mas Kazuma cometeu um erro grave: Aqua é completamente inútil! Infelizmente, os problemas deles não param por aí; viver em um mundo assim é muito diferente de como as coisas funcionam nos jogos. Em vez de embarcar em uma aventura emocionante, a dupla precisa primeiro trabalhar para pagar as despesas de subsistência. Na verdade, as desventuras deles estão apenas começando!",
+    "banner": "https://image.tmdb.org/t/p/original/3eDzgm1MpaRf3sBEtkri39bAdgh.jpg",
+    "poster": "https://image.tmdb.org/t/p/original/bQ5wYik4IZaJm8oQfWyCT4pdVQZ.jpg",
+    "temporadas": [
+      {
+        "nome": "1ª Temporada",
+        "episodios": [
+          {
+            "id": "konosuba_dub-s01e01",
+            "index": 1,
+            "titulo": "01. Essa Autoproclamada Deusa e Reencarnação em Outro Mundo!",
+            "descricao": "Kazuma conhece a Deusa Aqua após um acidente na Terra. Aqua oferece a Kazuma uma oportunidade para reencarnar em um outro mundo. Será que Kazuma aceitará isso?",
+            "thumb": "https://media.themoviedb.org/t/p/w640_and_h360_face/c93ohIPep6Pd2ltcixMM49zf09I.jpg",
+            "duracao": "24 min",
+            "video": "https://ia600700.us.archive.org/27/items/SubaDubLeg/Primeira-Dub-1.mp4"
+            
+          }
+        ]
+      }
+    ]
+  }
+
+ }
+

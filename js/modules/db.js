@@ -1,0 +1,118 @@
+// js/modules/db.js
+
+const DB_NAME = "ChibiHeartDB";
+const DB_VERSION = 1;
+const STORE_NAME = "progresso";
+
+/**
+ * Inicializa e abre a conexão com o IndexedDB
+ */
+function abrirBanco() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+    // Cria a tabela/store se o banco for criado pela primeira vez
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, { keyPath: "id" });
+      }
+    };
+
+    request.onsuccess = (event) => resolve(event.target.result);
+    request.onerror = (event) => reject("Erro ao abrir IndexedDB: " + event.target.error);
+  });
+}
+
+/**
+ * Salva ou atualiza o progresso de um episódio
+ * @param {string} epId - Ex: 'k-on_s01e01'
+ * @param {number} tempo - Segundo atual do player
+ * @param {number} total - Duração total do vídeo
+ */
+export async function salvarProgressoDB(epId, tempo, total) {
+  try {
+    const db = await abrirBanco();
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(STORE_NAME, "readwrite");
+      const store = transaction.objectStore(STORE_NAME);
+
+      const registro = { id: epId, tempo, total, atualizadoEm: Date.now() };
+      const request = store.put(registro);
+
+      request.onsuccess = () => resolve(true);
+      request.onerror = (e) => reject(e.target.error);
+    });
+  } catch (erro) {
+    console.error("❌ [DB] Falha ao salvar progresso:", erro);
+  }
+}
+
+/**
+ * Busca o progresso de um episódio específico
+ * @param {string} epId 
+ */
+export async function buscarProgressoDB(epId) {
+  try {
+    const db = await abrirBanco();
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(STORE_NAME, "readonly");
+      const store = transaction.objectStore(STORE_NAME);
+      const request = store.get(epId);
+
+      request.onsuccess = (e) => resolve(e.target.result || null);
+      request.onerror = (e) => reject(e.target.error);
+    });
+  } catch (erro) {
+    console.error("❌ [DB] Falha ao buscar progresso:", erro);
+    return null;
+  }
+}
+
+/**
+ * Busca o progresso de TODOS os episódios de uma vez (otimizado para listagens)
+ */
+export async function buscarTodoProgressoDB() {
+  try {
+    const db = await abrirBanco();
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(STORE_NAME, "readonly");
+      const store = transaction.objectStore(STORE_NAME);
+      const request = store.getAll();
+
+      request.onsuccess = (e) => {
+        // Transforma o array resultante em um mapa { id: { tempo, total } } para busca rápida O(1)
+        const mapa = {};
+        const resultados = e.target.result || [];
+        resultados.forEach(item => {
+          mapa[item.id] = item;
+        });
+        resolve(mapa);
+      };
+      request.onerror = (e) => reject(e.target.error);
+    });
+  } catch (erro) {
+    console.error("❌ [DB] Falha ao listar progressos:", erro);
+    return {};
+  }
+}
+
+/**
+ * Remove o registro de progresso (ex: quando o anime chega ao fim)
+ * @param {string} epId 
+ */
+export async function deletarProgressoDB(epId) {
+  try {
+    const db = await abrirBanco();
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(STORE_NAME, "readwrite");
+      const store = transaction.objectStore(STORE_NAME);
+      const request = store.delete(epId);
+
+      request.onsuccess = () => resolve(true);
+      request.onerror = (e) => reject(e.target.error);
+    });
+  } catch (erro) {
+    console.error("❌ [DB] Falha ao deletar registro:", erro);
+  }
+}
