@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. CONFIGURAÇÕES GERAIS (TEMA ESCURO)
+   1. CONFIGURAÇÕES GERAIS E ESTRUTURA BASE (HTML, Body e App Views)
    ========================================================================== */
 * {
     box-sizing: border-box;
@@ -13,305 +13,6 @@
   -webkit-overflow-scrolling: touch;
 }
 
-
-/* ==========================================================================
-   ESTILOS EXCLUSIVOS DA TELA DE PESQUISA (#busca)
-   ========================================================================== */
-
-/* Grade onde os cards pesquisados são injetados */
-#grade-resultados-busca {
-    display: grid;
-    /* Cria colunas automáticas com largura mínima de 110px */
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
-    /* 16px de espaço entre linhas e 12px entre colunas */
-    gap: 16px 12px; 
-    padding-top: 12px;
-    padding-bottom: 24px;
-}
-
-/* Ajusta cada card dentro da busca */
-#grade-resultados-busca .card {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 6px; /* Espacinho entre a imagem e o título do anime */
-}
-
-/* Força a imagem a manter o formato de pôster na pesquisa */
-#grade-resultados-busca .card-media {
-    width: 100%;
-    aspect-ratio: 2 / 3;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-/* Ajuste fino dos textos dentro do card de busca */
-#grade-resultados-busca .card-title {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #ffffff;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0 2px;
-}
-
-
-
-
-/* Garante o posicionamento correto da barra na base da thumb */
-.player-ep-media {
-    position: relative;
-    overflow: hidden;
-}
-
-/* Fundo cinza translúcido da barra */
-.barra-progresso-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.3);
-    z-index: 4; /* Fica acima da imagem e abaixo do texto de duração se necessário */
-}
-
-/* Linha vermelha que indica o avanço do usuário */
-.barra-progresso-preenchimento {
-    height: 100%;
-    background: #ff0000;
-    width: 0%; /* Controlado dinamicamente via JS */
-    transition: width 0.3s ease;
-}
-
-
-
-
-/* --- CARDS HORIZONTAIS (Novos Episódios / Vídeos) --- */
-.card.horizontal {
-    width: 160px; /* Largura do card na fileira */
-    flex-shrink: 0;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.card.horizontal .card-media {
-    width: 100%;
-    aspect-ratio: 16 / 9; /* Força proporção widescreen de vídeo */
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: #1a1a1a;
-}
-
-.card.horizontal .card-media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.card.horizontal .card-title {
-    font-size: 0.85rem;
-    color: #fff;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limita a no máximo 2 linhas */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    margin: 0;
-}
-
-
-/* Layout Geral da View do Player (Ocupa 100% da Tela anulando o padding do container) */
-#player {
-    width: calc(100% + 40px);
-    min-height: 100vh;
-    background-color: #121212;
-    color: #ffffff;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    margin: calc(-16px - env(safe-area-inset-top, 0px)) -20px 0 -20px;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Área do Vídeo Fixo no Topo com Proporção 16:9 Ocupando Toda a Largura */
-.player-media-block {
-    width: 100%;
-    max-width: 100%;
-    background-color: #000;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    aspect-ratio: 16 / 9;
-}
-
-.player-media-block video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Evita cortar o vídeo nas bordas */
-    display: block;
-}
-
-/* Detalhes do Episódio Atual */
-.player-episode-detail {
-    padding: 20px 16px 12px 16px;
-    max-width: 1200px; /* Alinha o conteúdo centralizado em telas ultra-wide */
-    margin: 0 auto;
-}
-
-.player-meta {
-    color: #e50914; /* Cor vermelha de destaque */
-    font-weight: bold;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-}
-
-.player-episode-detail h2 {
-    font-size: 1.5rem;
-    margin: 6px 0 12px 0;
-    font-weight: bold;
-}
-
-.badge-tag {
-    background-color: #2a2a2a;
-    color: #b3b3b3;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-}
-
-/* Seção de Próximos Episódios */
-.proximos-container {
-    padding: 0 16px 40px 16px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.proximos-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-}
-
-.titulo-proximos {
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin: 0;
-}
-
-.btn-ver-todos {
-    color: #e50914;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-/* Grid de Cards (Mobile: Scroll Horizontal | Desktop: Grid Responsivo) */
-.proximos-grid {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    padding-bottom: 8px;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Esconder barra de scroll no Chrome/Safari/Firefox */
-.proximos-grid::-webkit-scrollbar {
-    display: none;
-}
-.proximos-grid {
-    scrollbar-width: none;
-}
-
-/* Cards no Mobile (2 cards por tela) */
-.card-player-ep {
-    flex: 0 0 calc(50% - 8px);
-    min-width: 150px;
-    cursor: pointer;
-}
-
-.player-ep-media {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: 6px;
-    overflow: hidden;
-    background-color: #000;
-}
-
-.player-ep-thumb {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Ícone de Play centralizado na Thumb */
-.player-play-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s ease;
-}
-
-.card-player-ep:hover .player-play-overlay {
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.player-play-overlay span {
-    color: #ffffff;
-    font-size: 1.5rem;
-    background: rgba(0,0,0,0.6);
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.player-ep-duration {
-    position: absolute;
-    bottom: 6px;
-    right: 6px;
-    background-color: rgba(0, 0, 0, 0.8);
-    font-size: 0.7rem;
-    padding: 2px 5px;
-    border-radius: 3px;
-    color: #fff;
-}
-
-.player-card-title {
-    margin: 8px 0 0 0;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #e5e5e5;
-    line-height: 1.3;
-}
-
-/* --- ADAPTAÇÃO PARA TELAS MAIORES (Desktop / Tablet) --- */
-@media (min-width: 768px) {
-    .proximos-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        overflow-x: visible;
-    }
-
-    .card-player-ep {
-        flex: none;
-        min-width: 0;
-    }
-}
-
-
-
 body {
     background-color: #0d0e12;
     color: #ffffff;
@@ -320,127 +21,6 @@ body {
     overflow-x: hidden;
 }
 
-.episodes-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-}
-
-.episodes-header .titulo-categoria {
-    margin: 0;
-}
-
-
-/* Container principal relativo para posicionar o pop-up */
-.custom-select-container {
-  position: relative;
-  display: inline-block;
-}
-
-/* O botão principal que substitui o visual do select */
-.btn-select-atual {
-  background-color: #1a1a1a;
-  color: #ffffff;
-  padding: 8px 16px;
-  border: 1px solid #333333;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* O Pop-up flutuante de opções */
-.popup-opcoes {
-  display: none; /* Começa escondido */
-  position: absolute;
-  top: 105%; /* Senta logo abaixo do botão */
-  left: 0;
-  width: 100%;
-  min-width: 160px;
-  background-color: #1a1a1a;
-  border: 1px solid #333333;
-  border-radius: 8px;
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  overflow: hidden;
-}
-
-/* Classe utilitária para mostrar o pop-up */
-.popup-opcoes.mostrar {
-  display: block;
-}
-
-/* Cada item/temporada dentro do pop-up */
-.opcao-temporada {
-  color: #aaaaaa;
-  padding: 12px 16px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-
-/* Efeito visual ao passar o dedo/clicar na opção */
-.opcao-temporada:active {
-  background-color: #333333;
-  color: #ffffff;
-}
-
-/* Estilo para a temporada que está atualmente selecionada */
-.opcao-temporada.selecionada {
-  color: #00ffcc; /* Cor de destaque (pode mudar para a cor do seu app) */
-  background-color: #262626;
-  font-weight: bold;
-}
-
-
-
-/* testees hero */
-
-/* Animação do Pulso Neon Elegante */
-@keyframes pulsoSuave {
-    0% {
-        box-shadow: 0 4px 14px rgba(255, 118, 183, 0.4);
-        transform: scale(1);
-    }
-    50% {
-        /* Aumenta o alcance do brilho e expande o botão bem de leve */
-        box-shadow: 0 6px 24px rgba(255, 118, 183, 0.75), 0 0 12px rgba(255, 64, 129, 0.4);
-        transform: scale(1.025);
-    }
-    100% {
-        box-shadow: 0 4px 14px rgba(255, 118, 183, 0.4);
-        transform: scale(1);
-    }
-}
-
-/* Aplicação no Botão de Assistir */
-.btn-hero-play {
-    background: linear-gradient(135deg, #ff76b7, #ff4081);
-    color: #ffffff;
-    box-shadow: 0 4px 14px rgba(255, 118, 183, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-
-    /* Ativa a animação: 2.8 segundos por ciclo, contínua e suave */
-    animation: pulsoSuave 2.8s infinite ease-in-out;
-}
-
-/* Pausa o pulso enquanto o usuário estiver com o cursor por cima ou clicando */
-.btn-hero-play:hover {
-    animation-play-state: paused;
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 8px 25px rgba(255, 118, 183, 0.8);
-}
-
-
-
-
-/* ==========================================================================
-   2. CABEÇALHO (LOGO CHIBIHEART)
-   ========================================================================== */
 .main-header {
     position: sticky;
     top: 0;
@@ -476,9 +56,6 @@ body {
     filter: drop-shadow(0 0 8px rgba(255, 118, 183, 0.3)); /* Brilho neon */
 }
 
-/* ==========================================================================
-   3. CONTEÚDO E VIEWS (ESTRUTURA SPA)
-   ========================================================================== */
 .main-content {
     padding: calc(16px + env(safe-area-inset-top, 0px)) 20px 16px 20px;
     padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px));
@@ -522,69 +99,16 @@ body {
     line-height: 1.5;
 }
 
+
 /* ==========================================================================
-   4. TAB BAR (EFEITO VIDRO FLUIDO - ESTILO TRAKT)
+   2. VIEW DE ERRO (#erro)
+   (O arquivo original não possui regras CSS isoladas para esta View.
+   Os estilos aplicados nesta seção são inline no HTML).
    ========================================================================== */
-.tab-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 58px; /* Altura compacta ideal para formato "apenas ícones" */
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 1000;
 
-    /* Cantos superiores arredondados idêntico ao Trakt */
-    border-top-left-radius: 18px;
-    border-top-right-radius: 18px;
-
-    /* O Segredo do Vidro Escuro */
-    background-color: rgba(18, 19, 26, 0.75);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px); /* Suporte para iOS/Safari */
-
-    /* Borda cirúrgica simulando o reflexo da luz no vidro */
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-
-    /* Sombra projetada para dar profundidade em relação ao fundo */
-    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.5);
-}
-
-/* Itens da Tab (Botões dos Ícones) */
-.tab-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: #64748b; /* Cinza fosco moderno para itens inativos */
-    width: 48px;
-    height: 48px;
-    border-radius: 50%; /* Área de toque redonda */
-    transition: all 0.2s ease;
-}
-
-/* Ícones do Google Fonts */
-.tab-item .material-symbols-outlined {
-    font-size: 28px;
-    transition: transform 0.2s ease, text-shadow 0.2s ease;
-}
-
-/* Estado Ativo e Efeito de Hover */
-.tab-item:hover,
-.tab-item.active {
-    color: #ff76b7; /* Rosa neon suave do ChibiHeart */
-    text-shadow: 0 0 12px rgba(255, 118, 183, 0.5); /* Efeito iluminado no ícone */
-}
-
-/* Feedback de clique */
-.tab-item:active .material-symbols-outlined {
-    transform: scale(0.88);
-}
 
 /* ==========================================================================
-   5. HERO BANNER (EXPANDIDO & UNIFICADO)
+   3. VIEW DA HOME (#inicio) - HERO BANNER
    ========================================================================== */
 .hero-banner {
     position: relative;
@@ -725,11 +249,48 @@ body {
     transform: translateY(-2px);
 }
 
+/* Primeira Declaração do Botão Play do Hero */
 .btn-hero-play {
     background: linear-gradient(135deg, #ff76b7, #ff4081);
     color: #ffffff;
     box-shadow: 0 4px 14px rgba(255, 118, 183, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animação do Pulso Neon Elegante */
+@keyframes pulsoSuave {
+    0% {
+        box-shadow: 0 4px 14px rgba(255, 118, 183, 0.4);
+        transform: scale(1);
+    }
+    50% {
+        /* Aumenta o alcance do brilho e expande o botão bem de leve */
+        box-shadow: 0 6px 24px rgba(255, 118, 183, 0.75), 0 0 12px rgba(255, 64, 129, 0.4);
+        transform: scale(1.025);
+    }
+    100% {
+        box-shadow: 0 4px 14px rgba(255, 118, 183, 0.4);
+        transform: scale(1);
+    }
+}
+
+/* Segunda Declaração do Botão Play do Hero (testees hero) */
+/* Aplicação no Botão de Assistir */
+.btn-hero-play {
+    background: linear-gradient(135deg, #ff76b7, #ff4081);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(255, 118, 183, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* Ativa a animação: 2.8 segundos por ciclo, contínua e suave */
+    animation: pulsoSuave 2.8s infinite ease-in-out;
+}
+
+/* Pausa o pulso enquanto o usuário estiver com o cursor por cima ou clicando */
+.btn-hero-play:hover {
+    animation-play-state: paused;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(255, 118, 183, 0.8);
 }
 
 .btn-hero-play .material-symbols-outlined {
@@ -774,8 +335,9 @@ body {
     }
 }
 
+
 /* ==========================================================================
-   6. CARDS E FILEIRAS (ROLAGEM HORIZONTAL)
+   4. VIEW DA HOME (#inicio) - CATEGORIAS E CARDS (Rolagem Horizontal)
    ========================================================================== */
 .titulo-categoria {
     font-size: 1.05rem;
@@ -891,8 +453,44 @@ a.card {
     flex-direction: column;
 }
 
+/* --- CARDS HORIZONTAIS (Novos Episódios / Vídeos) --- */
+.card.horizontal {
+    width: 160px; /* Largura do card na fileira */
+    flex-shrink: 0;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.card.horizontal .card-media {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Força proporção widescreen de vídeo */
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #1a1a1a;
+}
+
+.card.horizontal .card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card.horizontal .card-title {
+    font-size: 0.85rem;
+    color: #fff;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limita a no máximo 2 linhas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0;
+}
+
+
 /* ==========================================================================
-   7. LAYOUT DA TELA DE INFORMAÇÕES (#info) - ESTILO DISNEY+
+   5. VIEW DE DETALHES (#info) - BANNER E INFORMAÇÕES DO ANIME
    ========================================================================== */
 #info {
     margin: -16px -20px 0 -20px;
@@ -1066,8 +664,9 @@ a.card {
     text-align: left; /* Sinopse alinhada à esquerda como no print */
 }
 
+
 /* ==========================================================================
-   8. SEÇÃO DE EPISÓDIOS
+   6. VIEW DE DETALHES (#info) - SEÇÃO DE EPISÓDIOS E TEMPORADAS
    ========================================================================== */
 .info-episodes-container {
     margin-top: 28px;
@@ -1078,6 +677,81 @@ a.card {
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 16px;
+}
+
+.episodes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.episodes-header .titulo-categoria {
+    margin: 0;
+}
+
+/* Container principal relativo para posicionar o pop-up */
+.custom-select-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* O botão principal que substitui o visual do select */
+.btn-select-atual {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid #333333;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* O Pop-up flutuante de opções */
+.popup-opcoes {
+  display: none; /* Começa escondido */
+  position: absolute;
+  top: 105%; /* Senta logo abaixo do botão */
+  left: 0;
+  width: 100%;
+  min-width: 160px;
+  background-color: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  overflow: hidden;
+}
+
+/* Classe utilitária para mostrar o pop-up */
+.popup-opcoes.mostrar {
+  display: block;
+}
+
+/* Cada item/temporada dentro do pop-up */
+.opcao-temporada {
+  color: #aaaaaa;
+  padding: 12px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Efeito visual ao passar o dedo/clicar na opção */
+.opcao-temporada:active {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+/* Estilo para a temporada que está atualmente selecionada */
+.opcao-temporada.selecionada {
+  color: #00ffcc; /* Cor de destaque (pode mudar para a cor do seu app) */
+  background-color: #262626;
+  font-weight: bold;
 }
 
 .episodes-list {
@@ -1155,8 +829,38 @@ a.card {
 
 
 /* ==========================================================================
-   9. ESTILOS DO PLAYER (VIDEO.JS)
+   7. VIEW DO PLAYER (#player) E VÍDEO
    ========================================================================== */
+/* Layout Geral da View do Player (Ocupa 100% da Tela anulando o padding do container) */
+#player {
+    width: calc(100% + 40px);
+    min-height: 100vh;
+    background-color: #121212;
+    color: #ffffff;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: calc(-16px - env(safe-area-inset-top, 0px)) -20px 0 -20px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Área do Vídeo Fixo no Topo com Proporção 16:9 Ocupando Toda a Largura */
+.player-media-block {
+    width: 100%;
+    max-width: 100%;
+    background-color: #000;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    aspect-ratio: 16 / 9;
+}
+
+.player-media-block video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Evita cortar o vídeo nas bordas */
+    display: block;
+}
+
 .player-container {
     position: relative;
     width: 100%;
@@ -1202,6 +906,303 @@ a.card {
     aspect-ratio: 16 / 9;
 }
 
+/* Detalhes do Episódio Atual */
+.player-episode-detail {
+    padding: 20px 16px 12px 16px;
+    max-width: 1200px; /* Alinha o conteúdo centralizado em telas ultra-wide */
+    margin: 0 auto;
+}
+
+.player-meta {
+    color: #e50914; /* Cor vermelha de destaque */
+    font-weight: bold;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.player-episode-detail h2 {
+    font-size: 1.5rem;
+    margin: 6px 0 12px 0;
+    font-weight: bold;
+}
+
+.badge-tag {
+    background-color: #2a2a2a;
+    color: #b3b3b3;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
+
+/* Seção de Próximos Episódios */
+.proximos-container {
+    padding: 0 16px 40px 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.proximos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.titulo-proximos {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.btn-ver-todos {
+    color: #e50914;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Grid de Cards (Mobile: Scroll Horizontal | Desktop: Grid Responsivo) */
+.proximos-grid {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Esconder barra de scroll no Chrome/Safari/Firefox */
+.proximos-grid::-webkit-scrollbar {
+    display: none;
+}
+.proximos-grid {
+    scrollbar-width: none;
+}
+
+/* Cards no Mobile (2 cards por tela) */
+.card-player-ep {
+    flex: 0 0 calc(50% - 8px);
+    min-width: 150px;
+    cursor: pointer;
+}
+
+/* Garante o posicionamento correto da barra na base da thumb (Primeira Regra) */
+.player-ep-media {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Fundo cinza translúcido da barra */
+.barra-progresso-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 4; /* Fica acima da imagem e abaixo do texto de duração se necessário */
+}
+
+/* Linha vermelha que indica o avanço do usuário */
+.barra-progresso-preenchimento {
+    height: 100%;
+    background: #ff0000;
+    width: 0%; /* Controlado dinamicamente via JS */
+    transition: width 0.3s ease;
+}
+
+/* Repetição da thumb mantida conforme código original para preservar propriedades */
+.player-ep-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.player-ep-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Ícone de Play centralizado na Thumb */
+.player-play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.card-player-ep:hover .player-play-overlay {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.player-play-overlay span {
+    color: #ffffff;
+    font-size: 1.5rem;
+    background: rgba(0,0,0,0.6);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-ep-duration {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    background-color: rgba(0, 0, 0, 0.8);
+    font-size: 0.7rem;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.player-card-title {
+    margin: 8px 0 0 0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #e5e5e5;
+    line-height: 1.3;
+}
+
+/* --- ADAPTAÇÃO PARA TELAS MAIORES (Desktop / Tablet) --- */
+@media (min-width: 768px) {
+    .proximos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        overflow-x: visible;
+    }
+
+    .card-player-ep {
+        flex: none;
+        min-width: 0;
+    }
+}
+
+
+/* ==========================================================================
+   8. OUTRAS VIEWS (#lista e #perfil)
+   (Não há estilos específicos para estas sections no código original).
+   ========================================================================== */
+
+
+/* ==========================================================================
+   9. VIEW DE PESQUISA (#pesquisa)
+   ========================================================================== */
+/* Grade onde os cards pesquisados são injetados */
+#grade-resultados-busca {
+    display: grid;
+    /* Cria colunas automáticas com largura mínima de 110px */
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
+    /* 16px de espaço entre linhas e 12px entre colunas */
+    gap: 16px 12px; 
+    padding-top: 12px;
+    padding-bottom: 24px;
+}
+
+/* Ajusta cada card dentro da busca */
+#grade-resultados-busca .card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Espacinho entre a imagem e o título do anime */
+}
+
+/* Força a imagem a manter o formato de pôster na pesquisa */
+#grade-resultados-busca .card-media {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Ajuste fino dos textos dentro do card de busca */
+#grade-resultados-busca .card-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 2px;
+}
+
+
+/* ==========================================================================
+   10. TAB BAR (MENU DE NAVEGAÇÃO INFERIOR)
+   ========================================================================== */
+.tab-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 58px; /* Altura compacta ideal para formato "apenas ícones" */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+
+    /* Cantos superiores arredondados idêntico ao Trakt */
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+
+    /* O Segredo do Vidro Escuro */
+    background-color: rgba(18, 19, 26, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); /* Suporte para iOS/Safari */
+
+    /* Borda cirúrgica simulando o reflexo da luz no vidro */
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+    /* Sombra projetada para dar profundidade em relação ao fundo */
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Itens da Tab (Botões dos Ícones) */
+.tab-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #64748b; /* Cinza fosco moderno para itens inativos */
+    width: 48px;
+    height: 48px;
+    border-radius: 50%; /* Área de toque redonda */
+    transition: all 0.2s ease;
+}
+
+/* Ícones do Google Fonts */
+.tab-item .material-symbols-outlined {
+    font-size: 28px;
+    transition: transform 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* Estado Ativo e Efeito de Hover */
+.tab-item:hover,
+.tab-item.active {
+    color: #ff76b7; /* Rosa neon suave do ChibiHeart */
+    text-shadow: 0 0 12px rgba(255, 118, 183, 0.5); /* Efeito iluminado no ícone */
+}
+
+/* Feedback de clique */
+.tab-item:active .material-symbols-outlined {
+    transform: scale(0.88);
+}
+
+
+/* ==========================================================================
+   11. OVERLAYS E MODAIS (GERADOS VIA JAVASCRIPT)
+   ========================================================================== */
 /* =========================
    Overlay de Episódio (overlay-ep)
    ========================= */
@@ -1317,4 +1318,181 @@ body.overlay-open .main-content { filter: blur(3px) brightness(0.92); pointer-ev
   .overlay-title { font-size: 1rem; }
   .overlay-desc { font-size: 0.95rem; }
   .overlay-play { padding: 10px 12px; font-size: 0.95rem; }
+}
+
+
+/* ==========================================================================
+   12. ADAPTAÇÃO PARA GOOGLE TV E SMART TVs (10-FOOT UI)
+   ========================================================================== */
+@media (min-width: 960px) and (orientation: landscape) {
+    
+    /* 1. CONFIGURAÇÕES GERAIS E REMOÇÃO DE TOUCH */
+    * {
+        /* Remove o highlight de toque nativo do mobile */
+        -webkit-tap-highlight-color: transparent !important; 
+    }
+    
+    body {
+        /* Aumenta a base da fonte para leitura a 3 metros de distância */
+        font-size: 1.2rem; 
+        /* Oculta barras de rolagem globais (a navegação trará o conteúdo para a tela) */
+        overflow: hidden; 
+    }
+
+    /* Anula o scroll suave de toque do mobile */
+    .container, .proximos-grid, .cards-row, .episodes-list {
+        -webkit-overflow-scrolling: auto !important; 
+    }
+
+    /* 2. ESTADOS VISUAIS FORTES DE NAVEGAÇÃO (D-PAD) */
+    /* Todos os elementos interativos precisam de um feedback claro de onde o usuário está */
+    a:focus, 
+    button:focus, 
+    .card:focus, 
+    .card-ep:focus, 
+    .tab-item:focus, 
+    .btn-hero:focus, 
+    .btn-disney-play:focus,
+    .btn-acao-secundaria:focus,
+    .opcao-temporada:focus {
+        outline: none; /* Remove o contorno padrão azul/pontilhado do navegador */
+        transform: scale(1.08) !important;
+        box-shadow: 0 0 0 4px #ff76b7, 0 12px 30px rgba(0,0,0,0.8) !important;
+        border-radius: 8px;
+        z-index: 50;
+        transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease;
+    }
+
+    /* Corrige o border-radius específico do menu inferior no foco */
+    .tab-item:focus {
+        border-radius: 50%;
+    }
+
+    /* O botão de assistir não deve pausar o brilho se estiver apenas em foco na TV */
+    .btn-hero-play:focus {
+        animation-play-state: running; 
+    }
+
+    /* 3. TIPOGRAFIA E DIMENSÕES AMPLIADAS */
+    .app-view h2, .info-header-block h2 {
+        font-size: 2.5rem; 
+    }
+    
+    .titulo-categoria {
+        font-size: 1.5rem;
+    }
+
+    .hero-banner-title {
+        font-size: 4rem; /* Títulos de destaque colossais na TV */
+        text-shadow: 0 6px 16px rgba(0, 0, 0, 0.9);
+    }
+    
+    .hero-banner-desc {
+        font-size: 1.2rem;
+        max-width: 80ch;
+        -webkit-line-clamp: 4; /* Permite mais texto na tela grande */
+    }
+
+    .btn-hero, .btn-disney-play {
+        padding: 16px 36px;
+        font-size: 1.3rem;
+    }
+
+    /* 4. REESTRUTURAÇÃO DE LISTAS E CARDS (CARROSSEL HORIZONTAL) */
+    /* A grade de busca ganha colunas muito maiores */
+    #grade-resultados-busca {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+        gap: 32px 24px; 
+    }
+
+    /* Escala dos cards para visualização na TV */
+    .card.poster { 
+        width: 220px; 
+    }
+    
+    .card.landscape, .card-player-ep { 
+        width: 340px; 
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        margin-top: 8px;
+    }
+
+    /* Transforma a lista vertical de episódios (.episodes-list) em uma fileira horizontal */
+    .episodes-list {
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 10px 0 20px 0;
+        gap: 24px;
+        scrollbar-width: none; /* Oculta a scrollbar, o foco puxará os itens */
+    }
+    
+    .episodes-list::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Adapta o card de episódio para formato "Thumb em cima, Texto embaixo" no carrossel */
+    .card-ep {
+        flex-direction: column;
+        width: 300px;
+        flex-shrink: 0;
+        align-items: flex-start;
+        padding: 12px;
+    }
+    
+    .ep-media { 
+        width: 100%; 
+    }
+    
+    .card-title-ep {
+        font-size: 1.1rem;
+        margin-top: 8px;
+    }
+    
+    .card-subtitle-ep {
+        font-size: 0.95rem;
+        -webkit-line-clamp: 3;
+    }
+
+    /* 5. NAVEGAÇÃO E MENU (TAB BAR) */
+    /* Em TVs, converte a barra de baixo colada na tela para um menu estilo "pílula flutuante" */
+    .tab-bar {
+        height: 80px;
+        bottom: 30px; 
+        width: 50%;
+        left: 25%; /* Centraliza horizontalmente */
+        border-radius: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    
+    .tab-item { 
+        width: 64px; 
+        height: 64px; 
+    }
+    
+    .tab-item .material-symbols-outlined { 
+        font-size: 38px; 
+    }
+
+    /* 6. OVERLAY DE EPISÓDIO */
+    .overlay-panel {
+        width: 600px; /* Fixa uma largura contida para leitura */
+        padding: 40px;
+    }
+    
+    .overlay-title { 
+        font-size: 2rem; 
+    }
+    
+    .overlay-desc { 
+        font-size: 1.2rem; 
+        max-height: none; /* Deixa o texto fluir sem cortes */
+    }
+    
+    .overlay-play {
+        padding: 14px 28px;
+        font-size: 1.2rem;
+    }
 }

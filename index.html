@@ -20,19 +20,19 @@
     <!-- Conteúdo Principal (SPA) -->
     <main class="main-content">
 
-    <!-- VIEW DE ERRO / NOT FOUND -->
-            <section id="erro" class="app-view">
-                <div class="error-container" style="text-align: center; padding: 60px 20px;">
-                    <span class="material-symbols-outlined" style="font-size: 72px; color: #ff4081; margin-bottom: 16px;">error_outline</span>
-                    <h2 style="font-size: 1.8rem; margin-bottom: 8px;">Conteúdo Não Encontrado</h2>
-                    <p id="mensagem-erro" style="color: #aaa; max-width: 400px; margin: 0 auto 24px auto;">
-                        Não encontramos o que você estava procurando ou o link está quebrado.
-                    </p>
-                    <button id="btn-erro-voltar" class="btn-disney-play" style="display: inline-flex; width: auto; padding: 12px 24px; font-size: 0.9rem; border: none; cursor: pointer;">
-                        VOLTAR
-                    </button>
-                </div>
-            </section>
+        <!-- VIEW DE ERRO / NOT FOUND -->
+        <section id="erro" class="app-view">
+            <div class="error-container" style="text-align: center; padding: 60px 20px;">
+                <span class="material-symbols-outlined" style="font-size: 72px; color: #ff4081; margin-bottom: 16px;">error_outline</span>
+                <h2 style="font-size: 1.8rem; margin-bottom: 8px;">Conteúdo Não Encontrado</h2>
+                <p id="mensagem-erro" style="color: #aaa; max-width: 400px; margin: 0 auto 24px auto;">
+                    Não encontramos o que você estava procurando ou o link está quebrado.
+                </p>
+                <button id="btn-erro-voltar" class="btn-disney-play" style="display: inline-flex; width: auto; padding: 12px 24px; font-size: 0.9rem; border: none; cursor: pointer;">
+                    VOLTAR
+                </button>
+            </div>
+        </section>
 
         <!-- VIEW DA HOME -->
         <section id="inicio" class="app-view active">
@@ -50,24 +50,22 @@
                         <p class="hero-banner-desc"></p>
 
                         <div class="hero-actions">
-                            <a class="btn-hero btn-hero-play" role="button" aria-label="Assistir"></a>
-                            <a class="btn-hero btn-hero-info" role="button" aria-label="Detalhes"></a>
+                            <a class="btn-hero btn-hero-play" role="button" tabindex="0" aria-label="Assistir"></a>
+                            <a class="btn-hero btn-hero-info" role="button" tabindex="0" aria-label="Detalhes"></a>
                         </div>
                     </div>
                 </div>
             </template>
 
-            <!-- Grade de Animes Recomendados -->
-            <!-- Adicionados Recentemente -->
             <!-- Seção de Novos Episódios (Link direto para o player) -->
             <h2 class="titulo-categoria">Novos Episódios</h2>
             <div id="grade-novos-episodios" class="cards-grid carrossel-horizontal"></div>
 
-            
+            <!-- Adicionados Recentemente -->
             <h2 class="titulo-categoria">Adicionados Recentemente</h2>
             <div id="grade-recentes" class="cards-grid carrossel-horizontal"></div>
 
-            
+            <!-- Grade de Animes Recomendados -->
             <h2 class="titulo-categoria">Assista no Chibi Heart</h2>
             <div id="grade-recomendados" class="cards-grid"></div>
 
@@ -78,13 +76,9 @@
                     <div class="cards-grid carrossel-horizontal"></div>
                 </div>
             </template>
-            
-
-
-
 
             <template id="modelo-card-anime">
-                <a href="" class="card poster">
+                <a href="" class="card poster" tabindex="0">
                     <div class="card-media">
                         <img src="" alt="">
                     </div>
@@ -96,7 +90,7 @@
         <!-- VIEW DE DETALHES -->
         <section id="info" class="app-view">
             <div class="info-hero">
-                <a href="#inicio" class="btn-voltar" aria-label="Voltar">
+                <a href="#inicio" class="btn-voltar" aria-label="Voltar" tabindex="0">
                     <span class="material-symbols-outlined">arrow_back</span>
                 </a>
                 <div class="hero-overlay"></div>
@@ -117,7 +111,7 @@
                 <div id="info-generos" class="info-genres"></div>
 
                 <div class="acao-principal-container">
-                    <a id="btn-play-filme" href="#player" class="btn-disney-play">
+                    <a id="btn-play-filme" href="#player" class="btn-disney-play" tabindex="0">
                         <span class="material-symbols-outlined">play_arrow</span>
                         ASSISTIR
                     </a>
@@ -134,12 +128,11 @@
                     <h2 class="titulo-categoria">Episódios</h2>
                     
                     <div class="custom-select-container">
-                    <div type="button" id="btn-selecionar-temporada" class="btn-select-atual" onclick="togglePopupTemporadas()">
-                        Carregando... ▾
-                    </div>
+                        <!-- Convertido para <button> para receber foco via D-Pad -->
+                        <button type="button" id="btn-selecionar-temporada" class="btn-select-atual" onclick="togglePopupTemporadas()" tabindex="0">
+                            Carregando... ▾
+                        </button>
 
-                    
-                    
                         <div id="popup-temporadas" class="popup-opcoes"></div>
                     </div>
                 </div>
@@ -147,21 +140,21 @@
                 <div id="lista-episodios" class="episodes-list"></div>
 
                 <template id="modelo-card-ep">
-                    <div class="card-ep">
+                    <!-- Adicionado tabindex="0" e role="button" para navegação na TV -->
+                    <div class="card-ep" tabindex="0" role="button">
                         <div class="ep-media">
                             <img src="" alt="">
                             <span class="ep-duration"></span>
                         </div>
                         <div class="ep-info">
                             <h3 class="card-title-ep"></h3>
-                          <!--  <p class="card-subtitle-ep"></p> -->
                         </div>
                     </div>
                 </template>
             </div>
         </section>
 
-
+        <!-- VIEW DO PLAYER -->
         <section id="player" class="app-view">
             <!-- Bloco do Player / Mídia -->
             <div class="player-media-block">
@@ -178,12 +171,10 @@
             </div>
         
             <!-- Seção de Próximos Episódios -->
-
-            <!-- Seção de Próximos Episódios -->
             <div class="proximos-container">
                 <div class="proximos-header">
                     <h3 class="titulo-proximos">Próximos episódios</h3>
-                    <a href="#info" id="lnk-ver-todos" class="btn-ver-todos">Ver todos</a>
+                    <a href="#info" id="lnk-ver-todos" class="btn-ver-todos" tabindex="0">Ver todos</a>
                 </div>
             
                 <!-- Lista onde os próximos episódios serão injetados -->
@@ -191,11 +182,11 @@
             
                 <!-- Template para os cards de próximos episódios -->
                 <template id="modelo-card-player">
-                    <div class="card-player-ep">
+                    <!-- Adicionado tabindex="0" e role="button" -->
+                    <div class="card-player-ep" tabindex="0" role="button">
                         <div class="player-ep-media">
                             <img src="" alt="" class="player-ep-thumb">
                             
-                            <!-- 🟥 NOVA BARRA DE PROGRESSO ADICIONADA AQUI -->
                             <div class="barra-progresso-container" style="display: none;">
                                 <div class="barra-progresso-preenchimento"></div>
                             </div>
@@ -209,11 +200,7 @@
                     </div>
                 </template>
             </div>
-            
-
-
         </section>
-        
 
         <!-- OUTRAS SEÇÕES DA APLICAÇÃO -->
         <section id="lista" class="app-view">
@@ -224,9 +211,9 @@
         <section id="pesquisa" class="app-view">
             <h2 class="titulo-categoria" style="margin-bottom: 16px;">Pesquisar</h2>
             
-            <!-- Campo de Entrada com Ícone -->
+            <!-- Campo de Entrada com Ícone e Hint de Busca para TV -->
             <div class="search-input-wrapper" style="position: relative; margin-bottom: 24px; max-width: 500px;">
-                <input type="text" id="input-busca" placeholder="Buscar por título ou gênero..." autocomplete="off" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #fff; font-size: 1rem; outline: none;">
+                <input type="text" id="input-busca" placeholder="Buscar por título ou gênero..." autocomplete="off" enterkeyhint="search" tabindex="0" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #fff; font-size: 1rem; outline: none;">
             </div>
 
             <!-- Grade onde os resultados filtrados aparecem dinamicamente -->
@@ -238,9 +225,6 @@
             </div>
         </section>
 
-
-
-
         <section id="perfil" class="app-view">
             <h2>Meu Perfil</h2>
             <p>Configurações do usuário...</p>
@@ -249,21 +233,21 @@
 
     <!-- TAB BAR DE NAVEGAÇÃO -->
     <nav class="tab-bar">
-        <a href="#inicio" class="tab-item active" aria-label="Início">
+        <a href="#inicio" class="tab-item active" aria-label="Início" tabindex="0">
             <span class="material-symbols-outlined">home</span>
         </a>
-        <a href="#lista" class="tab-item" aria-label="Minha Lista">
+        <a href="#lista" class="tab-item" aria-label="Minha Lista" tabindex="0">
             <span class="material-symbols-outlined">list</span>
         </a>
-        <a href="#pesquisa" class="tab-item" aria-label="Pesquisa">
+        <a href="#pesquisa" class="tab-item" aria-label="Pesquisa" tabindex="0">
             <span class="material-symbols-outlined">search</span>
         </a>
-        <a href="#perfil" class="tab-item" aria-label="Perfil">
+        <a href="#perfil" class="tab-item" aria-label="Perfil" tabindex="0">
             <span class="material-symbols-outlined">person</span>
         </a>
     </nav>
 
-    <!-- No final do body de index.html -->
+    <!-- Script Principal da Aplicação -->
     <script type="module" src="js/main.js"></script>
 
     <!-- Plyr JS -->
