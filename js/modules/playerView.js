@@ -63,7 +63,7 @@ export async function gerenciarTelaPlayer() {
 
     if (!anime) return;
 
-    // 3. Mapear episódios da série
+    // 3. Mapear APENAS os episódios da temporada atual do episódio selecionado
     let episodioAtual = null;
     let todosEpisodios = [];
     let temporadaAtualNome = "";
@@ -74,21 +74,43 @@ export async function gerenciarTelaPlayer() {
         ? [{ nome: "Temporada Única", episodios: anime.episodios }]
         : [];
 
-    temporadas.forEach((temp, tIdx) => {
+    // Primeiro encontra a temporada à qual o episódio pertence
+    let temporadaEncontrada = null;
+
+    for (let tIdx = 0; tIdx < temporadas.length; tIdx++) {
+      const temp = temporadas[tIdx];
       const eps = Array.isArray(temp.episodios) ? temp.episodios : [];
+
+      const epAchado = eps.find((ep, eIdx) => {
+        const indexEp = typeof ep.index === 'number' ? ep.index : eIdx + 1;
+        const idEp = ep.id || makeEpisodeId(animeId, tIdx + 1, indexEp);
+        return idEp === epId;
+      });
+
+      if (epAchado) {
+        temporadaEncontrada = { temp, tIdx };
+        break;
+      }
+    }
+
+    // Se encontrou a temporada correspondente, monta os episódios APENAS dela
+    if (temporadaEncontrada) {
+      const { temp, tIdx } = temporadaEncontrada;
+      temporadaAtualNome = temp.nome || "Temporada Única";
+      const eps = Array.isArray(temp.episodios) ? temp.episodios : [];
+
       eps.forEach((ep, eIdx) => {
         const indexEp = typeof ep.index === 'number' ? ep.index : eIdx + 1;
         const idEp = ep.id || makeEpisodeId(animeId, tIdx + 1, indexEp);
 
-        const epFormatado = { ...ep, index: indexEp, id: idEp, temporadaNome: temp.nome || "Temporada Única" };
+        const epFormatado = { ...ep, index: indexEp, id: idEp, temporadaNome: temporadaAtualNome };
         todosEpisodios.push(epFormatado);
 
         if (idEp === epId) {
           episodioAtual = epFormatado;
-          temporadaAtualNome = temp.nome || "Temporada Única";
         }
       });
-    });
+    }
 
     if (!episodioAtual) return;
 
@@ -133,7 +155,7 @@ export async function gerenciarTelaPlayer() {
           }
         });
 
-        // REPRODUÇÃO AUTOMÁTICA
+        // REPRODUÇÃO AUTOMÁTICA (limitada à temporada atual)
         plyrInstance.on('ended', async () => {
           // Limpa o registro do IndexedDB pois o episódio foi concluído com sucesso
           await deletarProgressoDB(epIdAtual);
@@ -192,11 +214,10 @@ export async function gerenciarTelaPlayer() {
     if (tituloEp) tituloEp.textContent = episodioAtual.titulo || "Episódio sem título";
     if (btnVerTodos) btnVerTodos.href = `#info?anime=${animeId}`;
 
-    // 7. Renderiza a lista de episódios seguintes
+    // 7. Renderiza a lista de episódios seguintes (apenas da temporada atual)
     const indexAtual = todosEpisodios.findIndex(e => e.id === epId);
     const proximosEpisodios = todosEpisodios.slice(indexAtual + 1);
 
-    // Como renderizarProximos precisa ler o banco de forma assíncrona, adicionamos o await aqui
     await renderizarProximos(proximosEpisodios, animeId);
 
   } catch (erro) {
@@ -213,11 +234,11 @@ async function renderizarProximos(lista, animeId) {
   container.innerHTML = "";
 
   if (!Array.isArray(lista) || lista.length === 0) {
-    container.innerHTML = "<p class='badge-tag' style='margin-top: 12px;'>Nenhum episódio seguinte disponível.</p>";
+    container.innerHTML = "<p class='badge-tag' style='margin-top: 12px;'>Nenhum episódio seguinte disponível nesta temporada.</p>";
     return;
   }
 
-  // 📂 Coleta todos os registros de progresso salvos no IndexedDB em uma única chamada em lote (O(1) no loop)
+  // 📂 Coleta todos os registros de progresso salvos no IndexedDB em uma única chamada em lote
   const mapaProgresso = await buscarTodoProgressoDB();
 
   lista.forEach(ep => {
