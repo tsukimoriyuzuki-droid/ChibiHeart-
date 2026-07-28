@@ -12,6 +12,7 @@ import {
 import { gerenciarTelaInfo, fecharOverlayEp } from './modules/info.js';
 import { gerenciarTelaPlayer } from './modules/playerView.js';
 import { inicializarPesquisa } from './modules/pesquisa.js';
+import { ocultarSplashScreen, exibirErroSplash } from './modules/splash.js';
 
 // --- MÓDULO TV INTEGRADO DIRECTAMENTE ---
 function inicializarNavegacaoTV() {
@@ -101,7 +102,7 @@ function navegarPeloHash() {
 }
 
 // --- INICIALIZAÇÃO DA APLICAÇÃO ---
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const btnErroVoltar = document.getElementById("btn-erro-voltar");
   if (btnErroVoltar) {
     btnErroVoltar.addEventListener("click", () => {
@@ -109,26 +110,46 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Executa os carregadores da Home
-  carregarHeroBanner();
-  carregarAnimesRecomendados();
-  carregarAnimesRecentes();
-  carregarNovosEpisodios();
-  carregarAnimesPorGenero();
-  
-  inicializarPesquisa();
-  inicializarNavegacaoTV();
+  try {
+    // 1. Executa todas as buscas de dados iniciais em paralelo
+    await Promise.all([
+      carregarHeroBanner(),
+      carregarAnimesRecomendados(),
+      carregarAnimesRecentes(),
+      carregarNovosEpisodios(),
+      carregarAnimesPorGenero()
+    ]);
+    
+    inicializarPesquisa();
+    inicializarNavegacaoTV();
 
-  window.addEventListener("hashchange", () => {
+    window.addEventListener("hashchange", async () => {
+      try {
+        navegarPeloHash();
+        fecharOverlayEp();
+        await gerenciarTelaInfo();
+        await gerenciarTelaPlayer();
+        atualizarElementosFocaveis();
+      } catch (e) {
+        console.error("Erro ao alterar rota:", e);
+      }
+    });
+
     navegarPeloHash();
-    fecharOverlayEp();
-    gerenciarTelaInfo();
-    gerenciarTelaPlayer();
+    await gerenciarTelaInfo();
+    await gerenciarTelaPlayer();
     atualizarElementosFocaveis();
-  });
 
-  navegarPeloHash();
-  gerenciarTelaInfo();
-  gerenciarTelaPlayer();
-  atualizarElementosFocaveis();
+    // 2. TUDO OK: Esconde a tela de Splash!
+    ocultarSplashScreen();
+
+  } catch (erroGeral) {
+    console.error("Erro crítico na inicialização:", erroGeral);
+    
+    // 3. ERRO: Exibe a interface de falha com os detalhes
+    exibirErroSplash(
+      "Ocorreu uma falha ao carregar os dados do aplicativo.",
+      erroGeral
+    );
+  }
 });

@@ -1,0 +1,47 @@
+/* ==========================================================================
+   6. ADAPTAÇÃO PARA GOOGLE TV, SMART TVs E NAVEGAÇÃO D-PAD
+   ========================================================================== */
+@media (min-width: 960px) and (orientation: landscape) {
+    * { -webkit-tap-highlight-color: transparent !important; }
+    body { font-size: 1.2rem; overflow: hidden; }
+    .container, .proximos-grid, .cards-row, .episodes-list { -webkit-overflow-scrolling: auto !important; }
+
+    /* Estilo de foco aprimorado para o controle remoto da TV */
+    a:focus, button:focus, .card:focus, .card-ep:focus, .tab-item:focus, .btn-hero:focus, .btn-disney-play:focus, .btn-acao-secundaria:focus, .opcao-temporada:focus {
+        outline: none; 
+        transform: scale(1.08) !important; 
+        box-shadow: 0 0 0 4px var(--accent-color), 0 12px 30px rgba(0,0,0,0.8) !important; 
+        border-radius: 8px; 
+        z-index: 50; 
+        transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease;
+    }
+    
+    .tab-item:focus { border-radius: 50%; }
+    .btn-hero-play:focus, .btn-disney-play:focus, .overlay-play:focus { animation-play-state: running; }
+
+    .app-view h2, .info-header-block h2 { font-size: 2.5rem; }
+    .titulo-categoria { font-size: 1.5rem; }
+    .hero-banner-title { font-size: 4rem; text-shadow: 0 6px 16px rgba(0, 0, 0, 0.9); }
+    .hero-banner-desc { font-size: 1.2rem; max-width: 80ch; -webkit-line-clamp: 4; }
+    .btn-hero, .btn-disney-play { padding: 16px 36px; font-size: 1.3rem; }
+
+    #grade-resultados-busca { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 32px 24px; }
+    .card.poster { width: 220px; }
+    .card.landscape, .card-player-ep { width: 340px; }
+    .card-title { font-size: 1.2rem; margin-top: 8px; }
+
+    .episodes-list { flex-direction: row; overflow-x: auto; overflow-y: hidden; padding: 10px 0 20px 0; gap: 24px; }
+    .card-ep { flex-direction: column; width: 300px; flex-shrink: 0; align-items: flex-start; padding: 12px; }
+    .ep-media { width: 100%; }
+    .card-title-ep { font-size: 1.1rem; margin-top: 8px; }
+    .card-subtitle-ep { font-size: 0.95rem; -webkit-line-clamp: 3; }
+
+    .tab-bar { height: 80px; bottom: 30px; width: 50%; left: 25%; border-radius: 40px; border: 1px solid rgba(255, 255, 255, 0.15); }
+    .tab-item { width: 64px; height: 64px; }
+    .tab-item .material-symbols-outlined { font-size: 38px; }
+
+    .overlay-panel { width: 600px; padding: 40px; }
+    .overlay-title { font-size: 2rem; }
+    .overlay-desc { font-size: 1.2rem; max-height: none; }
+    .overlay-play { padding: 14px 28px; font-size: 1.2rem; }
+}

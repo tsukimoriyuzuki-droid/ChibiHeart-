@@ -13,9 +13,39 @@
     <!-- Plyr CSS -->
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+    <!-- Carrega a fonte Poppins + TODOS os ícones do Material Symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
+
+    <!-- SPLASH SCREEN / CARREGAMENTO E ERRO -->
+    <div id="splash-screen" class="splash-container">
+        <!-- ESTADO 1: CARREGANDO -->
+        <div id="splash-loading" class="splash-content">
+            <div class="splash-logo-box">
+                <h1>Chibi<span>Heart</span></h1>
+            </div>
+            <div class="splash-spinner"></div>
+            <p class="splash-status">Carregando aplicativo...</p>
+        </div>
+
+        <!-- ESTADO 2: ERRO -->
+        <div id="splash-error" class="splash-content hidden">
+            <span class="material-symbols-outlined splash-error-icon">error</span>
+            <h2>Ops! Algo deu errado</h2>
+            <p id="splash-error-msg" class="splash-error-text">Não foi possível carregar os dados.</p>
+            
+            <details class="splash-error-details">
+                <summary>Ver motivo do erro</summary>
+                <pre id="splash-error-code"></pre>
+            </details>
+
+            <button id="btn-splash-retry" class="btn-disney-play" onclick="window.location.reload()" tabindex="0">
+                <span class="material-symbols-outlined">refresh</span>
+                TENTAR NOVAMENTE
+            </button>
+        </div>
+    </div>
 
     <!-- Conteúdo Principal (SPA) -->
     <main class="main-content">

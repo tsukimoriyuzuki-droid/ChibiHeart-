@@ -127,30 +127,82 @@ export async function gerenciarTelaPlayer() {
 
     // 5. Gerenciamento do Plyr (Instanciação / Atualização da Source)
     if (videoElement) {
+      // 📥 [PROGRES-TRACK] Função auxiliar para restaurar o tempo de forma segura
+      async function restaurarTempoSalvo() {
+        const progressoSalvo = await buscarProgressoDB(epIdAtual);
+        if (progressoSalvo && progressoSalvo.tempo > 0) {
+          // Usa o evento loadedmetadata para garantir que o vídeo já sabe sua duração e aceita o seek
+          videoElement.addEventListener('loadedmetadata', () => {
+            if (plyrInstance) plyrInstance.currentTime = progressoSalvo.tempo;
+          }, { once: true });
+          
+          // Fallback caso o evento já tenha disparado
+          if (videoElement.readyState >= 1 && plyrInstance) {
+            plyrInstance.currentTime = progressoSalvo.tempo;
+          }
+        }
+      }
+
       if (!plyrInstance) {
         videoElement.src = episodioAtual.video || "";
         videoElement.poster = episodioAtual.thumb || "";
 
         plyrInstance = new Plyr(videoElement, {
-          controls: ['play-large', 'play', 'progress', 'current-time', 'fullscreen'],
+          controls: [
+            'rewind',
+            'play',
+            'fast-forward',
+            'progress',
+            'current-time',
+            'duration',
+            'mute',
+            'volume',
+            'fullscreen'
+          ],
+          seekTime: 10,
           tooltips: { controls: true, seek: true },
-          autoplay: true
-        });
-
-        // 📥 [PROGRES-TRACK] Tenta recuperar o tempo salvo no IndexedDB assim que o Plyr estiver pronto
-        plyrInstance.on('ready', async () => {
-          const progressoSalvo = await buscarProgressoDB(epIdAtual);
-          if (progressoSalvo && progressoSalvo.tempo) {
-            plyrInstance.currentTime = progressoSalvo.tempo;
+          autoplay: true,
+          i18n: {
+            rewind: 'Voltar 10s',
+            fastForward: 'Avançar 10s',
+            play: 'Reproduzir',
+            pause: 'Pausar'
           }
         });
 
-        // 💾 [PROGRES-TRACK] Grava o tempo atualizado no IndexedDB a cada 3 segundos assistidos
+        // Quando o player estiver pronto, restaura o tempo e injeta os ícones Material Symbols
+        plyrInstance.on('ready', async () => {
+          await restaurarTempoSalvo();
+
+          const container = plyrInstance.elements.controls;
+          if (container) {
+            const btnRewind = container.querySelector('[data-plyr="rewind"]');
+            const btnPlay = container.querySelector('[data-plyr="play"]');
+            const btnForward = container.querySelector('[data-plyr="fast-forward"]');
+
+            if (btnRewind) btnRewind.innerHTML = `<span class="material-symbols-outlined">replay_10</span>`;
+            if (btnForward) btnForward.innerHTML = `<span class="material-symbols-outlined">forward_10</span>`;
+
+            const atualizarIconePlay = () => {
+              if (btnPlay) {
+                btnPlay.innerHTML = plyrInstance.playing
+                  ? `<span class="material-symbols-outlined">pause</span>`
+                  : `<span class="material-symbols-outlined">play_arrow</span>`;
+              }
+            };
+
+            plyrInstance.on('play', atualizarIconePlay);
+            plyrInstance.on('pause', atualizarIconePlay);
+            atualizarIconePlay();
+          }
+        });
+
+        // 💾 [PROGRES-TRACK] Grava o tempo no IndexedDB a partir de 15s e de 5 em 5s
         plyrInstance.on('timeupdate', () => {
           const tempoAtual = Math.floor(plyrInstance.currentTime);
           const duracaoTotal = Math.floor(plyrInstance.duration || 0);
 
-          if (tempoAtual > 0 && tempoAtual % 3 === 0) {
+          if (tempoAtual >= 15 && tempoAtual % 5 === 0) {
             salvarProgressoDB(epIdAtual, tempoAtual, duracaoTotal);
           }
         });
@@ -196,14 +248,16 @@ export async function gerenciarTelaPlayer() {
           poster: episodioAtual.thumb || ''
         };
 
-        // 📥 [PROGRES-TRACK] Caso o player já exista e mude a fonte (troca rápida), injeta o tempo de forma assíncrona
-        const progressoSalvo = await buscarProgressoDB(epIdAtual);
-        if (progressoSalvo && progressoSalvo.tempo) {
-          plyrInstance.currentTime = progressoSalvo.tempo;
-        }
+        // 📥 [PROGRES-TRACK] Restaura o tempo de forma assíncrona ao trocar de episódio rapidamente
+        await restaurarTempoSalvo();
       }
 
-      plyrInstance.play().catch(e => console.log("Autoplay bloqueado pelo navegador:", e));
+      // Pequeno atraso para garantir que o motor de mídia absorveu o currentTime antes do play automático
+      setTimeout(() => {
+        if (plyrInstance) {
+          plyrInstance.play().catch(e => console.log("Autoplay bloqueado pelo navegador:", e));
+        }
+      }, 200);
     }
 
     // 6. Atualiza os dados de texto na interface

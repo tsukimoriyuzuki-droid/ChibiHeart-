@@ -1,0 +1,177 @@
+/* ==========================================================================
+   5. PLAYER DE VÍDEO E PERSONALIZAÇÃO DO PLYR
+   ========================================================================== */
+
+/* ESTRUTURA DO PLAYER E PRÓXIMOS EPISÓDIOS */
+#player { 
+    width: calc(100% + 40px); 
+    min-height: 100vh; 
+    background-color: #121212; 
+    color: var(--text-main); 
+    margin: calc(-16px - env(safe-area-inset-top, 0px)) -20px 0 -20px; 
+    padding: 0; 
+}
+
+.player-media-block { width: 100%; background-color: #000; position: sticky; top: 0; z-index: 10; aspect-ratio: 16 / 9; }
+.player-media-block video { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.player-container { position: relative; width: 100%; max-width: 1000px; margin: 0 auto; border-radius: 12px; overflow: hidden; background-color: #000; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8); }
+
+.vjs-theme-chibi .vjs-play-progress, 
+.vjs-theme-chibi .vjs-volume-level { 
+    background-color: var(--accent-color) !important; 
+}
+
+.video-js { width: 100%; aspect-ratio: 16 / 9; }
+
+.player-episode-detail { padding: 20px 16px 12px 16px; max-width: 1200px; margin: 0 auto; }
+.player-meta { color: #e50914; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; }
+.player-episode-detail h2 { font-size: 1.5rem; margin: 6px 0 12px 0; font-weight: bold; }
+.badge-tag { background-color: #2a2a2a; color: #b3b3b3; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; }
+
+.proximos-container { padding: 0 16px 40px 16px; max-width: 1200px; margin: 0 auto; }
+.proximos-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.titulo-proximos { font-size: 1.1rem; font-weight: bold; margin: 0; }
+.btn-ver-todos { color: #e50914; text-decoration: none; font-size: 0.9rem; font-weight: 600; }
+
+.proximos-grid { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px; }
+.card-player-ep { flex: 0 0 calc(50% - 8px); min-width: 150px; cursor: pointer; }
+
+.player-ep-media { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background-color: #000; }
+
+.barra-progresso-container { position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: rgba(255, 255, 255, 0.3); z-index: 4; }
+.barra-progresso-preenchimento { height: 100%; background: #ff0000; width: 0%; transition: width 0.3s ease; }
+
+.player-play-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.3); display: flex; align-items: center; justify-content: center; transition: background 0.2s ease; }
+.card-player-ep:hover .player-play-overlay { background: rgba(0, 0, 0, 0.5); }
+.player-play-overlay span { color: var(--text-main); font-size: 1.5rem; background: rgba(0,0,0,0.6); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
+
+.player-ep-duration { position: absolute; bottom: 6px; right: 6px; background-color: rgba(0, 0, 0, 0.8); font-size: 0.7rem; padding: 2px 5px; border-radius: 3px; color: #fff; }
+.player-card-title { margin: 8px 0 0 0; font-size: 0.85rem; font-weight: 500; color: #e5e5e5; line-height: 1.3; }
+
+@media (min-width: 768px) {
+    .proximos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); overflow-x: visible; }
+    .card-player-ep { flex: none; min-width: 0; }
+}
+
+/* PERSONALIZAÇÃO DO PLYR (CONTROLES NO CENTRO + BARRA EM BAIXO) */
+:root {
+    --plyr-color-main: var(--accent-color, #ff76b7) !important;
+}
+
+.plyr__control--overlaid {
+    display: none !important;
+}
+
+.plyr__controls .plyr__volume,
+.plyr__controls [data-plyr="mute"] {
+    display: none !important;
+}
+
+.plyr--video .plyr__controls {
+    position: absolute !important;
+    inset: 0 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-content: flex-end !important;
+    padding: 16px 20px !important;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), transparent 30%, transparent 65%, rgba(0, 0, 0, 0.85)) !important;
+    pointer-events: none;
+}
+
+.plyr__controls > * {
+    pointer-events: auto;
+}
+
+.plyr__controls [data-plyr="rewind"],
+.plyr__controls [data-plyr="play"],
+.plyr__controls [data-plyr="fast-forward"] {
+    position: absolute !important;
+    top: 50% !important;
+    z-index: 10 !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease, background-color 0.2s ease !important;
+}
+
+.plyr__controls [data-plyr="play"] {
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 64px !important;
+    height: 64px !important;
+    border-radius: 50% !important;
+    background: var(--accent-gradient, linear-gradient(135deg, #ff76b7, #ff4081)) !important;
+    box-shadow: 0 0 20px rgba(255, 118, 183, 0.6) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.plyr__controls [data-plyr="rewind"] {
+    left: calc(50% - 90px) !important;
+    transform: translate(-50%, -50%) !important;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.plyr__controls [data-plyr="fast-forward"] {
+    left: calc(50% + 90px) !important;
+    transform: translate(-50%, -50%) !important;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.plyr__controls [data-plyr="rewind"] .material-symbols-outlined,
+.plyr__controls [data-plyr="fast-forward"] .material-symbols-outlined {
+    font-size: 28px !important;
+    color: #ffffff !important;
+}
+
+.plyr__controls [data-plyr="play"] .material-symbols-outlined {
+    font-size: 40px !important;
+    color: #ffffff !important;
+}
+
+.plyr__controls [data-plyr="rewind"]:hover,
+.plyr__controls [data-plyr="fast-forward"]:hover {
+    background: rgba(255, 255, 255, 0.35) !important;
+    transform: translate(-50%, -50%) scale(1.1) !important;
+}
+
+.plyr__controls [data-plyr="play"]:hover {
+    transform: translate(-50%, -50%) scale(1.1) !important;
+    box-shadow: 0 0 28px rgba(255, 118, 183, 0.9) !important;
+}
+
+.plyr__controls .plyr__progress {
+    width: 100% !important;
+    flex: 1 1 100% !important;
+    margin-bottom: 6px !important;
+}
+
+.plyr__controls .plyr__time {
+    font-size: 0.85rem !important;
+    color: #e2e8f0 !important;
+    font-weight: 600 !important;
+    padding: 0 4px !important;
+}
+
+.plyr__controls [data-plyr="fullscreen"] {
+    margin-left: auto !important;
+    background: transparent !important;
+    color: #ffffff !important;
+}

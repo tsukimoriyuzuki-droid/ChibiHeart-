@@ -1,0 +1,130 @@
+/* ==========================================================================
+   2. HEADER, ESTRUTURA DAS VIEWS E TAB BAR
+   ========================================================================== */
+.main-header {
+    position: sticky; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 60px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    background-color: var(--bg-glass);
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-glass); 
+    z-index: 1000;
+}
+
+.logo h1 { 
+    font-size: 1.35rem; 
+    font-weight: 400; 
+    color: var(--text-main); 
+    letter-spacing: -0.5px; 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+}
+
+.logo h1 span {
+    font-weight: 800; 
+    background: var(--accent-gradient);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+.main-content {
+    padding: calc(16px + env(safe-area-inset-top, 0px)) 20px 16px 20px;
+    padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+    min-height: calc(100vh - 118px); 
+    max-width: 1200px; 
+    margin: 0 auto;
+}
+
+.app-view { 
+    display: none; 
+    opacity: 0; 
+    transform: translateY(12px); 
+}
+
+.app-view.active { 
+    display: block; 
+    animation: surgiraTela 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards; 
+}
+
+@keyframes surgiraTela { 
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    } 
+}
+
+.app-view h2 { 
+    font-size: 1.6rem; 
+    font-weight: 600; 
+    margin-bottom: 12px; 
+    letter-spacing: -0.3px; 
+}
+
+.app-view p { 
+    color: var(--text-secondary); 
+    font-size: 0.95rem; 
+    line-height: 1.5; 
+}
+
+/* TAB BAR (MENU INFERIOR) */
+.tab-bar {
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 58px; 
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+    z-index: 1000;
+    border-top-left-radius: 18px; 
+    border-top-right-radius: 18px;
+    background-color: rgba(18, 19, 26, 0.75); 
+    backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-glass); 
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.tab-item { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    text-decoration: none; 
+    color: #64748b; 
+    width: 48px; 
+    height: 48px; 
+    border-radius: 50%; 
+    transition: all 0.2s ease; 
+}
+
+.tab-item .material-symbols-outlined { 
+    font-size: 28px; 
+    transition: transform 0.2s ease, text-shadow 0.2s ease; 
+}
+
+.tab-item:hover, .tab-item.active { 
+    color: var(--accent-color); 
+    text-shadow: 0 0 12px var(--accent-glow); 
+}
+
+.tab-item:active .material-symbols-outlined { 
+    transform: scale(0.88); 
+}
+
+/* Estrutura da grade de busca */
+#grade-resultados-busca { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
+    gap: 16px 12px; 
+    padding-top: 12px; 
+    padding-bottom: 24px; 
+}
