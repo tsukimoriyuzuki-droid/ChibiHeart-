@@ -1,6 +1,7 @@
 // js/modules/info.js
 
 import { buscarTodoProgressoDB } from './db.js';
+import { obterAnimePorId } from './repository.js';
 
 // --- ESTADO LOCAL E MAPEAMENTOS ---
 export let episodesMap = {}; 
@@ -457,13 +458,10 @@ export async function gerenciarTelaInfo() {
     }
 
     try {
-        const resposta = await fetch("./dados/info.json");
-        if (!resposta.ok) throw new Error('Erro ao carregar info.json: ' + resposta.status);
-        const bancoDados = await resposta.json();
-        const item = bancoDados[itemId];
+        const item = await obterAnimePorId(itemId);
 
         if (!item) {
-            console.error("Item não encontrado no info.json:", itemId);
+            console.error("Item não encontrado:", itemId);
             window.location.hash = "#erro";
             return;
         }
@@ -483,7 +481,7 @@ export async function gerenciarTelaInfo() {
         }
 
     } catch (erro) {
-        console.error("Erro ao carregar os dados de info.json:", erro);
+        console.error("Erro ao carregar dados da tela info:", erro);
         window.location.hash = "#erro";
     }
 }
@@ -494,7 +492,6 @@ function preencherMetadados(item, containerGeneros) {
     const infoAno = document.getElementById("info-ano");
     const infoSinopse = document.getElementById("info-sinopse");
 
-    // Alterado para carregar o 'poster' primeiro, mantendo 'banner' como fallback
     if (infoBanner) infoBanner.src = item.poster || item.banner || "";
     if (infoTitulo) infoTitulo.textContent = item.titulo || "Sem título";
     if (infoAno) infoAno.textContent = item.ano || "----";

@@ -1,5 +1,13 @@
 // js/modules/inicio.js
 
+import { 
+  obterInfoCompleta, 
+  obterHeroBanner, 
+  obterRecomendados, 
+  obterRecentes, 
+  obterNovosEpisodios 
+} from './repository.js';
+
 /**
  * 1. Carrega o Hero Banner principal no topo da Home
  */
@@ -10,17 +18,12 @@ export async function carregarHeroBanner() {
   if (!container || !template) return;
 
   try {
-    const [resBanner, resInfo] = await Promise.all([
-      fetch('./dados/hero_banner.json'),
-      fetch('./dados/info.json')
+    const [items, infoCompleta] = await Promise.all([
+      obterHeroBanner(),
+      obterInfoCompleta()
     ]);
 
-    if (!resBanner.ok || !resInfo.ok) return;
-
-    const items = await resBanner.json();
-    const infoCompleta = await resInfo.json();
-
-    if (!Array.isArray(items) || items.length === 0) return;
+    if (!items || !infoCompleta || !Array.isArray(items) || items.length === 0) return;
 
     const highlight = items.find(i => i.highlight);
     const heroConfig = highlight || items[0];
@@ -96,17 +99,12 @@ export async function carregarAnimesRecomendados() {
     if (!grade || !modelo) return;
 
     try {
-        const [respostaCards, respostaInfo] = await Promise.all([
-            fetch("./dados/destaque_principal_card.json"),
-            fetch("./dados/info.json")
+        const [listaIds, infoCompleta] = await Promise.all([
+            obterRecomendados(),
+            obterInfoCompleta()
         ]);
 
-        if (!respostaCards.ok || !respostaInfo.ok) return;
-
-        const listaIds = await respostaCards.json();
-        const infoCompleta = await respostaInfo.json();
-
-        if (listaIds.length === 0) return;
+        if (!listaIds || !infoCompleta || listaIds.length === 0) return;
 
         grade.innerHTML = "";
 
@@ -146,17 +144,12 @@ export async function carregarAnimesRecentes() {
     if (!grade || !modelo) return;
 
     try {
-        const [respostaRecentes, respostaInfo] = await Promise.all([
-            fetch("./dados/add_recent.json"),
-            fetch("./dados/info.json")
+        const [listaIds, infoCompleta] = await Promise.all([
+            obterRecentes(),
+            obterInfoCompleta()
         ]);
 
-        if (!respostaRecentes.ok || !respostaInfo.ok) return;
-
-        const listaIds = await respostaRecentes.json();
-        const infoCompleta = await respostaInfo.json();
-
-        if (!Array.isArray(listaIds) || listaIds.length === 0) return;
+        if (!listaIds || !infoCompleta || !Array.isArray(listaIds) || listaIds.length === 0) return;
 
         grade.innerHTML = "";
 
@@ -196,15 +189,12 @@ export async function carregarNovosEpisodios() {
     if (!grade || !modelo) return;
 
     try {
-        const [resNovos, resInfo] = await Promise.all([
-            fetch("./dados/novos_episodios.json"),
-            fetch("./dados/info.json")
+        const [listaNovos, infoCompleta] = await Promise.all([
+            obterNovosEpisodios(),
+            obterInfoCompleta()
         ]);
 
-        if (!resNovos.ok || !resInfo.ok) return;
-
-        const listaNovos = await resNovos.json();
-        const infoCompleta = await resInfo.json();
+        if (!listaNovos || !infoCompleta) return;
 
         grade.innerHTML = "";
 
@@ -263,10 +253,8 @@ export async function carregarAnimesPorGenero() {
     secoesExistentes.forEach(secao => secao.remove());
 
     try {
-        const respostaInfo = await fetch("./dados/info.json");
-        if (!respostaInfo.ok) return;
-
-        const infoCompleta = await respostaInfo.json();
+        const infoCompleta = await obterInfoCompleta();
+        if (!infoCompleta) return;
 
         const setGeneros = new Set();
         Object.values(infoCompleta).forEach(anime => {

@@ -1,6 +1,6 @@
 // js/modules/pesquisa.js
 
-let bancoDadosCache = null; // Guarda o info.json em memória para buscas instantâneas
+import { obterInfoCompleta } from './repository.js';
 
 /**
  * Remove acentos e converte para minúsculas para facilitar a comparação
@@ -31,38 +31,27 @@ export async function inicializarPesquisa() {
             return;
         }
 
-        // 📡 Carrega o info.json apenas na primeira busca realizada
-        if (!bancoDadosCache) {
-            try {
-                console.log("📡 [Pesquisa] Carregando dados de info.json...");
-                const resposta = await fetch("./dados/info.json");
-                if (!resposta.ok) throw new Error(`Erro HTTP: ${resposta.status}`);
-                bancoDadosCache = await resposta.json();
-                console.log("✅ [Pesquisa] Banco indexado com sucesso.");
-            } catch (erro) {
-                console.error("❌ [Pesquisa] Falha ao carregar info.json:", erro);
-                return;
-            }
-        }
+        // 📡 Obtém os dados centralizados via Repositório (que já gerencia o cache em memória)
+        const bancoDados = await obterInfoCompleta();
 
-        executarFiltro(termoBusca, gradeResultados, modeloCard, msgVazia);
+        if (!bancoDados) return;
+
+        executarFiltro(termoBusca, bancoDados, gradeResultados, modeloCard, msgVazia);
     });
 }
 
 /**
  * Filtra e renderiza os resultados cruzando os termos com títulos e gêneros
  */
-function executarFiltro(termo, container, template, feedbackVazio) {
+function executarFiltro(termo, bancoDados, container, template, feedbackVazio) {
     container.innerHTML = ""; // Limpa os resultados anteriores
     let totalEncontrados = 0;
 
     const frag = document.createDocumentFragment();
 
-    if (!bancoDadosCache) return;
-
-    // Varre os animes do info.json
-    Object.keys(bancoDadosCache).forEach(animeId => {
-        const anime = bancoDadosCache[animeId];
+    // Varre os animes do banco de dados do repositório
+    Object.keys(bancoDados).forEach(animeId => {
+        const anime = bancoDados[animeId];
         
         const tituloNormalizado = normalizarTexto(anime.titulo);
         

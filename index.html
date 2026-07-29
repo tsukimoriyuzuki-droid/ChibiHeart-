@@ -88,6 +88,13 @@
             </template>
 
             <!-- Seção de Novos Episódios (Link direto para o player) -->
+
+            <!-- Seção Continuar Assistindo (Sempre acima ou abaixo do Banner Hero) -->
+            <div id="secao-continuar-assistindo" style="display: none;">
+                <h2 class="titulo-categoria">Continuar Assistindo</h2>
+                <div id="grade-continuar-assistindo" class="cards-grid carrossel-horizontal"></div>
+            </div>
+
             <h2 class="titulo-categoria">Novos Episódios</h2>
             <div id="grade-novos-episodios" class="cards-grid carrossel-horizontal"></div>
 
@@ -174,6 +181,12 @@
                     <div class="card-ep" tabindex="0" role="button">
                         <div class="ep-media">
                             <img src="" alt="">
+
+                            <!-- Barra de progresso vermelha -->
+                            <div class="barra-progresso-container" style="display: none;">
+                                <div class="barra-progresso-preenchimento"></div>
+                            </div>
+
                             <span class="ep-duration"></span>
                         </div>
                         <div class="ep-info">

@@ -81,7 +81,7 @@
 .info-content {
     position: relative;
     z-index: 2; /* Garante que fique acima do .info-hero */
-    margin-top: 35vh; /* Faz o texto iniciar no meio do poster */
+    margin-top: 53vh; /* Faz o texto iniciar no meio do poster */
     padding: 0 24px 40px 24px;
     display: flex;
     flex-direction: column;
@@ -309,6 +309,25 @@
     background-color: #1c1d22; 
 }
 
+/* BARRA DE PROGRESSO RED/RED LINE */
+.barra-progresso-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: 2;
+    overflow: hidden;
+}
+
+.barra-progresso-preenchimento {
+    height: 100%;
+    background-color: #ff0000;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
 .ep-duration { 
     position: absolute; 
     bottom: 4px; 
@@ -319,6 +338,7 @@
     padding: 2px 4px; 
     border-radius: 3px; 
     font-weight: 600; 
+    z-index: 3;
 }
 
 .ep-info { 
