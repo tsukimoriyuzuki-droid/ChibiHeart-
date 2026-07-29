@@ -4,14 +4,36 @@
 
 /* HERO BANNER E ESTRUTURA DE BOTÕES */
 .hero-banner {
-    position: relative; 
-    width: calc(100% + 40px); 
-    margin: -16px -20px 24px -20px;
-    height: clamp(340px, 55vh, 600px); 
-    overflow: hidden; 
-    background-color: var(--bg-panel); 
-    border-radius: 10px;
+    position: relative;
+
+    /* Define a largura maior que 100% para expandir para os lados */
+    width: 106%; 
+    
+    /* Centraliza o elemento puxando metade do valor extra para cada lado */
+    margin-left: -4%;
+    margin-right: -4%;
+    margin-bottom: 26px;
+
+    /* Mantém a proporção de poster solicitada */
+    aspect-ratio: 2 / 3;
+
+    /* Define uma altura máxima menor para o mobile */
+    max-height: 60vh; 
+
+    /* Faz a imagem interna preencher o espaço sem distorcer ao cortar a altura */
+    object-fit: cover;
+    object-position: top; /* Mantém o foco no rosto dos personagens ao cortar */
+
+    overflow: hidden;
+    background-color: var(--bg-panel);
+    border-radius: 22px;
+    isolation: isolate;
+    box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.45), 0 6px 16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+
+
 
 .hero-banner-slide, 
 .hero-banner-link { 
@@ -24,6 +46,9 @@
 }
 
 .hero-banner-img { 
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     filter: brightness(0.65); 
 }
 
