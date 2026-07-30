@@ -3,10 +3,11 @@
 import { salvarProgressoDB, buscarProgressoDB, buscarTodoProgressoDB, deletarProgressoDB } from "./db.js";
 import { obterAnimePorId } from "./repository.js";
 
-let plyrInstance = null;
 let todosEpisodiosAtuais = [];
 let epIdAtual = null;
 let animeIdAtual = null;
+let hideControlsTimeout = null;
+let listenersAtivos = false;
 
 function makeEpisodeId(animeId, seasonIdx, episodeIdx) {
   const s = String(seasonIdx).padStart(2, '0');
@@ -14,23 +15,27 @@ function makeEpisodeId(animeId, seasonIdx, episodeIdx) {
   return `${animeId}_s${s}e${e}`;
 }
 
-export function limparPlayer() {
-  if (plyrInstance) {
-    try {
-      plyrInstance.stop();
-      plyrInstance.destroy();
-    } catch (e) {
-      console.warn("Aviso ao destruir Plyr:", e);
-    }
-    plyrInstance = null;
-  }
+// Formata segundos em MM:SS ou HH:MM:SS
+function formatarTempo(segundos) {
+  if (isNaN(segundos) || segundos < 0) return "00:00";
+  const horas = Math.floor(segundos / 3600);
+  const minutos = Math.floor((segundos % 3600) / 60);
+  const seg = Math.floor(segundos % 60);
 
+  if (horas > 0) {
+    return `${String(horas).padStart(2, '0')}:${String(minutos).padStart(2, '0')}:${String(seg).padStart(2, '0')}`;
+  }
+  return `${String(minutos).padStart(2, '0')}:${String(seg).padStart(2, '0')}`;
+}
+
+export function limparPlayer() {
   const videoElement = document.getElementById("player-video");
   if (videoElement) {
     videoElement.pause();
     videoElement.removeAttribute("src");
     videoElement.load();
   }
+  if (hideControlsTimeout) clearTimeout(hideControlsTimeout);
 }
 
 export async function gerenciarTelaPlayer() {
@@ -49,7 +54,6 @@ export async function gerenciarTelaPlayer() {
 
   try {
     const anime = await obterAnimePorId(animeId);
-
     if (!anime) return;
 
     let episodioAtual = null;
@@ -105,133 +109,192 @@ export async function gerenciarTelaPlayer() {
     animeIdAtual = animeId;
 
     const videoElement = document.getElementById("player-video");
+    const containerPlayer = document.getElementById("custom-player-container");
+    const controlsOverlay = document.getElementById("custom-player-controls");
+    
+    const btnPlay = document.getElementById("btn-player-play");
+    const btnRewind = document.getElementById("btn-player-rewind");
+    const btnForward = document.getElementById("btn-player-forward");
+    const progressBar = document.getElementById("player-progress");
+    const timeDisplay = document.getElementById("player-time-display");
+    const btnFullscreen = document.getElementById("btn-player-fullscreen");
+
     const metaTag = document.getElementById("player-meta-tag");
     const tituloEp = document.getElementById("player-titulo-ep");
     const btnVerTodos = document.getElementById("lnk-ver-todos");
 
     if (videoElement) {
+      // Define a nova mídia
+      videoElement.src = episodioAtual.video || "";
+      videoElement.poster = episodioAtual.thumb || "";
+
+      // Função para restaurar o progresso
       async function restaurarTempoSalvo() {
         const progressoSalvo = await buscarProgressoDB(epIdAtual);
         if (progressoSalvo && progressoSalvo.tempo > 0) {
-          videoElement.addEventListener('loadedmetadata', () => {
-            if (plyrInstance) plyrInstance.currentTime = progressoSalvo.tempo;
-          }, { once: true });
-          
-          if (videoElement.readyState >= 1 && plyrInstance) {
-            plyrInstance.currentTime = progressoSalvo.tempo;
-          }
+          videoElement.currentTime = progressoSalvo.tempo;
         }
       }
 
-      if (!plyrInstance) {
-        videoElement.src = episodioAtual.video || "";
-        videoElement.poster = episodioAtual.thumb || "";
+      videoElement.addEventListener('loadedmetadata', restaurarTempoSalvo, { once: true });
 
-        plyrInstance = new Plyr(videoElement, {
-          controls: [
-            'rewind',
-            'play',
-            'fast-forward',
-            'progress',
-            'current-time',
-            'duration',
-            'mute',
-            'volume',
-            'fullscreen'
-          ],
-          seekTime: 10,
-          tooltips: { controls: true, seek: true },
-          autoplay: true,
-          i18n: {
-            rewind: 'Voltar 10s',
-            fastForward: 'Avançar 10s',
-            play: 'Reproduzir',
-            pause: 'Pausar'
+      // Configuração dos Listeners de Eventos (Executada apenas uma vez)
+      if (!listenersAtivos) {
+        listenersAtivos = true;
+
+        // Alternar Play/Pause
+        const togglePlay = () => {
+          if (videoElement.paused) {
+            videoElement.play().catch(e => console.log("Autoplay bloqueado:", e));
+          } else {
+            videoElement.pause();
+          }
+        };
+
+        btnPlay.addEventListener("click", togglePlay);
+        
+        // Clique no próprio vídeo para dar Play/Pause
+        videoElement.addEventListener("click", togglePlay);
+
+        // Atualizar Ícone do Play
+        videoElement.addEventListener("play", () => {
+          btnPlay.innerHTML = `<span class="material-symbols-outlined">pause</span>`;
+          resetAutoOcultarControles();
+        });
+
+        videoElement.addEventListener("pause", () => {
+          btnPlay.innerHTML = `<span class="material-symbols-outlined">play_arrow</span>`;
+          mostrarControles();
+        });
+
+        // Avançar/Voltar 10s
+        btnRewind.addEventListener("click", (e) => {
+          e.stopPropagation();
+          videoElement.currentTime = Math.max(0, videoElement.currentTime - 10);
+          resetAutoOcultarControles();
+        });
+
+        btnForward.addEventListener("click", (e) => {
+          e.stopPropagation();
+          videoElement.currentTime = Math.min(videoElement.duration || 0, videoElement.currentTime + 10);
+          resetAutoOcultarControles();
+        });
+
+        // Atualização de Progresso e Tempo
+        videoElement.addEventListener("timeupdate", () => {
+          const tempoAtual = videoElement.currentTime;
+          const duracaoTotal = videoElement.duration || 0;
+
+          // Atualiza Barra de Progresso
+          if (duracaoTotal > 0) {
+            const porcentagem = (tempoAtual / duracaoTotal) * 100;
+            progressBar.value = porcentagem;
+            progressBar.style.background = `linear-gradient(to right, #ff4081 ${porcentagem}%, rgba(255,255,255,0.3) ${porcentagem}%)`;
+          }
+
+          // Atualiza Texto formatado: 00:00 • 00:00
+          timeDisplay.textContent = `${formatarTempo(tempoAtual)} • ${formatarTempo(duracaoTotal)}`;
+
+          // Salva no Banco de Dados
+          const segAtual = Math.floor(tempoAtual);
+          if (segAtual >= 15 && segAtual % 5 === 0) {
+            salvarProgressoDB(epIdAtual, segAtual, Math.floor(duracaoTotal));
           }
         });
 
-        plyrInstance.on('ready', async () => {
-          await restaurarTempoSalvo();
-
-          const container = plyrInstance.elements.controls;
-          if (container) {
-            const btnRewind = container.querySelector('[data-plyr="rewind"]');
-            const btnPlay = container.querySelector('[data-plyr="play"]');
-            const btnForward = container.querySelector('[data-plyr="fast-forward"]');
-
-            if (btnRewind) btnRewind.innerHTML = `<span class="material-symbols-outlined">replay_10</span>`;
-            if (btnForward) btnForward.innerHTML = `<span class="material-symbols-outlined">forward_10</span>`;
-
-            const atualizarIconePlay = () => {
-              if (btnPlay) {
-                btnPlay.innerHTML = plyrInstance.playing
-                  ? `<span class="material-symbols-outlined">pause</span>`
-                  : `<span class="material-symbols-outlined">play_arrow</span>`;
-              }
-            };
-
-            plyrInstance.on('play', atualizarIconePlay);
-            plyrInstance.on('pause', atualizarIconePlay);
-            atualizarIconePlay();
+        // Interação na Barra de Progresso (Seek)
+        progressBar.addEventListener("input", () => {
+          const duracaoTotal = videoElement.duration || 0;
+          if (duracaoTotal > 0) {
+            videoElement.currentTime = (progressBar.value / 100) * duracaoTotal;
           }
         });
 
-        plyrInstance.on('timeupdate', () => {
-          const tempoAtual = Math.floor(plyrInstance.currentTime);
-          const duracaoTotal = Math.floor(plyrInstance.duration || 0);
-
-          if (tempoAtual >= 15 && tempoAtual % 5 === 0) {
-            salvarProgressoDB(epIdAtual, tempoAtual, duracaoTotal);
-          }
-        });
-
-        plyrInstance.on('ended', async () => {
+        // Fim do Vídeo -> Próximo Episódio
+        videoElement.addEventListener("ended", async () => {
           await deletarProgressoDB(epIdAtual);
 
           const indexAtualIndex = todosEpisodiosAtuais.findIndex(e => e.id === epIdAtual);
           if (indexAtualIndex !== -1 && indexAtualIndex + 1 < todosEpisodiosAtuais.length) {
             const proximoEp = todosEpisodiosAtuais[indexAtualIndex + 1];
-
             const novaUrl = `${window.location.pathname}#player?anime=${animeIdAtual}&ep=${proximoEp.id}`;
             window.location.replace(novaUrl);
           }
         });
 
-        plyrInstance.on('enterfullscreen', () => {
-          if (screen.orientation && screen.orientation.lock) {
-            screen.orientation.lock('landscape').catch(() => {});
-          }
-        });
+        // Alternar Tela Cheia (Com suporte Cross-Browser)
+        const toggleFullscreen = () => {
+          const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
 
-        plyrInstance.on('exitfullscreen', () => {
-          if (screen.orientation && screen.orientation.unlock) {
-            screen.orientation.unlock();
-          }
-        });
-
-      } else {
-        plyrInstance.source = {
-          type: 'video',
-          title: episodioAtual.titulo || '',
-          sources: [
-            {
-              src: episodioAtual.video || '',
-              type: 'video/mp4'
+          if (!isFullscreen) {
+            if (containerPlayer.requestFullscreen) {
+              containerPlayer.requestFullscreen().catch(err => console.error(err));
+            } else if (containerPlayer.webkitRequestFullscreen) {
+              containerPlayer.webkitRequestFullscreen();
             }
-          ],
-          poster: episodioAtual.thumb || ''
+          } else {
+            if (document.exitFullscreen) {
+              document.exitFullscreen().catch(err => console.error(err));
+            } else if (document.webkitExitFullscreen) {
+              document.webkitExitFullscreen();
+            }
+          }
         };
 
-        await restaurarTempoSalvo();
+        btnFullscreen.addEventListener("click", toggleFullscreen);
+
+        // Atualização do Ícone e Orientação do Fullscreen
+        const atualizarIconeFullscreen = () => {
+          const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+
+          if (isFullscreen) {
+            btnFullscreen.innerHTML = `<span class="material-symbols-outlined">fullscreen_exit</span>`;
+            btnFullscreen.setAttribute("aria-label", "Sair da Tela Cheia");
+            if (screen.orientation && screen.orientation.lock) {
+              screen.orientation.lock('landscape').catch(() => {});
+            }
+          } else {
+            btnFullscreen.innerHTML = `<span class="material-symbols-outlined">fullscreen</span>`;
+            btnFullscreen.setAttribute("aria-label", "Tela Cheia");
+            if (screen.orientation && screen.orientation.unlock) {
+              screen.orientation.unlock();
+            }
+          }
+        };
+
+        document.addEventListener("fullscreenchange", atualizarIconeFullscreen);
+        document.addEventListener("webkitfullscreenchange", atualizarIconeFullscreen);
+
+        // Auto-ocultar Controles por Inatividade
+        function mostrarControles() {
+          controlsOverlay.classList.remove("controls-hidden");
+        }
+
+        function ocultarControles() {
+          if (!videoElement.paused) {
+            controlsOverlay.classList.add("controls-hidden");
+          }
+        }
+
+        function resetAutoOcultarControles() {
+          mostrarControles();
+          if (hideControlsTimeout) clearTimeout(hideControlsTimeout);
+          if (!videoElement.paused) {
+            hideControlsTimeout = setTimeout(ocultarControles, 3000);
+          }
+        }
+
+        containerPlayer.addEventListener("mousemove", resetAutoOcultarControles);
+        containerPlayer.addEventListener("touchstart", resetAutoOcultarControles, { passive: true });
       }
 
+      // Tenta dar autoplay
       setTimeout(() => {
-        if (plyrInstance) {
-          plyrInstance.play().catch(e => console.log("Autoplay bloqueado pelo navegador:", e));
-        }
+        videoElement.play().catch(e => console.log("Autoplay bloqueado pelo navegador:", e));
       }, 200);
     }
 
+    // Atualiza Metadados na Tela
     const numTemp = temporadaAtualNome.replace(/\D/g, "").padStart(2, "0") || "01";
     const numEp = String(episodioAtual.index || 1).padStart(2, "0");
 

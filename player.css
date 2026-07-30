@@ -183,7 +183,7 @@
     transform: translate(-50%, -50%) scale(1.1) !important;
 }
 
-/* --- ANIMAÇÕES DE ROTAÇÃO 360 NO CLIQUE (ATUALIZADO) --- */
+/* --- ANIMAÇÕES DE ROTAÇÃO 360 NO CLIQUE --- */
 @keyframes spinRewind {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(-360deg); }
@@ -194,14 +194,14 @@
     100% { transform: rotate(360deg); }
 }
 
-/* Ativa a animação 360° ao clicar no botão de retroceder (0.8s mais lento e suave) */
+/* Ativa a animação 360° ao clicar no botão de retroceder */
 .btn-player-center.btn-rewind:active .material-symbols-outlined {
-    animation: spinRewind 0.8s cubic-bezier(0.25, 1.5, 0.25, 1);
+    animation: spinRewind 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Ativa a animação 360° ao clicar no botão de avançar (0.8s mais lento e suave) */
+/* Ativa a animação 360° ao clicar no botão de avançar */
 .btn-player-center.btn-fast-forward:active .material-symbols-outlined {
-    animation: spinForward 0.8s cubic-bezier(0.25, 1.5, 0.25, 1);
+    animation: spinForward 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Efeito leve de clique no container dos botões */
@@ -209,12 +209,6 @@
 .btn-player-center.btn-fast-forward:active {
     transform: translate(-50%, -50%) scale(0.95) !important;
 }
-
-/* Remove o ícone de TV/Cast no Chrome, Edge e Safari */
-video::-webkit-media-controls-cast-button {
-    display: none !important;
-}
-
 
 /* Barra Inferior */
 .custom-bottom-bar {

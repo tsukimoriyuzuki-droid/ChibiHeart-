@@ -10,10 +10,8 @@
     <meta name="theme-color" content="#ffffff">
 
     <!-- CSS Externo e Fontes -->
-    <!-- Plyr CSS -->
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <link rel="stylesheet" href="style.css">
-    <!-- Carrega a fonte Poppins + TODOS os ícones do Material Symbols -->
+    <!-- Carrega a fonte Poppins + Material Symbols Outlined -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
@@ -67,7 +65,7 @@
         <!-- VIEW DA HOME -->
         <section id="inicio" class="app-view active">
             <!-- Hero Banner Dinâmico -->
-            <div id="hero-banner" class="hero-banner"></div>
+    <!--        <div id="hero-banner" class="hero-banner"></div>
 
             <template id="modelo-hero-banner">
                 <div class="hero-banner-slide">
@@ -85,18 +83,16 @@
                         </div>
                     </div>
                 </div>
-            </template>
+            </template>    -->
 
-            <!-- Seção de Novos Episódios (Link direto para o player) -->
-
-            <!-- Seção Continuar Assistindo (Sempre acima ou abaixo do Banner Hero) -->
+            <!-- Seção Continuar Assistindo -->
             <div id="secao-continuar-assistindo" style="display: none;">
                 <h2 class="titulo-categoria">Continuar Assistindo</h2>
                 <div id="grade-continuar-assistindo" class="cards-grid carrossel-horizontal"></div>
             </div>
 
-            <h2 class="titulo-categoria">Novos Episódios</h2>
-            <div id="grade-novos-episodios" class="cards-grid carrossel-horizontal"></div>
+      <!--      <h2 class="titulo-categoria">Novos Episódios</h2>
+            <div id="grade-novos-episodios" class="cards-grid carrossel-horizontal"></div> -->
 
             <!-- Adicionados Recentemente -->
             <h2 class="titulo-categoria">Adicionados Recentemente</h2>
@@ -165,7 +161,6 @@
                     <h2 class="titulo-categoria">Episódios</h2>
                     
                     <div class="custom-select-container">
-                        <!-- Convertido para <button> para receber foco via D-Pad -->
                         <button type="button" id="btn-selecionar-temporada" class="btn-select-atual" onclick="togglePopupTemporadas()" tabindex="0">
                             Carregando... ▾
                         </button>
@@ -177,12 +172,10 @@
                 <div id="lista-episodios" class="episodes-list"></div>
 
                 <template id="modelo-card-ep">
-                    <!-- Adicionado tabindex="0" e role="button" para navegação na TV -->
                     <div class="card-ep" tabindex="0" role="button">
                         <div class="ep-media">
                             <img src="" alt="">
 
-                            <!-- Barra de progresso vermelha -->
                             <div class="barra-progresso-container" style="display: none;">
                                 <div class="barra-progresso-preenchimento"></div>
                             </div>
@@ -197,13 +190,44 @@
             </div>
         </section>
 
-        <!-- VIEW DO PLAYER -->
+        <!-- VIEW DO PLAYER NATIVO CUSTOMIZADO -->
         <section id="player" class="app-view">
             <!-- Bloco do Player / Mídia -->
             <div class="player-media-block">
-                <video id="player-video" controls poster="" src="" playsinline></video>
+                <div id="custom-player-container" class="custom-player-wrapper">
+                    <video id="player-video" playsinline poster="" src=""></video>
+
+                    <!-- Overlay de Controles Customizados -->
+                    <div id="custom-player-controls" class="custom-player-controls">
+                        <!-- Botões do Centro -->
+                        <button type="button" id="btn-player-rewind" class="btn-player-center btn-rewind" aria-label="Voltar 10s" tabindex="0">
+                            <span class="material-symbols-outlined">replay_10</span>
+                        </button>
+                        
+                        <button type="button" id="btn-player-play" class="btn-player-center btn-play" aria-label="Reproduzir/Pausar" tabindex="0">
+                            <span class="material-symbols-outlined">play_arrow</span>
+                        </button>
+                        
+                        <button type="button" id="btn-player-forward" class="btn-player-center btn-fast-forward" aria-label="Avançar 10s" tabindex="0">
+                            <span class="material-symbols-outlined">forward_10</span>
+                        </button>
+
+                        <!-- Barra Inferior -->
+                        <div class="custom-bottom-bar">
+                            <div class="custom-progress-wrapper">
+                                <input type="range" id="player-progress" class="custom-progress-slider" min="0" max="100" value="0" step="0.1" tabindex="0">
+                            </div>
+                            <div class="custom-controls-row">
+                                <span id="player-time-display" class="custom-time-display">00:00 • 00:00</span>
+                                <button type="button" id="btn-player-fullscreen" class="btn-player-icon" aria-label="Tela Cheia" tabindex="0">
+                                    <span class="material-symbols-outlined">fullscreen</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        
+
             <!-- Informações do Episódio Atual -->
             <div class="player-episode-detail">
                 <span id="player-meta-tag" class="player-meta">K-ON!! T01E01</span>
@@ -212,20 +236,17 @@
                     <span class="badge-tag">Legendado</span>
                 </div>
             </div>
-        
+
             <!-- Seção de Próximos Episódios -->
             <div class="proximos-container">
                 <div class="proximos-header">
                     <h3 class="titulo-proximos">Próximos episódios</h3>
                     <a href="#info" id="lnk-ver-todos" class="btn-ver-todos" tabindex="0">Ver todos</a>
                 </div>
-            
-                <!-- Lista onde os próximos episódios serão injetados -->
+
                 <div id="player-lista-proximos" class="proximos-grid"></div>
-            
-                <!-- Template para os cards de próximos episódios -->
+
                 <template id="modelo-card-player">
-                    <!-- Adicionado tabindex="0" e role="button" -->
                     <div class="card-player-ep" tabindex="0" role="button">
                         <div class="player-ep-media">
                             <img src="" alt="" class="player-ep-thumb">
@@ -233,7 +254,7 @@
                             <div class="barra-progresso-container" style="display: none;">
                                 <div class="barra-progresso-preenchimento"></div>
                             </div>
-            
+
                             <div class="player-play-overlay">
                                 <span class="material-symbols-outlined">play_arrow</span>
                             </div>
@@ -254,15 +275,12 @@
         <section id="pesquisa" class="app-view">
             <h2 class="titulo-categoria" style="margin-bottom: 16px;">Pesquisar</h2>
             
-            <!-- Campo de Entrada com Ícone e Hint de Busca para TV -->
             <div class="search-input-wrapper" style="position: relative; margin-bottom: 24px; max-width: 500px;">
                 <input type="text" id="input-busca" placeholder="Buscar por título ou gênero..." autocomplete="off" enterkeyhint="search" tabindex="0" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #fff; font-size: 1rem; outline: none;">
             </div>
 
-            <!-- Grade onde os resultados filtrados aparecem dinamicamente -->
             <div id="grade-resultados-busca" class="cards-grid"></div>
             
-            <!-- Feedback visual caso não encontre nada -->
             <div id="busca-vazia" class="badge-tag" style="display: none; margin: 40px auto; text-align: center; color: #888;">
                 Nenhum anime encontrado para a sua busca.
             </div>
@@ -292,9 +310,6 @@
 
     <!-- Script Principal da Aplicação -->
     <script type="module" src="js/main.js"></script>
-
-    <!-- Plyr JS -->
-    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 
     <!-- Registro do Service Worker -->
     <script>
