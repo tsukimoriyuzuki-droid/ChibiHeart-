@@ -59,6 +59,45 @@ export async function salvarProgressoDB(epId, tempo, total) {
 }
 
 /**
+ * Marca ou desmarca manualmente um episódio como concluído no banco
+ * @param {string} epId 
+ * @param {boolean} concluido 
+ */
+export async function alternarConcluidoDB(epId, concluido = true) {
+  try {
+    const db = await abrirBanco();
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(STORE_NAME, "readwrite");
+      const store = transaction.objectStore(STORE_NAME);
+
+      const requestGet = store.get(epId);
+
+      requestGet.onsuccess = (e) => {
+        const existente = e.target.result || {};
+        const total = existente.total || 100;
+
+        const registro = {
+          ...existente,
+          id: epId,
+          tempo: concluido ? total : 0,
+          total: total,
+          concluido: concluido,
+          atualizadoEm: Date.now()
+        };
+
+        const requestPut = store.put(registro);
+        requestPut.onsuccess = () => resolve(true);
+        requestPut.onerror = (err) => reject(err.target.error);
+      };
+
+      requestGet.onerror = (err) => reject(err.target.error);
+    });
+  } catch (erro) {
+    console.error("❌ [DB] Falha ao alterar status de concluído:", erro);
+  }
+}
+
+/**
  * Busca o progresso de um episódio específico
  * @param {string} epId 
  */

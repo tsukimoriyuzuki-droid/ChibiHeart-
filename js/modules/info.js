@@ -1,6 +1,6 @@
 // js/modules/info.js
 
-import { buscarTodoProgressoDB } from './db.js';
+import { buscarTodoProgressoDB, buscarProgressoDB, alternarConcluidoDB } from './db.js';
 import { obterAnimePorId } from './repository.js';
 
 // --- ESTADO LOCAL E MAPEAMENTOS ---
@@ -10,6 +10,9 @@ let pendingRaf = null;
 let temporadasAtuais = [];
 let temporadaSelecionadaIndex = 0;
 let currentAnimeId = "";
+
+// Trava global para evitar múltiplos disparos seguidos (evita popup duplicado)
+let isProcessingAction = false;
 
 /**
  * Zera o mapeamento de episódios da memória.
@@ -196,7 +199,12 @@ export function renderizarListaEpisodios(listaEpisodios, container, modelo, anim
 
         if (mapaProgresso[ep.id]) {
             const dadosEp = mapaProgresso[ep.id];
-            if (dadosEp.total > 0 && dadosEp.tempo > 0) {
+            if (dadosEp.concluido) {
+                if (containerBarra && preenchimentoBarra) {
+                    containerBarra.style.display = "block";
+                    preenchimentoBarra.style.width = "100%";
+                }
+            } else if (dadosEp.total > 0 && dadosEp.tempo > 0) {
                 const porcentagem = (dadosEp.tempo / dadosEp.total) * 100;
                 
                 if (containerBarra && preenchimentoBarra) {
@@ -210,6 +218,40 @@ export function renderizarListaEpisodios(listaEpisodios, container, modelo, anim
     });
 
     container.appendChild(frag);
+}
+
+// --- POP-UP DE CONFIRMAÇÃO PARA MARCAR COMO ASSISTIDO ---
+
+async function solicitarMarcaAssistido(epId) {
+    // Evita execuções duplas/simultâneas
+    if (isProcessingAction) return;
+    isProcessingAction = true;
+
+    try {
+        const meta = episodesMap[epId];
+        const rawTitle = meta?.ep?.titulo || '';
+        const baseTitle = stripLeadingNumber(rawTitle) || rawTitle;
+        const nomeEp = baseTitle ? ` "${baseTitle}"` : '';
+
+        const progresso = await buscarProgressoDB(epId);
+        const estaConcluido = progresso?.concluido || (progresso?.total > 0 && (progresso.tempo / progresso.total) >= 0.85);
+
+        const mensagem = estaConcluido
+            ? `Deseja desmarcar o episódio${nomeEp} como assistido?`
+            : `Deseja marcar o episódio${nomeEp} como assistido?`;
+
+        if (confirm(mensagem)) {
+            await alternarConcluidoDB(epId, !estaConcluido);
+            await gerenciarTelaInfo();
+        }
+    } catch (erro) {
+        console.error("Erro ao alterar progresso:", erro);
+    } finally {
+        // Cooldown de 500ms para consumir qualquer evento fantasma de clique/touch
+        setTimeout(() => {
+            isProcessingAction = false;
+        }, 500);
+    }
 }
 
 // --- MODAL / OVERLAY DE EPISÓDIOS ---
@@ -438,9 +480,70 @@ export async function gerenciarTelaInfo() {
 
     if (!containerEps || !modeloEp) return;
 
+    // --- OUVINTES DE EVENTO (CORRIGIDOS PARA EVITAR DUPLO DISPARO) ---
     if (!containerEps.dataset.listenerAttached) {
         containerEps.dataset.listenerAttached = "true";
+
+        let touchTimer = null;
+        let isLongPress = false;
+        let blockContextMenu = false;
+
+        const cancelarTouch = () => {
+            if (touchTimer) {
+                clearTimeout(touchTimer);
+                touchTimer = null;
+            }
+        };
+
+        // 1. Toque Longo no Mobile
+        containerEps.addEventListener("touchstart", (e) => {
+            const card = e.target.closest(".card-ep");
+            if (!card || !card.dataset.epId) return;
+
+            isLongPress = false;
+            blockContextMenu = false;
+
+            touchTimer = setTimeout(() => {
+                isLongPress = true;
+                blockContextMenu = true; // Bloqueia o contextmenu sintético disparado ao soltar o dedo
+                
+                if (navigator.vibrate) navigator.vibrate(50);
+                
+                // Pequeno atraso assíncrono para liberar a callstack do evento touch
+                setTimeout(() => {
+                    solicitarMarcaAssistido(card.dataset.epId);
+                }, 20);
+            }, 600);
+        }, { passive: true });
+
+        containerEps.addEventListener("touchend", cancelarTouch);
+        containerEps.addEventListener("touchmove", cancelarTouch);
+        containerEps.addEventListener("touchcancel", cancelarTouch);
+
+        // 2. Clique com Botão Direito no Desktop (e previne menu nativo do mobile)
+        containerEps.addEventListener("contextmenu", (e) => {
+            const card = e.target.closest(".card-ep");
+            if (!card || !card.dataset.epId) return;
+
+            e.preventDefault(); // Impede o menu do navegador
+
+            // Se o toque longo já tratou essa ação, ignora a emulação contextmenu do navegador
+            if (blockContextMenu) {
+                blockContextMenu = false;
+                return;
+            }
+
+            solicitarMarcaAssistido(card.dataset.epId);
+        });
+
+        // 3. Clique Normal (Abre a overlay)
         containerEps.addEventListener("click", (e) => {
+            if (isLongPress) {
+                isLongPress = false;
+                e.preventDefault();
+                e.stopPropagation();
+                return;
+            }
             const card = e.target.closest(".card-ep");
             if (card && card.dataset.epId) {
                 abrirOverlayEp(card.dataset.epId);
@@ -568,10 +671,10 @@ async function configurarModoSerie(item, itemId, tempParam, dom) {
         let ultimoInteragido = null;
         let maiorData = 0;
 
-        // Procura no histórico qual foi o último episódio assistido (> 15 segundos)
+        // Procura no histórico qual foi o último episódio assistido
         todosEpisodios.forEach((ep, idx) => {
             const prog = mapaProgresso[ep.id];
-            if (prog && prog.tempo > 15) {
+            if (prog && (prog.tempo > 15 || prog.concluido)) {
                 const dataProg = prog.atualizadoEm || 0;
                 if (dataProg >= maiorData) {
                     maiorData = dataProg;
@@ -585,30 +688,25 @@ async function configurarModoSerie(item, itemId, tempParam, dom) {
 
         if (ultimoInteragido) {
             const { ep, idx, prog } = ultimoInteragido;
-            // Verifica se bateu os 85% ou se a flag concluido está ativa
             const estaConcluido = prog.concluido || (prog.total > 0 && (prog.tempo / prog.total) >= 0.85);
 
             if (estaConcluido) {
-                // Se concluiu (>= 85%), avança para o próximo episódio se houver
                 if (idx + 1 < todosEpisodios.length) {
                     epAlvo = todosEpisodios[idx + 1];
                     const rawTitle = epAlvo.titulo || `Episódio ${epAlvo.index}`;
                     const baseTitle = stripLeadingNumber(rawTitle) || rawTitle;
                     textoBotao = `ASSISTIR AO PRÓXIMO: EP. ${epAlvo.index} - ${baseTitle}`;
                 } else {
-                    // Se era o último episódio da obra toda
                     epAlvo = todosEpisodios[0];
                     textoBotao = `REASSISTIR DESDE O EP. 1`;
                 }
             } else {
-                // Se parou no meio do episódio (< 85% e > 15s)
                 epAlvo = ep;
                 const rawTitle = epAlvo.titulo || `Episódio ${epAlvo.index}`;
                 const baseTitle = stripLeadingNumber(rawTitle) || rawTitle;
                 textoBotao = `CONTINUAR ASSISTINDO: EP. ${epAlvo.index} - ${baseTitle}`;
             }
         } else {
-            // Se nunca assistiu ou assistiu menos de 15s
             epAlvo = todosEpisodios[0];
             textoBotao = `ASSISTIR AO PRIMEIRO EPISÓDIO`;
         }
