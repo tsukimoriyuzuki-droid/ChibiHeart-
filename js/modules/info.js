@@ -546,25 +546,97 @@ async function configurarModoSerie(item, itemId, tempParam, dom) {
         itemId
     );
 
-    const btnPlay = document.getElementById("btn-play-filme");
-    if (btnPlay) {
-        btnPlay.onclick = (e) => {
-            e.preventDefault();
-            const tempAtiva = temporadasAtuais[temporadaIndex];
-            const primeiroEp = tempAtiva?.episodios?.[0];
-
-            if (primeiroEp && primeiroEp.video) {
-                window.location.hash = `#player?anime=${encodeURIComponent(itemId)}&ep=${encodeURIComponent(primeiroEp.id)}`;
-            } else {
-                alert("Nenhum episódio disponível para reprodução.");
-            }
-        };
-    }
-
     indexEpisodes(itemId, temporadasAtuais);
 
+    // Carrega todo o histórico gravado no banco
     const mapaProgresso = await buscarTodoProgressoDB();
 
+    // Cria uma lista linear sequencial com todos os episódios de todas as temporadas
+    const todosEpisodios = [];
+    temporadasAtuais.forEach((temp, tIdx) => {
+        const eps = Array.isArray(temp.episodios) ? temp.episodios : [];
+        eps.forEach((ep, eIdx) => {
+            if (typeof ep.index !== 'number') ep.index = eIdx + 1;
+            if (!ep.id) ep.id = makeEpisodeId(itemId, tIdx + 1, ep.index);
+            todosEpisodios.push(ep);
+        });
+    });
+
+    // --- LÓGICA DO BOTÃO DINÂMICO ---
+    const btnPlay = document.getElementById("btn-play-filme");
+    if (btnPlay) {
+        let ultimoInteragido = null;
+        let maiorData = 0;
+
+        // Procura no histórico qual foi o último episódio assistido (> 15 segundos)
+        todosEpisodios.forEach((ep, idx) => {
+            const prog = mapaProgresso[ep.id];
+            if (prog && prog.tempo > 15) {
+                const dataProg = prog.atualizadoEm || 0;
+                if (dataProg >= maiorData) {
+                    maiorData = dataProg;
+                    ultimoInteragido = { ep, idx, prog };
+                }
+            }
+        });
+
+        let epAlvo = null;
+        let textoBotao = "";
+
+        if (ultimoInteragido) {
+            const { ep, idx, prog } = ultimoInteragido;
+            // Verifica se bateu os 85% ou se a flag concluido está ativa
+            const estaConcluido = prog.concluido || (prog.total > 0 && (prog.tempo / prog.total) >= 0.85);
+
+            if (estaConcluido) {
+                // Se concluiu (>= 85%), avança para o próximo episódio se houver
+                if (idx + 1 < todosEpisodios.length) {
+                    epAlvo = todosEpisodios[idx + 1];
+                    const rawTitle = epAlvo.titulo || `Episódio ${epAlvo.index}`;
+                    const baseTitle = stripLeadingNumber(rawTitle) || rawTitle;
+                    textoBotao = `ASSISTIR AO PRÓXIMO: EP. ${epAlvo.index} - ${baseTitle}`;
+                } else {
+                    // Se era o último episódio da obra toda
+                    epAlvo = todosEpisodios[0];
+                    textoBotao = `REASSISTIR DESDE O EP. 1`;
+                }
+            } else {
+                // Se parou no meio do episódio (< 85% e > 15s)
+                epAlvo = ep;
+                const rawTitle = epAlvo.titulo || `Episódio ${epAlvo.index}`;
+                const baseTitle = stripLeadingNumber(rawTitle) || rawTitle;
+                textoBotao = `CONTINUAR ASSISTINDO: EP. ${epAlvo.index} - ${baseTitle}`;
+            }
+        } else {
+            // Se nunca assistiu ou assistiu menos de 15s
+            epAlvo = todosEpisodios[0];
+            textoBotao = `ASSISTIR AO PRIMEIRO EPISÓDIO`;
+        }
+
+        if (epAlvo) {
+            btnPlay.innerHTML = `
+                <span class="material-symbols-outlined">play_arrow</span>
+                ${textoBotao.toUpperCase()}
+            `;
+
+            btnPlay.onclick = (e) => {
+                e.preventDefault();
+                if (epAlvo.video) {
+                    window.location.hash = `#player?anime=${encodeURIComponent(itemId)}&ep=${encodeURIComponent(epAlvo.id)}`;
+                } else {
+                    alert("Vídeo indisponível para este episódio.");
+                }
+            };
+        } else {
+            btnPlay.innerHTML = `
+                <span class="material-symbols-outlined">play_arrow</span>
+                ASSISTIR
+            `;
+            btnPlay.onclick = (e) => e.preventDefault();
+        }
+    }
+
+    // Renderiza a lista de episódios da temporada selecionada com suas barras
     const tempAtiva = temporadasAtuais[temporadaIndex];
     if (tempAtiva && tempAtiva.episodios) {
         renderizarListaEpisodios(tempAtiva.episodios, dom.containerEps, dom.modeloEp, itemId, temporadaIndex, mapaProgresso);

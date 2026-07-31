@@ -1,6 +1,6 @@
 // js/modules/playerView.js
 
-import { salvarProgressoDB, buscarProgressoDB, buscarTodoProgressoDB, deletarProgressoDB } from "./db.js";
+import { salvarProgressoDB, buscarProgressoDB, buscarTodoProgressoDB } from "./db.js";
 import { obterAnimePorId } from "./repository.js";
 
 let todosEpisodiosAtuais = [];
@@ -142,6 +142,25 @@ export async function gerenciarTelaPlayer() {
       if (!listenersAtivos) {
         listenersAtivos = true;
 
+        // Auto-ocultar Controles por Inatividade
+        function mostrarControles() {
+          controlsOverlay.classList.remove("controls-hidden");
+        }
+
+        function ocultarControles() {
+          if (!videoElement.paused) {
+            controlsOverlay.classList.add("controls-hidden");
+          }
+        }
+
+        function resetAutoOcultarControles() {
+          mostrarControles();
+          if (hideControlsTimeout) clearTimeout(hideControlsTimeout);
+          if (!videoElement.paused) {
+            hideControlsTimeout = setTimeout(ocultarControles, 3000);
+          }
+        }
+
         // Alternar Play/Pause
         const togglePlay = () => {
           if (videoElement.paused) {
@@ -210,16 +229,22 @@ export async function gerenciarTelaPlayer() {
           }
         });
 
-        // Fim do Vídeo -> Próximo Episódio
-        videoElement.addEventListener("ended", async () => {
-          await deletarProgressoDB(epIdAtual);
-
+        // Fim do Vídeo -> Salva concluído e passa pro Próximo Episódio
+        const avancarProximoEpisodio = () => {
           const indexAtualIndex = todosEpisodiosAtuais.findIndex(e => e.id === epIdAtual);
           if (indexAtualIndex !== -1 && indexAtualIndex + 1 < todosEpisodiosAtuais.length) {
             const proximoEp = todosEpisodiosAtuais[indexAtualIndex + 1];
             const novaUrl = `${window.location.pathname}#player?anime=${animeIdAtual}&ep=${proximoEp.id}`;
             window.location.replace(novaUrl);
           }
+        };
+
+        videoElement.addEventListener("ended", async () => {
+          const duracaoTotal = Math.floor(videoElement.duration || 0);
+          if (duracaoTotal > 0) {
+            await salvarProgressoDB(epIdAtual, duracaoTotal, duracaoTotal);
+          }
+          avancarProximoEpisodio();
         });
 
         // Alternar Tela Cheia (Com suporte Cross-Browser)
@@ -265,24 +290,78 @@ export async function gerenciarTelaPlayer() {
         document.addEventListener("fullscreenchange", atualizarIconeFullscreen);
         document.addEventListener("webkitfullscreenchange", atualizarIconeFullscreen);
 
-        // Auto-ocultar Controles por Inatividade
-        function mostrarControles() {
-          controlsOverlay.classList.remove("controls-hidden");
-        }
+        // --- SISTEMA DE ATALHOS DE TECLADO ---
+        window.addEventListener("keydown", (e) => {
+          if (!window.location.hash.startsWith("#player")) return;
 
-        function ocultarControles() {
-          if (!videoElement.paused) {
-            controlsOverlay.classList.add("controls-hidden");
+          // Ignora caso o usuário esteja digitando em um input/textarea
+          const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : "";
+          if (activeTag === "input" || activeTag === "textarea" || document.activeElement.isContentEditable) {
+            return;
           }
-        }
 
-        function resetAutoOcultarControles() {
-          mostrarControles();
-          if (hideControlsTimeout) clearTimeout(hideControlsTimeout);
-          if (!videoElement.paused) {
-            hideControlsTimeout = setTimeout(ocultarControles, 3000);
+          const duracaoTotal = videoElement.duration || 0;
+          let teclaTratada = true;
+
+          switch (e.key.toLowerCase()) {
+            case " ":
+            case "k":
+              togglePlay();
+              break;
+
+            case "j":
+              videoElement.currentTime = Math.max(0, videoElement.currentTime - 10);
+              break;
+
+            case "l":
+              videoElement.currentTime = Math.min(duracaoTotal, videoElement.currentTime + 10);
+              break;
+
+            case "arrowleft":
+              videoElement.currentTime = Math.max(0, videoElement.currentTime - 5);
+              break;
+
+            case "arrowright":
+              videoElement.currentTime = Math.min(duracaoTotal, videoElement.currentTime + 5);
+              break;
+
+            case "arrowup":
+              videoElement.volume = Math.min(1, videoElement.volume + 0.1);
+              videoElement.muted = false;
+              break;
+
+            case "arrowdown":
+              videoElement.volume = Math.max(0, videoElement.volume - 0.1);
+              break;
+
+            case "f":
+              toggleFullscreen();
+              break;
+
+            case "m":
+              videoElement.muted = !videoElement.muted;
+              break;
+
+            case "n":
+              avancarProximoEpisodio();
+              break;
+
+            default:
+              // Atalhos de porcentagem (0 a 9)
+              if (e.key >= "0" && e.key <= "9" && duracaoTotal > 0) {
+                const pct = parseInt(e.key, 10) / 10;
+                videoElement.currentTime = duracaoTotal * pct;
+              } else {
+                teclaTratada = false;
+              }
+              break;
           }
-        }
+
+          if (teclaTratada) {
+            e.preventDefault();
+            resetAutoOcultarControles();
+          }
+        });
 
         containerPlayer.addEventListener("mousemove", resetAutoOcultarControles);
         containerPlayer.addEventListener("touchstart", resetAutoOcultarControles, { passive: true });

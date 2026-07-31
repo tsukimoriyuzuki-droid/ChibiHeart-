@@ -263,6 +263,7 @@ export async function carregarAnimesPorGenero() {
             }
         });
 
+        // Embaralha a ordem das seções de gêneros
         let listaGeneros = embaralharLista(Array.from(setGeneros));
 
         listaGeneros.forEach(generoAlvo => {
@@ -274,7 +275,10 @@ export async function carregarAnimesPorGenero() {
 
             tituloSecao.textContent = generoAlvo;
 
-            Object.keys(infoCompleta).forEach(animeId => {
+            // Embaralha os animes individualmente para cada gênero renderizado
+            const animesEmbaralhados = embaralharLista(Object.keys(infoCompleta));
+
+            animesEmbaralhados.forEach(animeId => {
                 const anime = infoCompleta[animeId];
 
                 if (anime.generos && anime.generos.includes(generoAlvo)) {

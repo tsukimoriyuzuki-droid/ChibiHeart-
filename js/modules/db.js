@@ -37,7 +37,17 @@ export async function salvarProgressoDB(epId, tempo, total) {
       const transaction = db.transaction(STORE_NAME, "readwrite");
       const store = transaction.objectStore(STORE_NAME);
 
-      const registro = { id: epId, tempo, total, atualizadoEm: Date.now() };
+      // Regra dos 85%: Considera concluído se assistiu 85% ou mais do total
+      const concluido = total > 0 ? (tempo / total) >= 0.85 : false;
+
+      const registro = {
+        id: epId,
+        tempo,
+        total,
+        concluido,
+        atualizadoEm: Date.now()
+      };
+
       const request = store.put(registro);
 
       request.onsuccess = () => resolve(true);
@@ -81,7 +91,7 @@ export async function buscarTodoProgressoDB() {
       const request = store.getAll();
 
       request.onsuccess = (e) => {
-        // Transforma o array resultante em um mapa { id: { tempo, total } } para busca rápida O(1)
+        // Transforma o array resultante em um mapa { id: { tempo, total, concluido, atualizadoEm } }
         const mapa = {};
         const resultados = e.target.result || [];
         resultados.forEach(item => {
@@ -94,25 +104,5 @@ export async function buscarTodoProgressoDB() {
   } catch (erro) {
     console.error("❌ [DB] Falha ao listar progressos:", erro);
     return {};
-  }
-}
-
-/**
- * Remove o registro de progresso (ex: quando o anime chega ao fim)
- * @param {string} epId 
- */
-export async function deletarProgressoDB(epId) {
-  try {
-    const db = await abrirBanco();
-    return new Promise((resolve, reject) => {
-      const transaction = db.transaction(STORE_NAME, "readwrite");
-      const store = transaction.objectStore(STORE_NAME);
-      const request = store.delete(epId);
-
-      request.onsuccess = () => resolve(true);
-      request.onerror = (e) => reject(e.target.error);
-    });
-  } catch (erro) {
-    console.error("❌ [DB] Falha ao deletar registro:", erro);
   }
 }
