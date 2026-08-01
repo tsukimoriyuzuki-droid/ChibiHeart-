@@ -1,20 +1,43 @@
 /* ==========================================================================
    2. HEADER, ESTRUTURA DAS VIEWS E TAB BAR
    ========================================================================== */
+
+/* Esconde o Header por padrão nas outras telas */
+/* ==========================================================================
+   2. HEADER, ESTRUTURA DAS VIEWS E TAB BAR
+   ========================================================================== */
+
+/* Esconde o Header por padrão nas outras telas */
 .main-header {
+    display: none;
     position: sticky; 
     top: 0; 
     left: 0; 
     width: 100%; 
     height: 60px;
-    display: flex; 
     align-items: center; 
-    justify-content: center;
+    justify-content: space-between; /* Logo à esquerda, Lupa à direita */
+    padding: 0 20px;
     background-color: var(--bg-glass);
     backdrop-filter: blur(10px); 
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-glass); 
     z-index: 1000;
+    
+    /* ⚡ Adicionada a animação suave de deslizar e transparência */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+/* ⚡ Classe adicionada via JS ao rolar para baixo (oculta o header) */
+.main-header.header-hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Mostra o Header SOMENTE quando a tela #inicio estiver ativa */
+body:has(#inicio.active) .main-header {
+    display: flex;
 }
 
 .logo h1 { 
@@ -33,6 +56,24 @@
     -webkit-background-clip: text; 
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+/* Botão da Lupa no Header */
+.header-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    text-decoration: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.header-action-btn:hover {
+    color: var(--accent-color);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .main-content {
@@ -135,4 +176,94 @@ body:has(#player.active) .tab-bar {
     gap: 16px 12px; 
     padding-top: 12px; 
     padding-bottom: 24px; 
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO MODERNA DA PESQUISA
+   ========================================================================== */
+
+#pesquisa {
+    padding-top: 8px; /* Remove o excesso de topo para subir o input */
+}
+
+/* Wrapper da busca com posicionamento relativo */
+.search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 24px auto;
+}
+
+/* Ícone de busca interno (esquerda) */
+.search-input-wrapper .search-icon {
+    position: absolute;
+    left: 16px;
+    color: #94a3b8;
+    font-size: 22px;
+    pointer-events: none;
+    transition: color 0.25s ease;
+}
+
+/* Input moderno com Glassmorphism */
+#input-busca {
+    width: 100%;
+    height: 50px;
+    padding: 0 48px 0 48px; /* Espaço para o ícone da esquerda e botão de limpar */
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    outline: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#input-busca::placeholder {
+    color: #64748b;
+    font-weight: 400;
+}
+
+/* Efeito ao clicar/focar no input */
+#input-busca:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-color, #ff4081);
+    box-shadow: 0 0 0 4px rgba(255, 64, 129, 0.15), 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Altera a cor do ícone quando focado */
+.search-input-wrapper:focus-within .search-icon {
+    color: var(--accent-color, #ff4081);
+}
+
+/* Botão de limpar busca (direita) */
+.btn-clear-search {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    border-radius: 50%;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-clear-search:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+}
+
+.btn-clear-search .material-symbols-outlined {
+    font-size: 18px;
 }

@@ -51,7 +51,8 @@ export async function carregarHeroBanner() {
     const btnPlay = clone.querySelector('.btn-hero-play');
     const btnInfo = clone.querySelector('.btn-hero-info');
 
-    if (img) img.src = anime.banner || anime.poster || '';
+    /* Usa primeiramente a chave 'poster', com fallback para 'banner' */
+    if (img) img.src = anime.poster || anime.banner || '';
     if (title) title.textContent = anime.titulo || '';
     if (desc) {
       desc.textContent = anime.sinopse || '';
@@ -225,7 +226,7 @@ export async function carregarNovosEpisodios() {
                 linkCard.classList.add("horizontal");
 
                 linkCard.href = `#player?anime=${encodeURIComponent(item.animeId)}&ep=${encodeURIComponent(item.epId)}`;
-                imgCard.src = epEncontrado.thumb || anime.banner || anime.poster || "";
+                imgCard.src = epEncontrado.thumb || anime.poster || anime.banner || "";
                 imgCard.alt = epEncontrado.titulo;
 
                 tituloCard.textContent = epEncontrado.titulo;

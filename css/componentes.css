@@ -1,160 +1,140 @@
 /* ==========================================================================
-   3. HERO BANNER, BOTÕES, CARDS E OVERLAYS
+   3. BOTÕES, CARDS E OVERLAYS E HERO BANNER
    ========================================================================== */
-
-/* HERO BANNER E ESTRUTURA DE BOTÕES */
+/* Container principal do Hero */
 .hero-banner {
-    position: relative;
+    /* 1. Margem negativa para anular os 20px das laterais e os 16px do topo */
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: calc(-16px - env(safe-area-inset-top, 0px));
 
-    /* Define a largura maior que 100% para expandir para os lados */
-    width: 106%; 
-    
-    /* Centraliza o elemento puxando metade do valor extra para cada lado */
-    margin-left: -4%;
-    margin-right: -4%;
-    margin-bottom: 26px;
+    /* 2. Força a largura a ocupar a tela de ponta a ponta */
+    width: calc(100% + 40px);
 
-    /* Mantém a proporção de poster solicitada */
+    /* 3. Proporção e regras anteriores */
     aspect-ratio: 2 / 3;
-
-    /* Define uma altura máxima menor para o mobile */
-    max-height: 60vh; 
-
-    /* Faz a imagem interna preencher o espaço sem distorcer ao cortar a altura */
-    object-fit: cover;
-    object-position: top; /* Mantém o foco no rosto dos personagens ao cortar */
-
+    position: relative;
+    background-color: #09090B;
     overflow: hidden;
-    background-color: var(--bg-panel);
-    border-radius: 22px;
-    isolation: isolate;
-    box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.45), 0 6px 16px rgba(0, 0, 0, 0.25);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 
-
-
-.hero-banner-slide, 
-.hero-banner-link { 
-    display: block; 
-    width: 100%; 
-    height: 100%; 
-    text-decoration: none; 
-    color: var(--text-main); 
-    position: relative; 
+.hero-banner-slide {
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
-.hero-banner-img { 
+/* Imagem de fundo responsiva */
+.hero-banner-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.65); 
+    object-position: center;
 }
 
+/* Máscara de gradiente escuro para legibilidade */
 .hero-banner-overlay {
-    position: absolute; 
-    inset: 0; 
-    pointer-events: none;
-    background: linear-gradient(to top, var(--bg-main) 5%, rgba(13, 14, 18, 0.6) 50%, rgba(0, 0, 0, 0.1) 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+        rgba(9, 9, 11, 0.4) 0%, 
+        rgba(9, 9, 11, 0) 50%, 
+        rgba(9, 9, 11, 0.85) 85%, 
+        #09090B 100%);
+    z-index: 1;
 }
 
-.hero-banner-content { 
-    position: absolute; 
-    left: 28px; 
-    bottom: 24px; 
-    right: 28px; 
-    z-index: 2; 
-    color: #fff; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: flex-start; 
-    gap: 10px; 
+/* Bloco de conteúdo alinhado na base do banner */
+.hero-banner-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 24px;
+    box-sizing: border-box; /* Garante que o padding não estoure a largura */
+    z-index: 2;
 }
 
+/* Tag de destaque */
 .hero-badge-tag {
-    background: var(--accent-gradient); 
-    color: var(--text-main); 
-    font-size: 0.7rem; 
-    font-weight: 800;
-    padding: 4px 10px; 
-    border-radius: 6px; 
-    letter-spacing: 0.5px; 
-    box-shadow: 0 0 10px var(--accent-glow);
+    background-color: #E11D48;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-bottom: 12px;
 }
 
-.hero-banner-title { 
-    font-size: clamp(1.4rem, 4.5vw, 2.6rem); 
-    font-weight: 800; 
-    margin: 0; 
-    line-height: 1.1; 
-    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8); 
+/* Título */
+.hero-banner-title {
+    color: #FFFFFF;
+    /* Unidade fluida: ajusta o tamanho da fonte proporcionalmente à tela */
+    font-size: clamp(22px, 6vw, 32px);
+    font-weight: 900;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
 }
 
+/* Descrição / Sinopse */
 .hero-banner-desc {
-    max-width: 68ch; 
-    font-size: 0.95rem; 
-    color: rgba(255, 255, 255, 0.92); 
-    margin: 0;
-    display: -webkit-box; 
-    -webkit-line-clamp: 3; 
-    -webkit-box-orient: vertical; 
-    overflow: hidden; 
-    text-overflow: ellipsis;
-    cursor: pointer; 
-    transition: all 160ms ease; 
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+    color: #D4D4D8;
+    font-size: clamp(12px, 3.5vw, 14px);
+    line-height: 1.4;
+    margin-bottom: 20px;
+    /* Limita a sinopse a 3 linhas no mobile */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.hero-banner-desc.expanded { 
-    -webkit-line-clamp: unset; 
-    max-height: 40vh; 
+/* Container de botões */
+.hero-actions {
+    display: flex;
+    gap: 12px;
 }
 
-.hero-actions { 
-    display: flex; 
-    align-items: center; 
-    gap: 12px; 
-    margin-top: 6px; 
-    flex-wrap: nowrap; 
-}
-
+/* Estilo geral dos botões */
 .btn-hero {
-    display: inline-flex; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 8px; 
-    padding: 10px 20px;
-    border-radius: 999px; 
-    font-size: 0.95rem; 
-    font-weight: 700; 
-    text-decoration: none; 
-    color: #fff;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45); 
-    transition: transform 120ms ease, opacity 120ms ease; 
+    flex: 1;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
     cursor: pointer;
+    transition: opacity 0.2s ease;
 }
 
-.btn-hero:active { 
-    transform: translateY(1px) scale(0.98); 
-    opacity: 0.95; 
+.btn-hero:active {
+    opacity: 0.8;
 }
 
-.btn-hero:hover { 
-    transform: translateY(-2px); 
+/* Botão Assistir (Primário) */
+.btn-hero-play {
+    background-color: #E11D48;
+    color: #FFFFFF;
 }
 
+/* Botão Mais Informações (Secundário) */
 .btn-hero-info {
-    background-color: rgba(255, 255, 255, 0.12); 
-    color: var(--text-main);
-    backdrop-filter: blur(8px); 
-    -webkit-backdrop-filter: blur(8px); 
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
-.btn-hero-info .material-symbols-outlined { 
-    font-size: 20px; 
-}
 
 /* BOTÕES DE ASSISTIR E EFEITO DE PULSO */
 @keyframes pulsoSuave {
@@ -177,18 +157,6 @@
     box-shadow: 0 8px 25px rgba(255, 118, 183, 0.8);
 }
 
-.btn-hero-play, 
-.overlay-play {
-    background: var(--accent-gradient); 
-    color: var(--text-main);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.btn-hero-play .material-symbols-outlined { 
-    font-size: 20px; 
-    font-variation-settings: 'FILL' 1; 
-}
-
 .overlay-play {
     display: inline-flex; 
     align-items: center; 
@@ -198,6 +166,9 @@
     font-weight: 700; 
     text-decoration: none; 
     box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    background: var(--accent-gradient); 
+    color: var(--text-main);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn-disney-play {
@@ -223,14 +194,6 @@
 
 .btn-disney-play:active { 
     background-color: #cccccc; 
-}
-
-@media (max-width: 420px) {
-    .hero-banner { height: 280px; margin-bottom: 18px; }
-    .hero-banner-content { left: 16px; bottom: 16px; right: 16px; gap: 6px; }
-    .hero-banner-title { font-size: 1.25rem; }
-    .hero-banner-desc { font-size: 0.85rem; -webkit-line-clamp: 2; }
-    .btn-hero { padding: 8px 14px; font-size: 0.85rem; }
 }
 
 /* CATEGORIAS E CARDS */

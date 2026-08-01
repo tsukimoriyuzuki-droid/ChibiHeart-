@@ -14,6 +14,28 @@ import { gerenciarTelaPlayer } from './modules/playerView.js';
 import { inicializarPesquisa } from './modules/pesquisa.js';
 import { ocultarSplashScreen, exibirErroSplash } from './modules/splash.js';
 
+// --- CONTROLE DE SCROLL DO CABEÇALHO SUPERIOR ---
+function inicializarScrollHeader() {
+  let lastScrollY = window.scrollY;
+  const header = document.querySelector('.main-header');
+
+  window.addEventListener('scroll', () => {
+    if (!header) return;
+
+    const currentScrollY = window.scrollY;
+
+    // Se rolar para baixo e passar de 50px, oculta o cabeçalho
+    if (currentScrollY > lastScrollY && currentScrollY > 50) {
+      header.classList.add('header-hidden');
+    } else {
+      // Se rolar para cima, exibe o cabeçalho
+      header.classList.remove('header-hidden');
+    }
+
+    lastScrollY = currentScrollY;
+  });
+}
+
 // --- MÓDULO TV INTEGRADO DIRECTAMENTE ---
 function inicializarNavegacaoTV() {
   window.addEventListener("keydown", (e) => {
@@ -122,6 +144,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     inicializarPesquisa();
     inicializarNavegacaoTV();
+    inicializarScrollHeader(); // 👈 Ativa o controle do cabeçalho na rolagem
 
     window.addEventListener("hashchange", async () => {
       try {

@@ -16,6 +16,16 @@
 </head>
 <body>
 
+    <!-- TAB BAR SUPERIOR / MAIN HEADER -->
+    <header class="main-header">
+        <div class="logo">
+            <h1>Chibi<span>Heart</span></h1>
+        </div>
+        <a href="#pesquisa" class="header-action-btn" aria-label="Pesquisar" tabindex="0">
+            <span class="material-symbols-outlined">search</span>
+        </a>
+    </header>
+
     <!-- SPLASH SCREEN / CARREGAMENTO E ERRO -->
     <div id="splash-screen" class="splash-container">
         <!-- ESTADO 1: CARREGANDO -->
@@ -65,45 +75,46 @@
         <!-- VIEW DA HOME -->
         <section id="inicio" class="app-view active">
             <!-- Hero Banner Dinâmico -->
-    <!--        <div id="hero-banner" class="hero-banner"></div>
-
+            <section id="hero-banner" class="hero-banner" aria-label="Destaques principais"></section>
+        
+            <!-- Template do Hero Banner -->
             <template id="modelo-hero-banner">
                 <div class="hero-banner-slide">
                     <img class="hero-banner-img" src="" alt="">
                     <div class="hero-banner-overlay"></div>
-
+        
                     <div class="hero-banner-content">
                         <span class="hero-badge-tag">EM DESTAQUE</span>
                         <h2 class="hero-banner-title"></h2>
                         <p class="hero-banner-desc"></p>
-
+        
                         <div class="hero-actions">
-                            <a class="btn-hero btn-hero-play" role="button" tabindex="0" aria-label="Assistir"></a>
-                            <a class="btn-hero btn-hero-info" role="button" tabindex="0" aria-label="Detalhes"></a>
+                            <a class="btn-hero btn-hero-play" role="button" tabindex="0" aria-label="Assistir">Assistir</a>
+                            <a class="btn-hero btn-hero-info" role="button" tabindex="0" aria-label="Detalhes">Mais Informações</a>
                         </div>
                     </div>
                 </div>
-            </template>    -->
-
-      <!--      <h2 class="titulo-categoria">Novos Episódios</h2>
-            <div id="grade-novos-episodios" class="cards-grid carrossel-horizontal"></div> -->
-
+            </template>
+        
             <!-- Adicionados Recentemente -->
-            <h2 class="titulo-categoria">Adicionados Recentemente</h2>
-            <div id="grade-recentes" class="cards-grid carrossel-horizontal"></div>
-
+            <section class="secao-categoria">
+                <h2 class="titulo-categoria">Adicionados Recentemente</h2>
+                <div id="grade-recentes" class="cards-grid carrossel-horizontal"></div>
+            </section>
+        
             <!-- Grade de Animes Recomendados -->
-            <h2 class="titulo-categoria">Assista no Chibi Heart</h2>
-            <div id="grade-recomendados" class="cards-grid"></div>
-
-            <!-- Template para criar novas seções de gênero dinamicamente -->
+            <section class="secao-categoria">
+                <h2 class="titulo-categoria">Assista no Chibi Heart</h2>
+                <div id="grade-recomendados" class="cards-grid"></div>
+            </section>
+        
             <template id="modelo-secao-genero">
-                <div class="secao-genero-container">
+                <section class="secao-genero-container">
                     <h2 class="titulo-categoria">-- Nome do Gênero --</h2>
                     <div class="cards-grid carrossel-horizontal"></div>
-                </div>
+                </section>
             </template>
-
+        
             <template id="modelo-card-anime">
                 <a href="" class="card poster" tabindex="0">
                     <div class="card-media">
@@ -184,16 +195,13 @@
             </div>
         </section>
 
-        <!-- VIEW DO PLAYER NATIVO CUSTOMIZADO -->
+        <!-- VIEW DO PLAYER -->
         <section id="player" class="app-view">
-            <!-- Bloco do Player / Mídia -->
             <div class="player-media-block">
                 <div id="custom-player-container" class="custom-player-wrapper">
                     <video id="player-video" playsinline poster="" src=""></video>
 
-                    <!-- Overlay de Controles Customizados -->
                     <div id="custom-player-controls" class="custom-player-controls">
-                        <!-- Botões do Centro -->
                         <button type="button" id="btn-player-rewind" class="btn-player-center btn-rewind" aria-label="Voltar 10s" tabindex="0">
                             <span class="material-symbols-outlined">replay_10</span>
                         </button>
@@ -206,7 +214,6 @@
                             <span class="material-symbols-outlined">forward_10</span>
                         </button>
 
-                        <!-- Barra Inferior -->
                         <div class="custom-bottom-bar">
                             <div class="custom-progress-wrapper">
                                 <input type="range" id="player-progress" class="custom-progress-slider" min="0" max="100" value="0" step="0.1" tabindex="0">
@@ -222,7 +229,6 @@
                 </div>
             </div>
 
-            <!-- Informações do Episódio Atual -->
             <div class="player-episode-detail">
                 <span id="player-meta-tag" class="player-meta">K-ON!! T01E01</span>
                 <h2 id="player-titulo-ep">Carregando...</h2>
@@ -231,7 +237,6 @@
                 </div>
             </div>
 
-            <!-- Seção de Próximos Episódios -->
             <div class="proximos-container">
                 <div class="proximos-header">
                     <h3 class="titulo-proximos">Próximos episódios</h3>
@@ -267,18 +272,22 @@
         </section>
 
         <section id="pesquisa" class="app-view">
-            <h2 class="titulo-categoria" style="margin-bottom: 16px;">Pesquisar</h2>
-            
-            <div class="search-input-wrapper" style="position: relative; margin-bottom: 24px; max-width: 500px;">
-                <input type="text" id="input-busca" placeholder="Buscar por título ou gênero..." autocomplete="off" enterkeyhint="search" tabindex="0" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #fff; font-size: 1rem; outline: none;">
-            </div>
+                    <div class="search-input-wrapper">
+                        <span class="material-symbols-outlined search-icon">search</span>
+                        <input type="text" id="input-busca" placeholder="Buscar por título ou gênero..." autocomplete="off" enterkeyhint="search" tabindex="0">
+                        <button type="button" id="btn-limpar-busca" class="btn-clear-search" aria-label="Limpar busca" tabindex="0" style="display: none;">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+        
+                    <div id="grade-resultados-busca" class="cards-grid"></div>
+                    
+                    <div id="busca-vazia" class="badge-tag" style="display: none; margin: 40px auto; text-align: center; color: #888;">
+                        Nenhum anime encontrado para a sua busca.
+                    </div>
+                </section>
 
-            <div id="grade-resultados-busca" class="cards-grid"></div>
-            
-            <div id="busca-vazia" class="badge-tag" style="display: none; margin: 40px auto; text-align: center; color: #888;">
-                Nenhum anime encontrado para a sua busca.
-            </div>
-        </section>
+        
 
         <section id="perfil" class="app-view">
             <h2>Meu Perfil</h2>
@@ -286,16 +295,13 @@
         </section>
     </main>
 
-    <!-- TAB BAR DE NAVEGAÇÃO -->
+    <!-- 🔴 TAB BAR DE NAVEGAÇÃO (SEM O ÍCONE DE PESQUISA) -->
     <nav class="tab-bar">
         <a href="#inicio" class="tab-item active" aria-label="Início" tabindex="0">
             <span class="material-symbols-outlined">home</span>
         </a>
         <a href="#lista" class="tab-item" aria-label="Minha Lista" tabindex="0">
             <span class="material-symbols-outlined">list</span>
-        </a>
-        <a href="#pesquisa" class="tab-item" aria-label="Pesquisa" tabindex="0">
-            <span class="material-symbols-outlined">search</span>
         </a>
         <a href="#perfil" class="tab-item" aria-label="Perfil" tabindex="0">
             <span class="material-symbols-outlined">person</span>
@@ -315,5 +321,6 @@
         });
       }
     </script>
+    
 </body>
 </html>
