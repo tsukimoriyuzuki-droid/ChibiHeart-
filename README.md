@@ -1,0 +1,1 @@
+feat(perf): html/css optimizations - preconnect fonts, lazy image attrs

@@ -7,3 +7,6 @@
 @import 'css/componentes.css';
 @import 'css/views.css';
 @import 'css/player.css';
+
+/* Import de regras de performance (promove o uso de GPU para animações seguras) */
+@import 'css/perf.css';
