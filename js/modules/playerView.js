@@ -9,6 +9,9 @@ let animeIdAtual = null;
 let hideControlsTimeout = null;
 let listenersAtivos = false;
 
+// Controle de I/O de Banco de Dados (Evita engasgos de gravação no timeupdate)
+let ultimoTempoSalvoDB = 0;
+
 function makeEpisodeId(animeId, seasonIdx, episodeIdx) {
   const s = String(seasonIdx).padStart(2, '0');
   const e = String(episodeIdx).padStart(2, '0');
@@ -28,14 +31,23 @@ function formatarTempo(segundos) {
   return `${String(minutos).padStart(2, '0')}:${String(seg).padStart(2, '0')}`;
 }
 
+// OTIMIZAÇÃO SPA: Limpeza profunda para liberar GPU/RAM ao trocar de tela
 export function limparPlayer() {
   const videoElement = document.getElementById("player-video");
   if (videoElement) {
     videoElement.pause();
     videoElement.removeAttribute("src");
-    videoElement.load();
+    videoElement.load(); // Força o navegador a desalocar os buffers de vídeo da memória
   }
-  if (hideControlsTimeout) clearTimeout(hideControlsTimeout);
+  if (hideControlsTimeout) {
+    clearTimeout(hideControlsTimeout);
+    hideControlsTimeout = null;
+  }
+  
+  // Reseta variáveis globais do módulo
+  epIdAtual = null;
+  animeIdAtual = null;
+  ultimoTempoSalvoDB = 0;
 }
 
 export async function gerenciarTelaPlayer() {
@@ -107,6 +119,7 @@ export async function gerenciarTelaPlayer() {
     todosEpisodiosAtuais = todosEpisodios;
     epIdAtual = epId;
     animeIdAtual = animeId;
+    ultimoTempoSalvoDB = 0; // Reseta controle de salvamento
 
     const videoElement = document.getElementById("player-video");
     const containerPlayer = document.getElementById("custom-player-container");
@@ -124,21 +137,22 @@ export async function gerenciarTelaPlayer() {
     const btnVerTodos = document.getElementById("lnk-ver-todos");
 
     if (videoElement) {
-      // Define a nova mídia
+      // Define a nova mídia reaproveitando a tag <video>
       videoElement.src = episodioAtual.video || "";
       videoElement.poster = episodioAtual.thumb || "";
 
-      // Função para restaurar o progresso
+      // Restaura o tempo salvo do banco
       async function restaurarTempoSalvo() {
         const progressoSalvo = await buscarProgressoDB(epIdAtual);
         if (progressoSalvo && progressoSalvo.tempo > 0) {
           videoElement.currentTime = progressoSalvo.tempo;
+          ultimoTempoSalvoDB = Math.floor(progressoSalvo.tempo);
         }
       }
 
       videoElement.addEventListener('loadedmetadata', restaurarTempoSalvo, { once: true });
 
-      // Configuração dos Listeners de Eventos (Executada apenas uma vez)
+      // Configuração dos Listeners de Eventos (Executada apenas UMA VEZ para a SPA toda)
       if (!listenersAtivos) {
         listenersAtivos = true;
 
@@ -171,11 +185,8 @@ export async function gerenciarTelaPlayer() {
         };
 
         btnPlay.addEventListener("click", togglePlay);
-        
-        // Clique no próprio vídeo para dar Play/Pause
         videoElement.addEventListener("click", togglePlay);
 
-        // Atualizar Ícone do Play
         videoElement.addEventListener("play", () => {
           btnPlay.innerHTML = `<span class="material-symbols-outlined">pause</span>`;
           resetAutoOcultarControles();
@@ -184,6 +195,14 @@ export async function gerenciarTelaPlayer() {
         videoElement.addEventListener("pause", () => {
           btnPlay.innerHTML = `<span class="material-symbols-outlined">play_arrow</span>`;
           mostrarControles();
+
+          // Salva o progresso imediatamente ao pausar
+          const tempoAtual = Math.floor(videoElement.currentTime);
+          const duracaoTotal = Math.floor(videoElement.duration || 0);
+          if (tempoAtual > 0 && epIdAtual) {
+            salvarProgressoDB(epIdAtual, tempoAtual, duracaoTotal);
+            ultimoTempoSalvoDB = tempoAtual;
+          }
         });
 
         // Avançar/Voltar 10s
@@ -204,19 +223,22 @@ export async function gerenciarTelaPlayer() {
           const tempoAtual = videoElement.currentTime;
           const duracaoTotal = videoElement.duration || 0;
 
-          // Atualiza Barra de Progresso
+          // =========================================================
+          // MANTIDO EXATAMENTE COMO NO SEU ORIGINAL (Não altera lógica nem CSS)
+          // =========================================================
           if (duracaoTotal > 0) {
             const porcentagem = (tempoAtual / duracaoTotal) * 100;
             progressBar.value = porcentagem;
             progressBar.style.background = `linear-gradient(to right, #ff4081 ${porcentagem}%, rgba(255,255,255,0.3) ${porcentagem}%)`;
           }
 
-          // Atualiza Texto formatado: 00:00 • 00:00
           timeDisplay.textContent = `${formatarTempo(tempoAtual)} • ${formatarTempo(duracaoTotal)}`;
+          // =========================================================
 
-          // Salva no Banco de Dados
+          // OTIMIZAÇÃO I/O: Salva no IndexedDB apenas a cada 10 segundos para não travar a CPU
           const segAtual = Math.floor(tempoAtual);
-          if (segAtual >= 15 && segAtual % 5 === 0) {
+          if (segAtual >= 15 && (segAtual - ultimoTempoSalvoDB >= 10)) {
+            ultimoTempoSalvoDB = segAtual;
             salvarProgressoDB(epIdAtual, segAtual, Math.floor(duracaoTotal));
           }
         });
@@ -229,7 +251,7 @@ export async function gerenciarTelaPlayer() {
           }
         });
 
-        // Fim do Vídeo -> Salva concluído e passa pro Próximo Episódio
+        // Avança para o próximo episódio
         const avancarProximoEpisodio = () => {
           const indexAtualIndex = todosEpisodiosAtuais.findIndex(e => e.id === epIdAtual);
           if (indexAtualIndex !== -1 && indexAtualIndex + 1 < todosEpisodiosAtuais.length) {
@@ -241,13 +263,13 @@ export async function gerenciarTelaPlayer() {
 
         videoElement.addEventListener("ended", async () => {
           const duracaoTotal = Math.floor(videoElement.duration || 0);
-          if (duracaoTotal > 0) {
+          if (duracaoTotal > 0 && epIdAtual) {
             await salvarProgressoDB(epIdAtual, duracaoTotal, duracaoTotal);
           }
           avancarProximoEpisodio();
         });
 
-        // Alternar Tela Cheia (Com suporte Cross-Browser)
+        // Alternar Tela Cheia
         const toggleFullscreen = () => {
           const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
 
@@ -268,7 +290,7 @@ export async function gerenciarTelaPlayer() {
 
         btnFullscreen.addEventListener("click", toggleFullscreen);
 
-        // Atualização do Ícone e Orientação do Fullscreen
+        // Atualização do Ícone do Fullscreen
         const atualizarIconeFullscreen = () => {
           const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
 
@@ -290,11 +312,10 @@ export async function gerenciarTelaPlayer() {
         document.addEventListener("fullscreenchange", atualizarIconeFullscreen);
         document.addEventListener("webkitfullscreenchange", atualizarIconeFullscreen);
 
-        // --- SISTEMA DE ATALHOS DE TECLADO ---
+        // ATALHOS DE TECLADO
         window.addEventListener("keydown", (e) => {
           if (!window.location.hash.startsWith("#player")) return;
 
-          // Ignora caso o usuário esteja digitando em um input/textarea
           const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : "";
           if (activeTag === "input" || activeTag === "textarea" || document.activeElement.isContentEditable) {
             return;
@@ -308,46 +329,35 @@ export async function gerenciarTelaPlayer() {
             case "k":
               togglePlay();
               break;
-
             case "j":
               videoElement.currentTime = Math.max(0, videoElement.currentTime - 10);
               break;
-
             case "l":
               videoElement.currentTime = Math.min(duracaoTotal, videoElement.currentTime + 10);
               break;
-
             case "arrowleft":
               videoElement.currentTime = Math.max(0, videoElement.currentTime - 5);
               break;
-
             case "arrowright":
               videoElement.currentTime = Math.min(duracaoTotal, videoElement.currentTime + 5);
               break;
-
             case "arrowup":
               videoElement.volume = Math.min(1, videoElement.volume + 0.1);
               videoElement.muted = false;
               break;
-
             case "arrowdown":
               videoElement.volume = Math.max(0, videoElement.volume - 0.1);
               break;
-
             case "f":
               toggleFullscreen();
               break;
-
             case "m":
               videoElement.muted = !videoElement.muted;
               break;
-
             case "n":
               avancarProximoEpisodio();
               break;
-
             default:
-              // Atalhos de porcentagem (0 a 9)
               if (e.key >= "0" && e.key <= "9" && duracaoTotal > 0) {
                 const pct = parseInt(e.key, 10) / 10;
                 videoElement.currentTime = duracaoTotal * pct;
@@ -367,7 +377,7 @@ export async function gerenciarTelaPlayer() {
         containerPlayer.addEventListener("touchstart", resetAutoOcultarControles, { passive: true });
       }
 
-      // Tenta dar autoplay
+      // Autoplay seguro com tratamento de promessa
       setTimeout(() => {
         videoElement.play().catch(e => console.log("Autoplay bloqueado pelo navegador:", e));
       }, 200);
@@ -391,20 +401,29 @@ export async function gerenciarTelaPlayer() {
   }
 }
 
+// OTIMIZAÇÃO: Renderização de Próximos Episódios com Event Delegation + DocumentFragment (Zero Memory Leak)
 async function renderizarProximos(lista, animeId) {
   const container = document.getElementById("player-lista-proximos");
   const template = document.getElementById("modelo-card-player");
 
   if (!container || !template) return;
 
-  container.innerHTML = "";
+  // 1. Limpeza de DOM sem usar .innerHTML = "" (Evita parse HTML na CPU)
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
 
   if (!Array.isArray(lista) || lista.length === 0) {
-    container.innerHTML = "<p class='badge-tag' style='margin-top: 12px;'>Nenhum episódio seguinte disponível nesta temporada.</p>";
+    const p = document.createElement("p");
+    p.className = "badge-tag";
+    p.style.marginTop = "12px";
+    p.textContent = "Nenhum episódio seguinte disponível nesta temporada.";
+    container.appendChild(p);
     return;
   }
 
   const mapaProgresso = await buscarTodoProgressoDB();
+  const fragment = document.createDocumentFragment(); // Montagem em lote na memória RAM
 
   lista.forEach(ep => {
     const clone = template.content.cloneNode(true);
@@ -426,12 +445,8 @@ async function renderizarProximos(lista, animeId) {
 
     if (card) {
       card.style.cursor = "pointer";
-      card.addEventListener("click", (e) => {
-        e.preventDefault();
-
-        const novaUrl = `${window.location.pathname}#player?anime=${animeId}&ep=${ep.id}`;
-        window.location.replace(novaUrl);
-      });
+      // Guarda o ID do episódio no dataset em vez de criar múltiplos listeners
+      card.dataset.epId = ep.id;
     }
 
     if (mapaProgresso[ep.id]) {
@@ -446,6 +461,25 @@ async function renderizarProximos(lista, animeId) {
       }
     }
 
-    container.appendChild(clone);
+    fragment.appendChild(clone);
   });
+
+  // Insere todos os episódios de uma vez só no DOM real
+  container.appendChild(fragment);
+
+  // 2. EVENT DELEGATION: Apenas 1 listener de clique atrelado ao container pai
+  if (!container.dataset.hasListener) {
+    container.dataset.hasListener = "true";
+    container.addEventListener("click", (e) => {
+      const card = e.target.closest(".card-player-ep");
+      if (!card) return;
+
+      e.preventDefault();
+      const epId = card.dataset.epId;
+      if (epId && animeIdAtual) {
+        const novaUrl = `${window.location.pathname}#player?anime=${animeIdAtual}&ep=${epId}`;
+        window.location.replace(novaUrl);
+      }
+    });
+  }
 }

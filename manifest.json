@@ -4,25 +4,25 @@
   "icons": [
     {
       "src": "img/icon_transparent_192.png",
-      "type": "image/png",
+      "type": "imagem/png",
       "sizes": "192x192",
       "purpose": "any"
     },
     {
       "src": "img/icon_transparent_512.png",
-      "type": "image/png",
+      "type": "imagem/png",
       "sizes": "512x512",
       "purpose": "any"
     },
     {
       "src": "img/icon_solid_192.png",
-      "type": "image/png",
+      "type": "imagem/png",
       "sizes": "192x192",
       "purpose": "maskable"
     },
     {
       "src": "img/icon_solid_512.png",
-      "type": "image/png",
+      "type": "imagem/png",
       "sizes": "512x512",
       "purpose": "maskable"
     }
